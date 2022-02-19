@@ -16,6 +16,7 @@
         OPA KLOPA
       </a>
     </div>
+    <h2>PIZZA</h2>
     <?php 
       $products_IDs = new WP_Query( array(
         'post_type' => 'product',

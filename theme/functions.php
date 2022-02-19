@@ -4,11 +4,13 @@ function wpstart_scripts() {
   wp_enqueue_script( 'app', get_stylesheet_directory_uri() . '/assets/js/app.min.js', [], time(), true );
   wp_enqueue_style( 'style', get_stylesheet_directory_uri() . '/assets/css/style.css', [], time(), $media = 'all' );
 }
+
 add_action( 'wp_enqueue_scripts', 'wpstart_scripts' );
 
 function wpb_custom_new_menu() {
   register_nav_menu('main-menu',__( 'Main Menu' ));
 }
+
 add_action( 'init', 'wpb_custom_new_menu' );
 
 function add_tags_to_pages() {
@@ -27,10 +29,4 @@ function special_nav_class ($classes, $item) {
   return $classes;
 }
 
-// Add woocommerce support
-// function mytheme_add_woocommerce_support() {
-//   add_theme_support( 'woocommerce' );
-// }
-
-// add_action( 'after_setup_theme', 'mytheme_add_woocommerce_support' );
 
