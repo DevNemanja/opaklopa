@@ -15,6 +15,7 @@
       <a class="header__logo" title="Go to Homepage" href="/">
         <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/logo.png" alt="Milica's Logo">
       </a>
+      TEST
       <nav class="header__nav <?php if(is_front_page()) echo 'header__nav--homepage' ?>">
         <?php
         wp_nav_menu( array( 
