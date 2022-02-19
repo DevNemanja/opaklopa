@@ -13,15 +13,23 @@
   <div class="container">
     <div class="header__container">
       <a class="header__logo" title="Go to Homepage" href="/">
-        <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/logo.png" alt="Milica's Logo">
+        OPA KLOPA
       </a>
-      TEST
-      <nav class="header__nav <?php if(is_front_page()) echo 'header__nav--homepage' ?>">
-        <?php
-        wp_nav_menu( array( 
-          'theme_location' => 'main-menu' ) ); 
-          ?>
-      </nav>
     </div>
+    <?php 
+      $products_IDs = new WP_Query( array(
+        'post_type' => 'product',
+        'posts_per_page' => -1,
+        'product_cat' => 'slane palacinke'
+    ));
+      while ($products_IDs->have_posts() ) : $products_IDs->the_post();
+        global $product;
+      ?>
+
+          <?php echo $product->get_price_html(); ?>
+          <p><?php the_title(); ?></p>
+        <?php 
+      endwhile;
+    ?>
   </div>
 </header>
