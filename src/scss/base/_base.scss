@@ -1,18 +1,30 @@
 * {
-    box-sizing: border-box;
-    color: #191919;
+  box-sizing: border-box;
 }
 
 html {
-    font-family: 'Roboto', sans-serif;
-    font-size: 10px;
-}
-
-body {
-    font-size: 1.6rem;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10px;
 }
 
 img {
-    max-width: 100%;
-    display: block;
+  max-width: 100%;
+  display: block;
+}
+
+body {
+  font-size: 1.6rem;
+
+  position: relative;
+  background: radial-gradient(50% 50% at 50% 50%, #1b1b1b 0%, #141414 100%);
+}
+
+body:before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
 }

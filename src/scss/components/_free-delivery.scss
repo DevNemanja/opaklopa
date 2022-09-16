@@ -1,0 +1,15 @@
+.free-delivery {
+  position: relative;
+  background-color: #fafafa;
+  border-radius: 2rem;
+  padding: 1.4rem 1.8rem;
+  line-height: 1.5;
+  font-size: 1.8rem;
+  margin-top: 4rem;
+
+  &__image {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}

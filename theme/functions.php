@@ -29,4 +29,9 @@ function special_nav_class ($classes, $item) {
   return $classes;
 }
 
-
+// Remove all currency symbols
+function codeAstrology_remove_wc_currency_symbols( $currency_symbol, $currency ) {
+  $currency_symbol = '';
+  return $currency_symbol;
+}
+add_filter('woocommerce_currency_symbol', 'codeAstrology_remove_wc_currency_symbols', 10, 2);

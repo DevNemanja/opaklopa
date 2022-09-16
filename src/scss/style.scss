@@ -1,15 +1,15 @@
-@import "vendor/reset";
+@import 'vendor/reset';
 
-@import "abstracts/variables";
-@import "abstracts/mixins";
+@import 'abstracts/variables';
+@import 'abstracts/mixins';
 
-@import "base/animations";
-@import "base/fonts";
-@import "base/base";
-@import "base/typography";
-@import "base/utilities";
+@import 'base/animations';
+@import 'base/fonts';
+@import 'base/base';
+@import 'base/typography';
+@import 'base/utilities';
 
-@import "components/header";
-@import "components/projects";
-@import "components/page";
-@import "components/single-project";
+@import 'components/header';
+@import 'components/products';
+@import 'components/product';
+@import 'components/free-delivery';

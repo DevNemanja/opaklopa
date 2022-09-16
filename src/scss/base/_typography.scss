@@ -1,3 +1,10 @@
-h1, h2 {
-    color: #231F20;
+h1 {
+  font-family: Lobster;
+  color: $primary-color;
+}
+
+h2 {
+  font-family: Lobster;
+  color: $primary-color;
+  font-size: 3.6rem;
 }

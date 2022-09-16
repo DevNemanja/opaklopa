@@ -8,29 +8,15 @@
 <body>
 
 <?php wp_head(); ?>
-
+<style>
+  body:before {
+    background-image: url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/opa-bg.png);
+  }
+</style>
 <header class="header" data-module="HEADER">
   <div class="container">
     <div class="header__container">
-      <a class="header__logo" title="Go to Homepage" href="/">
-        OPA KLOPA
-      </a>
+        <h1 class="header__logo">OpaKlopa</h1>
     </div>
-    <h2>PIZZA</h2>
-    <?php 
-      $products_IDs = new WP_Query( array(
-        'post_type' => 'product',
-        'posts_per_page' => -1,
-        'product_cat' => 'slane palacinke'
-    ));
-      while ($products_IDs->have_posts() ) : $products_IDs->the_post();
-        global $product;
-      ?>
-
-          <?php echo $product->get_price_html(); ?>
-          <p><?php the_title(); ?></p>
-        <?php 
-      endwhile;
-    ?>
   </div>
 </header>
