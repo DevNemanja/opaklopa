@@ -1,8 +1,8 @@
 <section class="products" data-module="OPA">
   <div class="container">
-    <div class="products__title-wrapper">
-      <h2 class="products__title">Salate</h2>
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/salads.svg" alt="" class="products__title-img">
+  <div class="title title--with-icon">
+      <h2 class="title__header">Salate</h2>
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/salads.svg" alt="" class="title__icon">
     </div>
     <div>
       <?php 

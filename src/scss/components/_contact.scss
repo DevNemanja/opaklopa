@@ -1,0 +1,30 @@
+.contact {
+  background-color: $primary-color;
+  color: #0d0d0d;
+  border-radius: 2rem;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  position: relative;
+  margin-top: 2rem;
+
+  &__address {
+    max-width: 25rem;
+    margin-top: 2rem;
+  }
+
+  & > a {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__img {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
