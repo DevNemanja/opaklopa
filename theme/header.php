@@ -14,10 +14,13 @@
   }
 </style>
 <header class="header" data-module="HEADER">
-  <div class="container">
-    <div class="header__container">
+  <div class="header__wrapper">
+    <div class="container">
+      <div class="header__container">
         <h1 class="header__logo">OpaKlopa</h1>
-          <?php require('template-parts/hamburger-menu.php'); ?>
+        <?php require('template-parts/hamburger-menu.php'); ?>
+        <?php require('template-parts/mobile-menu.php'); ?>
+      </div>
     </div>
   </div>
 </header>

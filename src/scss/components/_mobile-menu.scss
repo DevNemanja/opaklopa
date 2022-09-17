@@ -1,0 +1,25 @@
+.mobile-menu {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 1.8rem;
+  background-color: #191919;
+  padding-top: 8rem;
+  line-height: 1.5;
+  padding-bottom: 5rem;
+  z-index: -1;
+  display: none;
+  overflow: scroll;
+  height: 100vh;
+
+  &--open {
+    display: block;
+  }
+
+  &__social-icons {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-top: 5rem;
+  }
+}
