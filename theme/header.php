@@ -17,6 +17,7 @@
   <div class="container">
     <div class="header__container">
         <h1 class="header__logo">OpaKlopa</h1>
+          <?php require('template-parts/hamburger-menu.php'); ?>
     </div>
   </div>
 </header>

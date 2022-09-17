@@ -1,14 +1,9 @@
-import Projects from './modules/projects';
-import SingleProject from './modules/single-project';
+import Hamburger from './modules/hamburger';
 
 // name of a module must be present in the DOM in order for it to be initialized
 export const modules = [
   {
-    name: 'PROJECTS',
-    constructor: Projects
+    name: 'HAMBURGER',
+    constructor: Hamburger
   },
-  {
-    name: 'SINGLE_PROJECT',
-    constructor: SingleProject
-  }
 ];

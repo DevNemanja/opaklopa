@@ -2,11 +2,7 @@
   &__container {
     display: flex;
     justify-content: space-between;
-
-    @include breakpoint(sm) {
-      display: block;
-      text-align: center;
-    }
+    align-items: center;
   }
 
   &__logo {
@@ -14,5 +10,12 @@
     margin-top: 2rem;
     color: $primary-color;
     font-weight: normal;
+  }
+
+  &__menu {
+    border: 1px solid red;
+    max-width: 3rem;
+    max-height: 3rem;
+    margin-right: 3rem;
   }
 }
