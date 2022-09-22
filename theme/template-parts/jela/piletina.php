@@ -2,7 +2,7 @@
   <div class="container">
     <div class="title title--with-icon">
       <h2 class="title__header">Piletina</h2>
-      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/pizza.svg" alt="" class="title__icon">
+      <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/chicken.svg" alt="" class="title__icon">
     </div>
     <div>
       <?php 

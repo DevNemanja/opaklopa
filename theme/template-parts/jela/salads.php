@@ -9,7 +9,7 @@
         $products_IDs = new WP_Query( array(
           'post_type' => 'product',
           'posts_per_page' => -1,
-          'product_cat' => 'pizza'
+          'product_cat' => 'salate'
         ));
         while ($products_IDs->have_posts() ) : $products_IDs->the_post();
         global $product;
