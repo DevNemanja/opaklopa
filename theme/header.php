@@ -22,5 +22,6 @@
         <?php require('template-parts/mobile-menu.php'); ?>
       </div>
     </div>
+    <?php require('template-parts/navigator.php'); ?>
   </div>
 </header>

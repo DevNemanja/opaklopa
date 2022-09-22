@@ -1,5 +1,6 @@
 import Hamburger from './modules/hamburger';
 import Header from './modules/header';
+import Navigator from './modules/navigator';
 
 // name of a module must be present in the DOM in order for it to be initialized
 export const modules = [
@@ -10,5 +11,9 @@ export const modules = [
   {
     name: 'HEADER',
     constructor: Header
+  },
+  {
+    name: 'NAVIGATOR',
+    constructor: Navigator
   },
 ];

@@ -1,0 +1,35 @@
+.navigator {
+  &__list {
+    margin-top: 2rem;
+    padding: 0.2rem 2rem;
+    gap: 1rem;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+    visibility: hidden;
+    scroll-behavior: smooth;
+    opacity: 0;
+    transition: opacity 0.2s;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    &--open {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
+
+  &__list-item {
+    flex-shrink: 0;
+
+    &--active {
+      font-weight: bold;
+      color: $primary-color;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-<section class="products" data-module="OPA">
+<section class="products">
   <div class="container">
     <div class="title title--with-icon">
       <h2 class="title__header">Pizza</h2>
