@@ -4,7 +4,7 @@
       <h2 class="title__header">Pizza</h2>
       <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/pizza.svg" alt="" class="title__icon">
     </div>
-    <div>
+    <div class="products__wrapper">
       <?php 
         $products_IDs = new WP_Query( array(
           'post_type' => 'product',
@@ -33,7 +33,11 @@
               </div>
           </div>
           <div class="product__image-wrapper">
-            <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/pizza.png" alt="" class="product__image">
+            <?php if(get_the_post_thumbnail_url($post->ID)) :  ?>
+              <img src="<?php echo get_the_post_thumbnail_url($post->ID) ?>" alt="SLIKA" class="product__image">
+            <?php else: ?>
+              <!-- <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/pizza.png" alt="" class="product__image"> -->
+            <?php endif; ?>          
           </div>
       </div>
       <?php endwhile; ?>
