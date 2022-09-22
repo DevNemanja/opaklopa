@@ -12,6 +12,8 @@ export default class Hamburger {
         this.el.classList.toggle('is-open');
         this.el.classList.toggle('is-closed');
 
+        document.querySelector('.navigator').classList.toggle('navigator--hidden')
+        document.querySelector('.header__container').classList.toggle('header__container--open')
         document.querySelector('.mobile-menu').classList.toggle('mobile-menu--open');
         document.body.classList.toggle('noscroll');
     }

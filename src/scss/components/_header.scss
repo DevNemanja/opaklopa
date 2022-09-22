@@ -19,6 +19,11 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+
+    &--open {
+      background-color: #191919;
+      padding-bottom: 2rem;
+    }
   }
 
   &__logo {
