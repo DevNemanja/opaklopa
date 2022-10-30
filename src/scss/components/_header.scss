@@ -1,6 +1,14 @@
 .header {
   padding-top: 6rem;
 
+  @include breakpoint(md) {
+    padding-top: 10rem;
+  }
+
+  @include breakpoint(xl) {
+    padding-top: 12rem;
+  }
+
   &__wrapper {
     position: fixed;
     top: 0;

@@ -1,14 +1,14 @@
 .container {
-  max-width: 1366px;
+  max-width: 2500px;
   margin: 0 auto;
-  padding: 0 $container-padding;
-  
-  @include breakpoint(md) {
+  padding: 0 $container-padding-mob;
+
+  @include breakpoint(sm) {
     padding: 0 $container-padding/2;
   }
   
-  @include breakpoint(sm) {
-    padding: 0 $container-padding-mob;
+  @include breakpoint(md) {
+    padding: 0 $container-padding;
   }
 
   &--narrow {

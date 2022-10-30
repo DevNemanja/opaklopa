@@ -5,6 +5,14 @@
   border-bottom: 1px solid #fafafa;
   margin-bottom: 2rem;
 
+  @include breakpoint(md) {
+    flex: 0 0 calc(50% - 0.5rem);
+  }
+
+  @include breakpoint(xl) {
+    flex: 0 0 calc(33.3% - 1rem);
+  }
+
   &__info {
     font-size: 1.6rem;
     display: flex;
