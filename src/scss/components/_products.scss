@@ -1,3 +1,15 @@
 .products {
   color: #fafafa;
+
+  &__wrapper {
+    @include breakpoint(md) {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    @include breakpoint(xl) {
+      gap: 1.5rem;
+    }
+  }
 }

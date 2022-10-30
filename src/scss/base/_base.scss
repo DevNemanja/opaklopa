@@ -6,6 +6,7 @@ html {
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;
   color: #fafafa;
+  background: radial-gradient(50% 50% at 50% 50%, #1b1b1b 0%, #141414 100%);
 }
 
 img {
@@ -17,9 +18,8 @@ body {
   font-size: 1.6rem;
 
   position: relative;
-  background: radial-gradient(50% 50% at 50% 50%, #1b1b1b 0%, #141414 100%);
-}
 
+<<<<<<< HEAD
 body:before {
   content: '';
   position: fixed;
@@ -29,4 +29,15 @@ body:before {
   height: 100vh;
   z-index: -1;
   kerning: auto;
+=======
+  &:before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: -1;
+  }
+>>>>>>> 447d073c580902e141d3feaf23d2aecfa28d780e
 }

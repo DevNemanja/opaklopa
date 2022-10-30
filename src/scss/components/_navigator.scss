@@ -22,6 +22,14 @@
       display: none;
     }
 
+    @include breakpoint(sm) {
+      padding: 0.5rem 4rem;
+    }
+
+    @include breakpoint(md) {
+      padding: 0.5rem 8rem;
+    }
+
     &--open {
       visibility: visible;
       opacity: 1;
