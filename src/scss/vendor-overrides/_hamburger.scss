@@ -1,0 +1,5 @@
+.hamburglar {
+  @include breakpoint(lg) {
+    display: none;
+  }
+}

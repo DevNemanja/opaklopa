@@ -6,6 +6,70 @@
   line-height: 1.5;
   padding-bottom: 5rem;
 
+  @include breakpoint(lg) {
+    position: fixed;
+    left: 0;
+    bottom: -50%;
+    width: 100%;
+    transition: bottom 0.3s ease-out;
+
+    &:hover {
+      bottom: 0;
+    }
+
+    &::before {
+      content: '';
+      background-image: url(../images/info.svg);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 3.5rem;
+      cursor: pointer;
+      position: absolute;
+      top: -5.6rem;
+      left: 50%;
+      width: 5rem;
+      height: 5rem;
+      background-color: inherit;
+      border: 1px solid $primary-color;
+      border-top-left-radius: 50%;
+      border-top-right-radius: 50%;
+      border-bottom: none;
+    }
+  }
+
+  &__container {
+    @include breakpoint(md) {
+      display: grid;
+      grid-template-areas:
+        'radnoVreme contact'
+        'detalji contact';
+
+      & > div {
+        &:nth-child(1) {
+          grid-area: radnoVreme;
+        }
+        &:nth-child(2) {
+          grid-area: contact;
+          margin-top: 3rem;
+        }
+        &:nth-child(3) {
+          grid-area: detalji;
+          max-width: 70rem;
+        }
+      }
+    }
+
+    @include breakpoint(lg) {
+      grid-template-areas: 'detalji radnoVreme contact';
+
+      & > div {
+        &:nth-child(3) {
+          max-width: 60rem;
+        }
+      }
+    }
+  }
+
   &__social-icons {
     display: flex;
     gap: 2rem;

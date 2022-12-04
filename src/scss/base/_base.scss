@@ -6,7 +6,6 @@ html {
   font-family: 'Open Sans', sans-serif;
   font-size: 10px;
   color: #fafafa;
-  background: radial-gradient(50% 50% at 50% 50%, #1b1b1b 0%, #141414 100%);
 }
 
 img {
@@ -19,7 +18,8 @@ body {
 
   position: relative;
 
-  &:before {
+  &:before,
+  &:after {
     content: '';
     position: fixed;
     top: 0;
@@ -27,5 +27,10 @@ body {
     width: 100%;
     height: 100vh;
     z-index: -1;
+  }
+
+  &:after {
+    z-index: -2;
+    background: radial-gradient(50% 50% at 50% 50%, #1b1b1b 0%, #141414 100%);
   }
 }
