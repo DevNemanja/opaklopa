@@ -1,18 +1,31 @@
-<?php $args = array(
-    'taxonomy'   => "product_cat",
-    'number'     => $number,
-    'orderby'    => 'none',
-    'order'      => $order,
-    'hide_empty' => $hide_empty,
-    'include'    => $ids
-);
-$product_categories = get_terms($args); ?>
+<div class="test">
+    <?php 
+        //     $taxonomy     = 'product_cat';
+        //     $orderby      = 'name';  
+        //     $show_count   = 0;      // 1 for yes, 0 for no
+        //     $pad_counts   = 0;      // 1 for yes, 0 for no
+        //     $hierarchical = 1;      // 1 for yes, 0 for no  
+        //     $title        = '';  
+        //     $empty        = 0;
 
-    <?php foreach ($product_categories as $key => $category): ?>
-        <?php if ($category->name !== 'Uncategorized') {
-            //  echo $category->name;
-        } ?>
-    <?php endforeach; ?> 
+        //     $args = array(
+        //         'taxonomy'     => $taxonomy,
+        //         // 'orderby'      => $orderby,
+        //         'show_count'   => $show_count,
+        //         'pad_counts'   => $pad_counts,
+        //         'hierarchical' => $hierarchical,
+        //         'title_li'     => $title,
+        //         'hide_empty'   => $empty
+        //  );
+        // $all_categories = get_categories( $args );
+
+        // // var_dump($all_categories);
+
+        // foreach ($all_categories as $cat) {
+        //     echo '<p>' . $cat->name . '</p>';
+        // }
+    ?>
+</div>
 
 <nav class="navigator" data-module="NAVIGATOR">
     <ul class="navigator__list">

@@ -35,3 +35,4 @@ function codeAstrology_remove_wc_currency_symbols( $currency_symbol, $currency )
   return $currency_symbol;
 }
 add_filter('woocommerce_currency_symbol', 'codeAstrology_remove_wc_currency_symbols', 10, 2);
+add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' ); // remove Woo CSS
