@@ -17,6 +17,7 @@ body {
   font-size: 1.6rem;
 
   position: relative;
+  background: radial-gradient(50% 50% at 50% 50%, #1b1b1b 0%, #141414 100%);
 
   &:before,
   &:after {
