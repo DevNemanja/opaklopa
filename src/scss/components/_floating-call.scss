@@ -2,4 +2,8 @@
   position: fixed;
   bottom: 2rem;
   right: 2rem;
+
+  @include breakpoint(sm) {
+    display: none;
+  }
 }
