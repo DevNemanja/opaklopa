@@ -1,4 +1,4 @@
-const url = 'http://opaklopa.local/';
+const url = 'https://opaklopa.local/';
 
 const { series, src, dest, watch, parallel } = require('gulp');
 const babel = require('gulp-babel');

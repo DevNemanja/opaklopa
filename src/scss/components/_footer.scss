@@ -6,36 +6,36 @@
   line-height: 1.5;
   padding-bottom: 5rem;
 
-  @include breakpoint(lg) {
-    position: fixed;
-    left: 0;
-    bottom: -50%;
-    width: 100%;
-    transition: bottom 0.3s ease-out;
+  // @include breakpoint(lg) {
+  //   position: fixed;
+  //   left: 0;
+  //   bottom: -50%;
+  //   width: 100%;
+  //   transition: bottom 0.3s ease-out;
 
-    &:hover {
-      bottom: 0;
-    }
+  //   &:hover {
+  //     bottom: 0;
+  //   }
 
-    &::before {
-      content: '';
-      background-image: url(../images/info.svg);
-      background-position: center;
-      background-repeat: no-repeat;
-      background-size: 3.5rem;
-      cursor: pointer;
-      position: absolute;
-      top: -5.6rem;
-      left: 50%;
-      width: 5rem;
-      height: 5rem;
-      background-color: inherit;
-      border: 1px solid $primary-color;
-      border-top-left-radius: 50%;
-      border-top-right-radius: 50%;
-      border-bottom: none;
-    }
-  }
+  //   &::before {
+  //     content: '';
+  //     background-image: url(../images/info.svg);
+  //     background-position: center;
+  //     background-repeat: no-repeat;
+  //     background-size: 3.5rem;
+  //     cursor: pointer;
+  //     position: absolute;
+  //     top: -5.6rem;
+  //     left: 50%;
+  //     width: 5rem;
+  //     height: 5rem;
+  //     background-color: inherit;
+  //     border: 1px solid $primary-color;
+  //     border-top-left-radius: 50%;
+  //     border-top-right-radius: 50%;
+  //     border-bottom: none;
+  //   }
+  // }
 
   &__container {
     @include breakpoint(md) {
