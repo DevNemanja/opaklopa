@@ -100,10 +100,10 @@ addButton.addEventListener('click', () => {
 
 
   fetch('https://opaklopa.local/wp-json/wc/v3/orders', {
-    method: 'POST',
+    method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Basic ${btoa('ck_47fc00cf4013b0019059255c037ec51d6f916797:cs_95133a72259ada71c449a10bb254eab7bb30ce38')}`,
+      Authorization: `Basic ${Buffer.from('ck_47fc00cf4013b0019059255c037ec51d6f916797:cs_95133a72259ada71c449a10bb254eab7bb30ce38').toString('base64')}`,
     },
     // body: JSON.stringify(data),
   })
