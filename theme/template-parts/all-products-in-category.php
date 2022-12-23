@@ -134,6 +134,26 @@
               <?php the_content(); ?>
             </div>
             <div class="product__price"><?php echo $product->get_price_html(); ?>rsd</div>
+            <?php if(WC()->cart->find_product_in_cart( WC()->cart->generate_cart_id( $post->ID ) )) :  ?>
+
+              <?php 
+                $quantity;
+              
+                foreach( WC()->cart->get_cart() as $cartItem ) {
+                  if($cartItem['product_id'] === $post->ID) {
+                    $quantity = $cartItem['quantity'];
+                  }
+                }
+              ?>
+              <div class="product__cart">
+                <a href="<?php echo esc_url( sprintf( '%1$s/?remove-item=%2$s', site_url(), get_the_ID() ) ); ?>">-</a>
+                <span class="product__amount"><?php echo $quantity; ?></span>
+                <a href="<?php echo esc_url( sprintf( '%1$s/?add-to-cart=%2$s', site_url(), get_the_ID() ) ); ?>">+</a>
+
+              </div>
+            <?php else : ?>
+              <a href="<?php echo esc_url( sprintf( '%1$s/?add-to-cart=%2$s', site_url(), get_the_ID() ) ); ?>">Add to cart</a>
+            <?php endif; ?>
           </div>
           <div class="product__image-wrapper">
             <?php if(get_the_post_thumbnail_url($post->ID)) :  ?>

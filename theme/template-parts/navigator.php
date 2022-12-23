@@ -1,4 +1,4 @@
-<div class="test">
+<!-- <div class="test">
     <?php 
         //     $taxonomy     = 'product_cat';
         //     $orderby      = 'name';  
@@ -25,7 +25,7 @@
         //     echo '<p>' . $cat->name . '</p>';
         // }
     ?>
-</div>
+</div> -->
 
 <nav class="navigator" data-module="NAVIGATOR">
     <ul class="navigator__list">

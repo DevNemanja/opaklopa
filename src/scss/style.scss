@@ -22,3 +22,20 @@
 @import 'components/floating-call';
 @import 'components/mobile-menu';
 @import 'components/navigator';
+
+.test {
+  background-color: #fff;
+  display: block;
+  width: 100%;
+  padding: 50px;
+  color: black;
+}
+
+main {
+  display: flex;
+}
+
+.right {
+  border: 1px solid red;
+  flex: 0 0 500px;
+}
