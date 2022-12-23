@@ -48,58 +48,67 @@ export default app;
 window.APP = app || {};
 
 const addButton = document.querySelector('#add');
-const removeButton = document.querySelector('#remove');
-const logCart = document.querySelector('#log-cart');
-const nonce = document.getElementById('nonce');
-
-const id = addButton.dataset.id;
-
-const url = 'https://opaklopa.local/wp-json/rae/v1/cart/items';
-const originalUrl = 'https://opaklopa.local/wp-json/wc/store/cart';
-
-logCart.addEventListener('click', () => {
-  console.log('Logging cart');
-
-  fetch(url, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Headless-CMS': true,
-      Authorization: `Basic ck_ddd6fa7a0529f127ddb19cde94fe15be16c2a31e:cs_f4f28a4196afb82c2a3d4ae63c9ef0c3f1fa9a8b`,
-    },
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data));
-});
 
 addButton.addEventListener('click', () => {
   console.log('Adding to cart');
 
-  fetch(url, {
+  const data = {
+    payment_method: "bacs",
+    payment_method_title: "Direct Bank Transfer",
+    set_paid: true,
+    billing: {
+      first_name: "John",
+      last_name: "Doe",
+      address_1: "969 Market",
+      address_2: "",
+      city: "San Francisco",
+      state: "CA",
+      postcode: "94103",
+      country: "US",
+      email: "john.doe@example.com",
+      phone: "(555) 555-5555"
+    },
+    shipping: {
+      first_name: "John",
+      last_name: "Doe",
+      address_1: "969 Market",
+      address_2: "",
+      city: "San Francisco",
+      state: "CA",
+      postcode: "94103",
+      country: "US"
+    },
+    line_items: [
+      {
+        product_id: 93,
+        quantity: 2
+      },
+      {
+        product_id: 22,
+        variation_id: 23,
+        quantity: 1
+      }
+    ],
+    shipping_lines: [
+      {
+        method_id: "flat_rate",
+        method_title: "Flat Rate",
+        total: "10.00"
+      }
+    ]
+  };
+
+
+  fetch('https://opaklopa.local/wp-json/wc/v3/orders', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Headless-CMS': true,
-      Authorization: `Basic ck_ddd6fa7a0529f127ddb19cde94fe15be16c2a31e:cs_f4f28a4196afb82c2a3d4ae63c9ef0c3f1fa9a8b`,
+      Authorization: `Basic ${btoa('ck_47fc00cf4013b0019059255c037ec51d6f916797:cs_95133a72259ada71c449a10bb254eab7bb30ce38')}`,
     },
-    body: JSON.stringify({ product_id: id, quantity: 2 }),
+    // body: JSON.stringify(data),
   })
     .then((response) => response.json())
     .then((data) => console.log(data));
 });
 
-removeButton.addEventListener('click', () => {
-  console.log('Removing from cart');
 
-  fetch(url, {
-    method: 'DELETE',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Headless-CMS': true,
-      Authorization: `Basic ck_ddd6fa7a0529f127ddb19cde94fe15be16c2a31e:cs_f4f28a4196afb82c2a3d4ae63c9ef0c3f1fa9a8b`,
-    },
-    body: JSON.stringify({ product_id: id, quantity: 1 }),
-  })
-    .then((response) => response.json())
-    .then((data) => console.log(data));
-});

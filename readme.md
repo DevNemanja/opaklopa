@@ -59,3 +59,9 @@ To use jQuery you need to add this import to the top of the module that is using
 ## Get pictures from WP directory
 
 <?php echo get_stylesheet_directory_uri(); ?>/assets/images/User icon.svg
+
+
+PC cred:
+
+key: ck_9edba16d1a370cd15e54bc837be764622f6de5fc
+secret: cs_e6bccdd55897392f7336387d2c62992bba090698
