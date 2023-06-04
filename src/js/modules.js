@@ -1,4 +1,4 @@
-import AddToCart from './modules/add-to-cart';
+import AddToCart from './modules/cart/add-to-cart';
 import Hamburger from './modules/hamburger';
 import Header from './modules/header';
 import Navigator from './modules/navigator';
