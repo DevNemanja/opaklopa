@@ -1,3 +1,4 @@
+import AddToCart from './modules/add-to-cart';
 import Hamburger from './modules/hamburger';
 import Header from './modules/header';
 import Navigator from './modules/navigator';
@@ -15,5 +16,9 @@ export const modules = [
   {
     name: 'NAVIGATOR',
     constructor: Navigator
+  },
+  {
+    name: 'ADD_TO_CART',
+    constructor: AddToCart
   },
 ];
