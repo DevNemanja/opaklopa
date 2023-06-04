@@ -15,6 +15,6 @@ export default class CartSidebar extends Cart {
     }
 
     handleClick(e) {
-        e.target.className === 'cart-sidebar__submit-cart' ? this.submitOrder() : null;
+        e.target.className === 'submit-cart' ? this.submitOrder() : null
     }
 }
