@@ -17,7 +17,7 @@ export default class AddToCart extends Cart {
     handleClick(e) {
         this.updateCart(
             this.id, 
-            e.target.className === 'remove-product' ? 'decrease' : 'increase',
+            e.target.className === 'remove-product' ? 'decrease' : (e.target.className === 'add-to-cart' || e.target.className === 'add-product') ? 'increase' : null,
             this.name,
             this.price    
         )
