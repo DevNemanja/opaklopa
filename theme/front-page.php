@@ -65,40 +65,9 @@
   ?>
 
   </div>
-  <div class="right">
-    <br>
-    <br>
-    <br>
-    
-    <p>Cart count: (<?php echo WC()->cart->get_cart_contents_count(); ?>)</p>
-    <p>Total Price: <?php echo WC()->cart->get_cart_total(); ?>din</p>
-    <button id="add">Create order</button>
-
-    <pre>
-      <?php //print_r(WC()->cart->cart_contents); ?>
-      <?php //print_r(WC()->cart->get_customer()); ?>
-
-      <?php 
-        $cartContents = WC()->cart->cart_contents;
-
-        foreach ($cartContents as $item) : ?>
-
-          <?php $nonce = wp_create_nonce('wc_store_api'); ?>
-
-          <p id="nonce"><?php echo $nonce; ?></p>
-
-          <?php print_r($item['data']->get_data()['name']) ?>
-
-          <div>
-            <p>Title: <?php echo $item['data']->get_data()['name']; ?>  </p>
-            <p>Price: <?php echo $item['line_total']; ?> </p>
-            <p>Quantity: <?php echo $item['quantity']; ?> </p>
-            <button id="add" data-id="<?php echo $item['data']->get_data()['id'] ?>">Create order</button>
-          </div>
-
-      <?php endforeach; ?>
-    </pre>
-  </div>
+    <div class="right cart-sidebar" data-module="CART_SIDEBAR">
+      <ul class="cart-sidebar__list"></ul>
+    </div> 
 </main>
 
 <?php get_footer(); ?>

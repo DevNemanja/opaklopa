@@ -1,14 +1,12 @@
 export default class Cart {
-    constructor() {
-        console.log('Greetings from Cart')
-    }
+    constructor() {}
 
     getCart() {
         return JSON.parse(localStorage.getItem('opa-cart'));
     }
 
-    createCart(id) {
-        localStorage.setItem('opa-cart', JSON.stringify([{id, quantity: 1}]));
+    createCart(id, productName, price) {
+        localStorage.setItem('opa-cart', JSON.stringify([{id, quantity: 1, productName, price}]));
 
         return this.getCart();
     }
@@ -19,6 +17,7 @@ export default class Cart {
         if(!cart) return false;
 
         return cart.filter(item => {
+            document.querySelector(`[data-id="${item.id}"] .product__cart-data`).innerHTML = `<button class="add-to-cart">Add to cart</button>`;
             if(item.id !== id) {
                 return item;
             }
@@ -51,14 +50,14 @@ export default class Cart {
     }
 
     
-    updateCart(id, action) {
+    updateCart(id, action, productName, price) {
         let cart = this.getCart();
 
         // Ako nema nista u localStorage-u
         if(!cart) {
             // Kreiraj cart sa osnovnim podacima
 
-            cart = this.createCart(id);
+            cart = this.createCart(id, productName, price);
         } else {
             // Ako ima azuriraj Cart
             
@@ -84,10 +83,39 @@ export default class Cart {
                 }
             } else {
                 // Ako ne postoji dodaj u niz novi objekat
-                cart.push({id, quantity: 1})
+                cart.push({id, quantity: 1, productName, price})
             }
         }
 
         localStorage.setItem('opa-cart', JSON.stringify(cart));
+    }
+
+    updateMarkup() {
+        const cart = this.getCart();
+        let cartMarkup = '';
+
+        cart.forEach(product => {
+            // Sidebar markup
+            cartMarkup += `
+                <p>Ime: ${product.productName}</p>
+                <p>Cena: ${product.price}</p>
+                <div class="product__cart">
+                    <button class="remove-product">-</button>
+                    <span class="product__amount">${product.quantity}</span>
+                    <button class="add-product">+</button>
+                </div>
+            `;
+
+            // All products markup
+            document.querySelector(`[data-id="${product.id}"] .product__cart-data`).innerHTML = `
+                <div class="product__cart">
+                    <button class="remove-product">-</button>
+                    <span class="product__amount">${product.quantity}</span>
+                    <button class="add-product">+</button>
+                </div>
+            `
+        }) 
+
+        document.querySelector('.cart-sidebar__list').innerHTML = cartMarkup;
     }
 }

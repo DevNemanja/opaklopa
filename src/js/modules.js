@@ -1,4 +1,5 @@
 import AddToCart from './modules/cart/add-to-cart';
+import CartSidebar from './modules/cart/cart-sidebar';
 import Hamburger from './modules/hamburger';
 import Header from './modules/header';
 import Navigator from './modules/navigator';
@@ -20,5 +21,9 @@ export const modules = [
   {
     name: 'ADD_TO_CART',
     constructor: AddToCart
+  },
+  {
+    name: 'CART_SIDEBAR',
+    constructor: CartSidebar
   },
 ];
