@@ -49,7 +49,6 @@ export default class Cart {
         })[0];
     }
 
-    
     updateCart(id, action, productName, price) {
         let cart = this.getCart();
 
@@ -118,4 +117,59 @@ export default class Cart {
 
         document.querySelector('.cart-sidebar__list').innerHTML = cartMarkup;
     }
+
+    prepareCartForOrder() {
+        const cart = this.getCart();
+
+        return cart.map(item => ({ product_id: item.id, quantity: item.quantity }));
+    }
+
+    submitOrder() {
+        const orderData  = {
+            payment_method: "bacs",
+            payment_method_title: "Direct Bank Transfer",
+            set_paid: true,
+            billing: {
+            first_name: "John",
+            last_name: "Doe",
+            address_1: "969 Market",
+            address_2: "",
+            city: "San Francisco",
+            state: "CA",
+            postcode: "94103",
+            country: "US",
+            email: "john.doe@example.com",
+            phone: "(555) 555-5555"
+            },
+            shipping: {
+            first_name: "John",
+            last_name: "Doe",
+            address_1: "969 Market",
+            address_2: "",
+            city: "San Francisco",
+            state: "CA",
+            postcode: "94103",
+            country: "US"
+            },
+            line_items: this.prepareCartForOrder(),
+            shipping_lines: [
+                {
+                    method_id: "flat_rate",
+                    method_title: "Flat Rate",
+                    total: "10.00"
+                }
+            ]
+        };
+
+        fetch('https://opaklopa.local/wp-json/wc/v3/orders', {
+            method: 'POST',
+            headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Basic ${Buffer.from('ck_47fc00cf4013b0019059255c037ec51d6f916797:cs_95133a72259ada71c449a10bb254eab7bb30ce38').toString('base64')}`,
+            },
+            body: JSON.stringify(orderData),
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+        };
 }

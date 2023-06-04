@@ -67,6 +67,7 @@
   </div>
     <div class="right cart-sidebar" data-module="CART_SIDEBAR">
       <ul class="cart-sidebar__list"></ul>
+      <button class="cart-sidebar__submit-cart">SUBMIT</button>
     </div> 
 </main>
 

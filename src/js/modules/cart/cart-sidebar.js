@@ -11,11 +11,10 @@ export default class CartSidebar extends Cart {
         
         this.updateMarkup();
 
-        window.addEventListener('cart-updated', () => console.log('Got inside sidebar'));
         el.addEventListener('click', this.handleClick);
     }
 
-    handleClick() {
-        this.updateMarkup()
+    handleClick(e) {
+        e.target.className === 'cart-sidebar__submit-cart' ? this.submitOrder() : null;
     }
 }
