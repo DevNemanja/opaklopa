@@ -1,0 +1,32 @@
+.cart-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  min-width: 500px;
+  background-color: #141414;
+  transform: translateX(100%);
+  transition: 0.2s;
+  padding: 3rem;
+  z-index: 3;
+
+  &--open {
+    transform: translateX(0);
+  }
+
+  &__input {
+    padding: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    border: none;
+  }
+
+  &__textarea {
+    padding: 1rem;
+    width: 100%;
+    border: none;
+    min-height: 10rem;
+    border-radius: 5px;
+  }
+}

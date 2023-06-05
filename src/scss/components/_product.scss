@@ -50,5 +50,8 @@
 
   &__amount {
     color: white;
+    min-width: 2.5rem;
+    display: inline-block;
+    text-align: center;
   }
 }

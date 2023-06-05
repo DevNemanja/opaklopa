@@ -135,7 +135,7 @@
             </div>
             <div class="product__price"><?php echo $product->get_price_html(); ?>rsd</div>
             <div class="product__cart-data">
-              <button class="add-to-cart">Add to cart</button>
+              <button class="add-to-cart button">Add to cart</button>
             </div>  
           </div>
           <div class="product__image-wrapper">

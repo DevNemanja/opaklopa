@@ -18,10 +18,10 @@ export default class CartSidebar extends Cart {
     const product = e.target.closest('[data-product-id]');
 
     switch (target.className) {
-      case 'cart-sidebar__submit-cart':
+      case 'cart-sidebar__submit-cart button':
         this.submitOrder();
         break;
-      case 'remove-product':
+      case 'remove-product button button--qty':
         this.updateCart(
           +product.dataset.productId,
           'decrease',
@@ -29,7 +29,7 @@ export default class CartSidebar extends Cart {
           +product.dataset.price
         );
         break;
-      case 'add-product':
+      case 'add-product button button--qty':
         this.updateCart(
           +product.dataset.productId,
           'increase',

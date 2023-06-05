@@ -62,39 +62,14 @@
     $product_category = 'poslastice';
     $title = 'Poslastice';
     require('template-parts/all-products-in-category.php'); 
+
+  
   ?>
 
   </div>
-    <div class="right cart-sidebar" data-module="CART_SIDEBAR">
-      <ul class="cart-sidebar__list"></ul>
-      <br> <br>
-      <form>
-        <div class="form-control">
-          <label for="name">Ime i prezime</label>
-          <input id="name" type="text">
-        </div>
-        <div class="form-control">
-          <label for="address">Adresa</label>
-          <input id="address" type="text">
-        </div>
-        <div class="form-control">
-          <label for="mail">E-mail</label>
-          <input id="mail" type="mail">
-        </div>
-        <div class="form-control">
-          <label for="telefon">Telefon</label>
-          <input id="telefon" type="tel">
-        </div>
-        <div class="form-control">
-          <label for="poruka">Poruka</label>
-          <textarea id="poruka"></textarea>
-        </div>
-      </form>
 
-      <br>
-      <button class="cart-sidebar__submit-cart">SUBMIT</button>
+  <?php   require('template-parts/cart-sidebar.php');  ?>
 
-    </div> 
 </main>
 
 <?php get_footer(); ?>

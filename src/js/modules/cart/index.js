@@ -24,7 +24,7 @@ export default class Cart {
     return cart.filter((item) => {
       document.querySelector(
         `[data-id="${item.id}"] .product__cart-data`
-      ).innerHTML = `<button class="add-to-cart">Add to cart</button>`;
+      ).innerHTML = `<button class="add-to-cart button">Add to cart</button>`;
       if (item.id !== id) {
         return item;
       }
@@ -59,8 +59,6 @@ export default class Cart {
   updateCart(id, action, productName, price) {
     let cart = this.getCart();
 
-    console.log(id, action, productName, price);
-
     // Ako nema nista u localStorage-u
     if (!cart) {
       // Kreiraj cart sa osnovnim podacima
@@ -85,7 +83,6 @@ export default class Cart {
               cart[cartIndex].quantity--;
             }
             break;
-
           default:
             break;
         }
@@ -112,9 +109,9 @@ export default class Cart {
                     <p>Ime: ${product.productName}</p>
                     <p>Cena: ${product.price}</p>
                     <div class="product__cart">
-                        <button class="remove-product">-</button>
+                        <button class="remove-product button button--qty">-</button>
                         <span class="product__amount">${product.quantity}</span>
-                        <button class="add-product">+</button>
+                        <button class="add-product button button--qty">+</button>
                     </div>
                 </div>
             `;
@@ -124,9 +121,9 @@ export default class Cart {
         `[data-id="${product.id}"] .product__cart-data`
       ).innerHTML = `
                 <div class="product__cart">
-                    <button class="remove-product">-</button>
+                    <button class="remove-product button button--qty">-</button>
                     <span class="product__amount">${product.quantity}</span>
-                    <button class="add-product">+</button>
+                    <button class="add-product button button--qty">+</button>
                 </div>
             `;
     });
@@ -143,29 +140,44 @@ export default class Cart {
     }));
   }
 
+  clearCart() {
+    const cart = this.getCart();
+
+    cart.map((item) => this.removeItemFromCart(item.id));
+
+    localStorage.setItem('opa-cart', JSON.stringify([]));
+    this.updateMarkup();
+  }
+
   submitOrder() {
-    const ime = document.querySelector('#name').value;
-    const adresa = document.querySelector('#address').value;
-    const mail = document.querySelector('#mail').value;
-    const phone = document.querySelector('#telefon').value;
-    const poruka = document.querySelector('#poruka').value;
+    const ime = document.querySelector('#name');
+    const adresa = document.querySelector('#address');
+    const mail = document.querySelector('#mail');
+    const phone = document.querySelector('#telefon');
+    const poruka = document.querySelector('#poruka');
+
+    function clearForm() {
+      ime.value = '';
+      adresa.value = '';
+      mail.value = '';
+      phone.value = '';
+      poruka.value = '';
+    }
 
     const orderData = {
       payment_method: 'cod',
       payment_method_title: 'Cash on Delivery',
       set_paid: false,
       billing: {
-        first_name: ime,
+        first_name: ime.value,
         last_name: '',
-        address_1: adresa,
-        email: mail,
-        phone: phone,
+        address_1: adresa.value,
+        email: mail.value,
+        phone: phone.value,
       },
       line_items: this.prepareCartForOrder(),
-      customer_note: poruka,
+      customer_note: poruka.value,
     };
-
-    console.log('testic');
 
     fetch('https://opaklopa.local/wp-json/wc/v3/orders', {
       method: 'POST',
@@ -178,6 +190,10 @@ export default class Cart {
       body: JSON.stringify(orderData),
     })
       .then((response) => response.json())
-      .then((data) => console.log(data));
+      .then((data) => {
+        clearForm();
+        this.clearCart();
+        console.log(data);
+      });
   }
 }

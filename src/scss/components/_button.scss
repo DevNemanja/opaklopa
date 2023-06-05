@@ -1,0 +1,16 @@
+.button {
+  border: none;
+  padding: 1rem 3rem;
+  border-radius: 5px;
+  background-color: #eca917;
+  color: white;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: darken(#eca917, 10%);
+  }
+
+  &--qty {
+    padding: 1rem 1.2rem;
+  }
+}
