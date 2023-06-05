@@ -18,7 +18,7 @@ export default class CartSidebar extends Cart {
     const product = e.target.closest('[data-product-id]');
 
     switch (target.className) {
-      case 'submit-cart':
+      case 'cart-sidebar__submit-cart':
         this.submitOrder();
         break;
       case 'remove-product':

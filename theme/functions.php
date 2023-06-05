@@ -36,3 +36,14 @@ function codeAstrology_remove_wc_currency_symbols( $currency_symbol, $currency )
 }
 add_filter('woocommerce_currency_symbol', 'codeAstrology_remove_wc_currency_symbols', 10, 2);
 add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' ); // remove Woo CSS
+
+// Protect admin page
+function custom_password_protect() {
+  if (is_page('admin-page') && !is_user_logged_in()) {
+    auth_redirect();
+  }
+  elseif (is_page('admin-page') && !current_user_can('administrator')) {
+    wp_die('Access denied. You must be an administrator to view this page.');
+  }
+}
+add_action('template_redirect', 'custom_password_protect');

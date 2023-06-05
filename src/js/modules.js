@@ -3,27 +3,32 @@ import CartSidebar from './modules/cart/cart-sidebar';
 import Hamburger from './modules/hamburger';
 import Header from './modules/header';
 import Navigator from './modules/navigator';
+import Orders from './modules/orders';
 
 // name of a module must be present in the DOM in order for it to be initialized
 export const modules = [
   {
     name: 'HAMBURGER',
-    constructor: Hamburger
+    constructor: Hamburger,
   },
   {
     name: 'HEADER',
-    constructor: Header
+    constructor: Header,
   },
   {
     name: 'NAVIGATOR',
-    constructor: Navigator
+    constructor: Navigator,
   },
   {
     name: 'ADD_TO_CART',
-    constructor: AddToCart
+    constructor: AddToCart,
   },
   {
     name: 'CART_SIDEBAR',
-    constructor: CartSidebar
+    constructor: CartSidebar,
+  },
+  {
+    name: 'ORDERS',
+    constructor: Orders,
   },
 ];

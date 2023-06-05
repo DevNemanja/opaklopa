@@ -1,3 +1,5 @@
+import { CLIENT_KEY, CLIENT_SECRET } from '../../app';
+
 export default class Cart {
   constructor() {}
 
@@ -163,12 +165,14 @@ export default class Cart {
       customer_note: poruka,
     };
 
+    console.log('testic');
+
     fetch('https://opaklopa.local/wp-json/wc/v3/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Basic ${Buffer.from(
-          'ck_47fc00cf4013b0019059255c037ec51d6f916797:cs_95133a72259ada71c449a10bb254eab7bb30ce38'
+          `${CLIENT_KEY}:${CLIENT_SECRET}`
         ).toString('base64')}`,
       },
       body: JSON.stringify(orderData),
