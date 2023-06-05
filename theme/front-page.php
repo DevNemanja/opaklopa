@@ -67,7 +67,7 @@
   </div>
     <div class="right cart-sidebar" data-module="CART_SIDEBAR">
       <ul class="cart-sidebar__list"></ul>
-      <button class="cart-sidebar__submit-cart">SUBMIT</button>
+      <br> <br>
       <form>
         <div class="form-control">
           <label for="name">Ime i prezime</label>
@@ -90,6 +90,10 @@
           <textarea id="poruka"></textarea>
         </div>
       </form>
+
+      <br>
+      <button class="cart-sidebar__submit-cart">SUBMIT</button>
+
     </div> 
 </main>
 
