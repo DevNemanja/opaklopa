@@ -1,10 +1,20 @@
 import { CLIENT_KEY, CLIENT_SECRET } from '../../app';
 
 export default class Cart {
-  constructor() {}
+  constructor() {
+    this.cartButton = document.querySelector('.header__cart');
+  }
 
   getCart() {
-    return JSON.parse(localStorage.getItem('opa-cart'));
+    const cart = JSON.parse(localStorage.getItem('opa-cart'));
+
+    if (cart.length > 0) {
+      this.cartButton.classList.add('header__cart--has-items');
+    } else {
+      this.cartButton.classList.remove('header__cart--has-items');
+    }
+
+    return cart;
   }
 
   createCart(id, productName, price, imgUrl) {

@@ -39,8 +39,6 @@ export default class CartSidebar extends Cart {
 
   persistData(e) {
     this.userData[e.target.id] = e.target.value;
-    console.log(e.target.value);
-    console.log(this.userData);
 
     localStorage.setItem('opa-user-data', JSON.stringify(this.userData));
   }

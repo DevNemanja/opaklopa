@@ -53,6 +53,26 @@
     border: none;
     max-width: 4rem;
     margin-top: auto;
+    position: relative;
+
+    &::before {
+      transition: 0.2s;
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #d20e0e;
+      border-radius: 50%;
+      top: 0;
+      right: 0;
+      opacity: 0;
+    }
+
+    &--has-items {
+      &::before {
+        opacity: 1;
+      }
+    }
   }
 
   &__cart-icon {
