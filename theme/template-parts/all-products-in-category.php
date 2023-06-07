@@ -129,11 +129,14 @@
 
       <div class="product" data-module="ADD_TO_CART" data-id="<?php echo get_the_ID(); ?>" data-name="<?php the_title(); ?>" data-price="<?php echo $product->get_price(); ?>">
           <div class="product__info">
-            <div class="product__name"><?php the_title(); ?></div>
+            <div class="product__name-wrapper">
+              <div class="product__name"><?php the_title(); ?></div>
+              <div class="product__price"><?php echo $product->get_price_html(); ?>rsd</div>
+            </div>
             <div class="product__ingredients">
               <?php the_content(); ?>
             </div>
-            <div class="product__price"><?php echo $product->get_price_html(); ?>rsd</div>
+            
             <div class="product__cart-data">
               <button class="add-to-cart button">Add to cart</button>
             </div>  
