@@ -7,10 +7,10 @@ export default class Cart {
     return JSON.parse(localStorage.getItem('opa-cart'));
   }
 
-  createCart(id, productName, price) {
+  createCart(id, productName, price, imgUrl) {
     localStorage.setItem(
       'opa-cart',
-      JSON.stringify([{ id, quantity: 1, productName, price }])
+      JSON.stringify([{ id, quantity: 1, productName, price, imgUrl }])
     );
 
     return this.getCart();
@@ -56,8 +56,10 @@ export default class Cart {
     })[0];
   }
 
-  updateCart(id, action, productName, price) {
+  updateCart(id, action, productName, price, imgUrl) {
     let cart = this.getCart();
+
+    console.log(id, action, productName, price, imgUrl);
 
     if (!action) return;
 
@@ -90,7 +92,7 @@ export default class Cart {
         }
       } else {
         // Ako ne postoji dodaj u niz novi objekat
-        cart.push({ id, quantity: 1, productName, price });
+        cart.push({ id, quantity: 1, productName, price, imgUrl });
       }
     }
 
@@ -105,18 +107,36 @@ export default class Cart {
     if (!cart) return;
 
     cart.forEach((product) => {
+      console.log(product, 'pr');
+
       // Sidebar markup
       cartMarkup += `
-                <div data-product-id="${product.id}" data-product-name="${product.productName}" data-price="${product.price}"> 
-                    <p>Ime: ${product.productName}</p>
-                    <p>Cena: ${product.price}</p>
-                    <div class="product__cart">
-                        <button class="remove-product button button--qty">-</button>
-                        <span class="product__amount">${product.quantity}</span>
-                        <button class="add-product button button--qty">+</button>
-                    </div>
-                </div>
-            `;
+        <div class="product" data-product-id="${
+          product.id
+        }" data-product-name="${product.productName}" data-price="${
+        product.price
+      }" data-img-url="${product.imgUrl ? product.imgUrl : ''}">
+            <div class="product__info">
+              <div class="product__name-wrapper">
+                <div class="product__name">${product.productName}</div>
+                <div class="product__price">${product.price}rsd</div>
+              </div>
+              <div class="product__cart">
+                  <button class="remove-product button button--qty">-</button>
+                  <span class="product__amount">${product.quantity}</span>
+                  <button class="add-product button button--qty">+</button>
+              </div>
+            </div>
+            ${
+              product.imgUrl
+                ? `<div class="product__image-wrapper">
+            <img src="${product.imgUrl}" alt="${product.productName}"  title="${product.productName}" class="product__image">     
+        </div>`
+                : ''
+            }
+            
+        </div>
+      `;
 
       // All products markup
       document.querySelector(

@@ -127,7 +127,7 @@
         global $product;
       ?>
 
-      <div class="product" data-module="ADD_TO_CART" data-id="<?php echo get_the_ID(); ?>" data-name="<?php the_title(); ?>" data-price="<?php echo $product->get_price(); ?>">
+      <div class="product" data-module="ADD_TO_CART" data-id="<?php echo get_the_ID(); ?>" data-name="<?php the_title(); ?>" data-price="<?php echo $product->get_price(); ?>" data-img-url="<?php echo get_the_post_thumbnail_url($post->ID) ?>">
           <div class="product__info">
             <div class="product__name-wrapper">
               <div class="product__name"><?php the_title(); ?></div>

@@ -8,6 +8,7 @@ export default class AddToCart extends Cart {
     this.id = +this.el.dataset.id;
     this.name = this.el.dataset.name;
     this.price = +this.el.dataset.price;
+    this.imgUrl = this.el.dataset.imgUrl;
 
     this.handleClick = this.handleClick.bind(this);
 
@@ -24,7 +25,8 @@ export default class AddToCart extends Cart {
         ? 'increase'
         : null,
       this.name,
-      this.price
+      this.price,
+      this.imgUrl
     );
 
     this.updateMarkup();
