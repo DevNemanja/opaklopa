@@ -107,8 +107,6 @@ export default class Cart {
     if (!cart) return;
 
     cart.forEach((product) => {
-      console.log(product, 'pr');
-
       // Sidebar markup
       cartMarkup += `
         <div class="product" data-product-id="${
@@ -116,8 +114,8 @@ export default class Cart {
         }" data-product-name="${product.productName}" data-price="${
         product.price
       }" data-img-url="${product.imgUrl ? product.imgUrl : ''}">
-            <div class="product__info">
-              <div class="product__name-wrapper">
+            <div class="product__info product__info--sidebar">
+              <div class="product__name-wrapper product__name-wrapper--sidebar">
                 <div class="product__name">${product.productName}</div>
                 <div class="product__price">${product.price}rsd</div>
               </div>
@@ -128,11 +126,10 @@ export default class Cart {
               </div>
             </div>
             ${
-              product.imgUrl
-                ? `<div class="product__image-wrapper">
+              product.imgUrl &&
+              `<div class="product__image-wrapper">
             <img src="${product.imgUrl}" alt="${product.productName}"  title="${product.productName}" class="product__image">     
         </div>`
-                : ''
             }
             
         </div>

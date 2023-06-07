@@ -17,6 +17,12 @@
     font-size: 1.6rem;
     display: flex;
     flex-direction: column;
+
+    // &--sidebar {
+    //   flex-direction: row;
+    //   justify-content: space-between;
+    //   width: 100%;
+    // }
   }
 
   &__name {
@@ -27,6 +33,11 @@
   &__name-wrapper {
     display: flex;
     gap: 1rem;
+
+    &--sidebar {
+      // flex-direction: column;
+      margin-bottom: 0.5rem;
+    }
   }
 
   &__ingredients {

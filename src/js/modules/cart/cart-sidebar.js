@@ -17,13 +17,14 @@ export default class CartSidebar extends Cart {
     const target = e.target;
     const product = e.target.closest('[data-product-id]');
 
-    console.log(product, 'product');
+    console.log(target.classList.contains('cart-sidebar__form-toggle'));
 
-    switch (target.className) {
-      case 'cart-sidebar__submit-cart button':
+    switch (true) {
+      case target.classList.contains('cart-sidebar__submit-cart'):
+        e.preventDefault();
         this.submitOrder();
         break;
-      case 'remove-product button button--qty':
+      case target.classList.contains('remove-product'):
         this.updateCart(
           +product.dataset.productId,
           'decrease',
@@ -32,7 +33,7 @@ export default class CartSidebar extends Cart {
           product.dataset.imgUrl
         );
         break;
-      case 'add-product button button--qty':
+      case target.classList.contains('add-product'):
         this.updateCart(
           +product.dataset.productId,
           'increase',
@@ -40,6 +41,14 @@ export default class CartSidebar extends Cart {
           +product.dataset.price,
           product.dataset.imgUrl
         );
+        break;
+      case target.classList.contains('cart-sidebar__form-toggle'):
+        document
+          .querySelector('.cart-sidebar__form')
+          .classList.toggle('cart-sidebar__form--open');
+        document
+          .querySelector('.cart-sidebar__form-toggle')
+          .classList.toggle('cart-sidebar__form-toggle--open');
         break;
 
       default:
