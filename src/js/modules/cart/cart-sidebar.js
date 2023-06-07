@@ -7,17 +7,47 @@ export default class CartSidebar extends Cart {
     this.el = el;
 
     this.handleClick = this.handleClick.bind(this);
+    this.persistData = this.persistData.bind(this);
+
+    this.userData = {
+      name: '',
+      address: '',
+      mail: '',
+      telefon: '',
+      poruka: '',
+    };
 
     this.updateMarkup();
 
+    this.inputs = el.querySelectorAll('.writtable');
+    this.loadUserInfo();
+
+    this.inputs.forEach((input) => {
+      input.addEventListener('blur', this.persistData);
+    });
+
     el.addEventListener('click', this.handleClick);
+  }
+
+  loadUserInfo() {
+    const userData = JSON.parse(localStorage.getItem('opa-user-data'));
+
+    this.inputs.forEach((input) => {
+      input.value = userData[input.id];
+    });
+  }
+
+  persistData(e) {
+    this.userData[e.target.id] = e.target.value;
+    console.log(e.target.value);
+    console.log(this.userData);
+
+    localStorage.setItem('opa-user-data', JSON.stringify(this.userData));
   }
 
   handleClick(e) {
     const target = e.target;
     const product = e.target.closest('[data-product-id]');
-
-    console.log(target.classList);
 
     switch (true) {
       case target.classList.contains('cart-sidebar__submit-cart'):

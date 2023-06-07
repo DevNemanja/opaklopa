@@ -68,7 +68,7 @@
 
   </div>
 
-  <?php   require('template-parts/cart-sidebar.php');  ?>
+  <?php require('template-parts/cart-sidebar.php');  ?>
 
 </main>
 

@@ -10,19 +10,19 @@
       <button class="cart-sidebar__form-toggle">Vaši podaci</button>
       <form class="cart-sidebar__form">
         <div class="cart-sidebar__form-control">
-          <input class="cart-sidebar__input" placeholder="Ime i prezime" id="name" type="text">
+          <input class="cart-sidebar__input writtable" placeholder="Ime i prezime" id="name" type="text">
         </div>
         <div class="cart-sidebar__form-control">
-          <input class="cart-sidebar__input" placeholder="Adresa" id="address" type="text">
+          <input class="cart-sidebar__input writtable" placeholder="Adresa" id="address" type="text">
         </div>
         <div class="cart-sidebar__form-control">
-          <input class="cart-sidebar__input" placeholder="Email" id="mail" type="mail">
+          <input class="cart-sidebar__input writtable" placeholder="Email" id="mail" type="mail">
         </div>
         <div class="cart-sidebar__form-control">
-          <input class="cart-sidebar__input" placeholder="Telefon" id="telefon" type="tel">
+          <input class="cart-sidebar__input writtable" placeholder="Telefon" id="telefon" type="tel">
         </div>
         <div class="cart-sidebar__form-control">
-          <textarea class="cart-sidebar__textarea" placeholder="Poruka" id="poruka"></textarea>
+          <textarea class="cart-sidebar__textarea writtable" placeholder="Poruka" id="poruka"></textarea>
         </div>
         <button class="cart-sidebar__submit-cart button">Naruči</button>
       </form>
