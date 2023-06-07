@@ -1,4 +1,7 @@
-<div class="right cart-sidebar cart-sidebar--open" data-module="CART_SIDEBAR">
+<div class="cart-sidebar cart-sidebar--open" data-module="CART_SIDEBAR">
+      <button class="cart-sidebar__close-button">
+        close
+      </button>
       <h2 class="cart-sidebar__title">Vaša korpa</h2>
       <ul class="cart-sidebar__list">
         <!-- Populated via JS -->

@@ -17,7 +17,7 @@ export default class CartSidebar extends Cart {
     const target = e.target;
     const product = e.target.closest('[data-product-id]');
 
-    console.log(target.classList.contains('cart-sidebar__form-toggle'));
+    console.log(target.classList);
 
     switch (true) {
       case target.classList.contains('cart-sidebar__submit-cart'):
@@ -49,6 +49,10 @@ export default class CartSidebar extends Cart {
         document
           .querySelector('.cart-sidebar__form-toggle')
           .classList.toggle('cart-sidebar__form-toggle--open');
+        break;
+
+      case target.classList.contains('cart-sidebar__close-button'):
+        this.el.classList.remove('cart-sidebar--open');
         break;
 
       default:
