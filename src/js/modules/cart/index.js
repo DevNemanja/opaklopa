@@ -59,6 +59,8 @@ export default class Cart {
   updateCart(id, action, productName, price) {
     let cart = this.getCart();
 
+    if (!action) return;
+
     // Ako nema nista u localStorage-u
     if (!cart) {
       // Kreiraj cart sa osnovnim podacima

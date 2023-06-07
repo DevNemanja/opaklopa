@@ -19,7 +19,7 @@ export default class AddToCart extends Cart {
       this.id,
       e.target.className === 'remove-product button button--qty'
         ? 'decrease'
-        : e.target.className === 'add-to-cart' ||
+        : e.target.className === 'add-to-cart button' ||
           e.target.className === 'add-product button button--qty'
         ? 'increase'
         : null,
