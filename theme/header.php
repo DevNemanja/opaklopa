@@ -18,6 +18,9 @@
     <div class="container">
       <div class="header__container">
         <h1 class="header__logo">OpaKlopa</h1>
+        <button class="header__cart">
+          <img class="header__cart-icon" src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/cart.svg" alt="Cart icon" title="Vaša korpa">
+        </button>
         <?php require('template-parts/hamburger-menu.php'); ?>
         <?php require('template-parts/mobile-menu.php'); ?>
       </div>

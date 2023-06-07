@@ -1,4 +1,4 @@
-<div class="cart-sidebar cart-sidebar--open" data-module="CART_SIDEBAR">
+<div class="cart-sidebar" data-module="CART_SIDEBAR">
       <button class="cart-sidebar__close-button">
         close
       </button>
@@ -6,6 +6,7 @@
       <ul class="cart-sidebar__list">
         <!-- Populated via JS -->
       </ul>
+      <h3>Ovde idu sugestije da se poruci jos nesto</h3>
       <button class="cart-sidebar__form-toggle">Vaši podaci</button>
       <form class="cart-sidebar__form">
         <div class="cart-sidebar__form-control">

@@ -46,4 +46,16 @@
     max-height: 3rem;
     margin-right: 3rem;
   }
+
+  &__cart {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    max-width: 4rem;
+    margin-top: auto;
+  }
+
+  &__cart-icon {
+    width: 100%;
+  }
 }
