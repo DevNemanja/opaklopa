@@ -32,6 +32,8 @@ export default class CartSidebar extends Cart {
   loadUserInfo() {
     const userData = JSON.parse(localStorage.getItem('opa-user-data'));
 
+    if (!userData) return;
+
     this.inputs.forEach((input) => {
       input.value = userData[input.id];
     });
