@@ -4,6 +4,8 @@
   right: 0;
   bottom: 0;
   min-width: 500px;
+  min-height: 100vh;
+  overflow: auto;
   background-color: #141414;
   transform: translateX(100%);
   transition: 0.2s;

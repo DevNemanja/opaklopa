@@ -69,8 +69,6 @@ export default class Cart {
   updateCart(id, action, productName, price, imgUrl) {
     let cart = this.getCart();
 
-    console.log(id, action, productName, price, imgUrl);
-
     if (!action) return;
 
     // Ako nema nista u localStorage-u
