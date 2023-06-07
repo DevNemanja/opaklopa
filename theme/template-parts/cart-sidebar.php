@@ -1,4 +1,4 @@
-<div class="cart-sidebar" data-module="CART_SIDEBAR">
+<div class="cart-sidebar cart-sidebar--open" data-module="CART_SIDEBAR">
       <button class="cart-sidebar__close-button">
         close
       </button>
@@ -6,7 +6,22 @@
       <ul class="cart-sidebar__list">
         <!-- Populated via JS -->
       </ul>
-      <h3>Ovde idu sugestije da se poruci jos nesto</h3>
+      <div>
+        <p>Sugestije:</p>
+        <ul class="cart-sidebar__suggestion-list">
+          <li>
+            <button class="cart-sidebar__suggestion-button">
+              <p class="cart-sidebar__suggestion-desc">Dodaj koka kolu</p>
+              <img class="cart-sidebar__suggestion-img" src="https://online.idea.rs/images/products/473/473103763_1l.jpg?1677503729" alt="Koka kola" title="Dodaj Koka kolu">
+            </button>
+          </li>
+            <button class="cart-sidebar__suggestion-button">
+              <p class="cart-sidebar__suggestion-desc">Dodaj Pomfrit</p>
+              <img class="cart-sidebar__suggestion-img" src="https://blog.kainexus.com/hubfs/French%20fries%202.jpeg" alt="Pomfrit" title="Dodaj pomfrit">
+            </button>
+          </li>
+        </ul>
+      </div>
       <button class="cart-sidebar__form-toggle">Vaši podaci</button>
       <form class="cart-sidebar__form">
         <div class="cart-sidebar__form-control">
