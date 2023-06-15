@@ -12,7 +12,7 @@
       <!-- Populated via JS -->
     </ul>
     <div class="cart-sidebar__suggestion">
-      <p>Sugestije:</p>
+      <p class="cart-sidebar__suggestion-title">Sugestije:</p>
 
       <ul class="cart-sidebar__empty-cart-suggestion">
         <?php
@@ -125,7 +125,7 @@
           ?>
       </ul>
     </div>
-    <button class="cart-sidebar__form-toggle">Vaši podaci</button>
+    <button class="cart-sidebar__form-toggle button">Naruči</button>
     <form class="cart-sidebar__form">
       <div class="cart-sidebar__form-control">
         <input class="cart-sidebar__input writtable" placeholder="Ime i prezime" id="name" type="text">

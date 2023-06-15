@@ -144,7 +144,8 @@ export default class Cart {
     if (!cart) return;
 
     if (cart.length === 0) {
-      cartMarkup = '<p>Vasa korpa je prazna</p>';
+      cartMarkup =
+        '<p class="cart-sidebar__empty-message">Vasa korpa je prazna</p>';
       this.emptyCartSuggestions.classList.remove(
         'cart-sidebar__empty-cart-suggestion--hidden'
       );
