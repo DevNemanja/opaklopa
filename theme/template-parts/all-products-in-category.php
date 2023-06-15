@@ -193,7 +193,7 @@
                   $variation_obj = wc_get_product($variation_id);
               ?>
                   <div class="product__variation">
-                    <input class="product__variation-input" data-id="<?php echo $variation_id; ?>" type="radio" name="<?php the_title(); ?>" id="<?php echo $variation_obj->get_name(); ?>" <?php if ($first_variation) echo 'checked'; ?>>
+                    <input class="product__variation-input" data-price="<?php echo $variation_obj->get_price(); ?>" data-id="<?php echo $variation_id; ?>" type="radio" name="<?php the_title(); ?>" id="<?php echo $variation_obj->get_name(); ?>" <?php if ($first_variation) echo 'checked'; ?>>
                     <label class="product__variation-label" for="<?php echo $variation_obj->get_name(); ?>"><?php echo $variation_obj->get_name(); ?> <?php echo $variation_obj->get_price_html(); ?>rsd</label>
                   </div>
               <?php

@@ -17,10 +17,12 @@ export default class Cart {
     return cart;
   }
 
-  createCart(id, productName, price, imgUrl) {
+  createCart(id, productName, price, imgUrl, hasVariations) {
     localStorage.setItem(
       'opa-cart',
-      JSON.stringify([{ id, quantity: 1, productName, price, imgUrl }])
+      JSON.stringify([
+        { id, quantity: 1, productName, price, imgUrl, hasVariations },
+      ])
     );
 
     return this.getCart();
@@ -32,9 +34,18 @@ export default class Cart {
     if (!cart) return false;
 
     return cart.filter((item) => {
-      document.querySelector(
-        `[data-id="${item.id}"] .product__cart-data`
-      ).innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`;
+      if (item.hasVariations) {
+        if (document.querySelector(`[data-id="${item.id}"]`).checked) {
+          document.querySelector(
+            `[data-name="${item.productName}"] .product__cart-data`
+          ).innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`;
+        }
+      } else {
+        document.querySelector(
+          `[data-name="${item.productName}"] .product__cart-data`
+        ).innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`;
+      }
+
       if (item.id !== id) {
         return item;
       }
@@ -66,16 +77,16 @@ export default class Cart {
     })[0];
   }
 
-  updateCart(id, action, productName, price, imgUrl) {
-    let cart = this.getCart();
-
+  updateCart(id, action, productName, price, imgUrl, hasVariations) {
     if (!action) return;
+
+    let cart = this.getCart();
 
     // Ako nema nista u localStorage-u
     if (!cart) {
       // Kreiraj cart sa osnovnim podacima
 
-      cart = this.createCart(id, productName, price);
+      cart = this.createCart(id, productName, price, hasVariations);
     } else {
       // Ako ima azuriraj Cart
 
@@ -100,7 +111,14 @@ export default class Cart {
         }
       } else {
         // Ako ne postoji dodaj u niz novi objekat
-        cart.push({ id, quantity: 1, productName, price, imgUrl });
+        cart.push({
+          id,
+          quantity: 1,
+          productName,
+          price,
+          imgUrl,
+          hasVariations,
+        });
       }
     }
 
@@ -139,27 +157,68 @@ export default class Cart {
             ${
               product.imgUrl &&
               `<div class="product__image-wrapper">
-            <img src="${product.imgUrl}" alt="${product.productName}"  title="${product.productName}" class="product__image">     
-        </div>`
+                  <img src="${product.imgUrl}" alt="${product.productName}"  title="${product.productName}" class="product__image">     
+              </div>`
             }
-            
         </div>
       `;
 
-        // All products markup
-        document.querySelector(
-          `[data-id="${product.id}"] .product__cart-data`
-        ).innerHTML = `
+        // Ako ima varijacije
+        if (product.hasVariations) {
+          // Proveri da li je ta varijacija cekirana
+          if (document.querySelector(`[data-id="${product.id}"]`).checked) {
+            // Ako jeste odradi update markupa, ako nije iskuliraj
+            let markup = '';
+            if (product.quantity > 0) {
+              markup = `
+              <div class="product__cart">
+                  <button class="remove-product button button--qty">-</button>
+                  <span class="product__amount">${product.quantity}</span>
+                  <button class="add-product button button--qty">+</button>
+              </div>
+          `;
+            } else {
+              markup = `<button class="add-to-cart button">Dodaj u korpu</button>`;
+            }
+            document.querySelector(
+              `[data-name="${product.productName}"] .product__cart-data`
+            ).innerHTML = markup;
+          }
+        } else {
+          // Svakako uradi proveru markapa ako nije varijacija u pitanju
+          document.querySelector(
+            `[data-name="${product.productName}"] .product__cart-data`
+          ).innerHTML = `
                 <div class="product__cart">
                     <button class="remove-product button button--qty">-</button>
                     <span class="product__amount">${product.quantity}</span>
                     <button class="add-product button button--qty">+</button>
                 </div>
             `;
+        }
       });
     }
 
     document.querySelector('.cart-sidebar__list').innerHTML = cartMarkup;
+  }
+
+  checkIfIdExists(array, id) {
+    for (let i = 0; i < array.length; i++) {
+      if (array[i].id === id) {
+        return true; // ID exists in the array
+      }
+    }
+    return false; // ID does not exist in the array
+  }
+
+  resetVariationMarkup(variationId, productName) {
+    const cart = this.getCart();
+
+    if (!this.checkIfIdExists(cart, variationId)) {
+      document.querySelector(
+        `[data-name="${productName}"] .product__cart-data`
+      ).innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`;
+    }
   }
 
   prepareCartForOrder() {
@@ -181,11 +240,11 @@ export default class Cart {
   }
 
   submitOrder() {
-    const ime = document.querySelector('#name');
-    const adresa = document.querySelector('#address');
-    const mail = document.querySelector('#mail');
-    const phone = document.querySelector('#telefon');
-    const poruka = document.querySelector('#poruka');
+    const ime = document.getElementById('name');
+    const adresa = document.getElementById('address');
+    const mail = document.getElementById('mail');
+    const phone = document.getElementById('telefon');
+    const poruka = document.getElementById('poruka');
 
     function clearForm() {
       ime.value = '';
