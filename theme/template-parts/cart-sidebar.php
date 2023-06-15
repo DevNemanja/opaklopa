@@ -1,4 +1,4 @@
-<div class="cart-sidebar cart-sidebar--open" data-module="CART_SIDEBAR">
+<div class="cart-sidebar" data-module="CART_SIDEBAR">
   <div class="cart-sidebar__overlay"></div>
   <div class="cart-sidebar__sidebar">
     <button class="cart-sidebar__close-button">
