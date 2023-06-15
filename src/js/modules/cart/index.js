@@ -42,9 +42,14 @@ export default class Cart {
     return cart.filter((item) => {
       if (item.hasVariations) {
         if (document.querySelector(`[data-id="${item.id}"]`).checked) {
-          document.querySelector(
+          const products = document.querySelectorAll(
             `[data-name="${item.productName}"] .product__cart-data`
-          ).innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`;
+          );
+
+          products.forEach(
+            (product) =>
+              (product.innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`)
+          );
         }
       } else {
         document.querySelector(
