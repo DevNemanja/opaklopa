@@ -233,9 +233,14 @@ export default class Cart {
     const cart = this.getCart();
 
     if (!this.checkIfIdExists(cart, variationId)) {
-      document.querySelector(
+      const selectedProducts = document.querySelectorAll(
         `[data-name="${productName}"] .product__cart-data`
-      ).innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`;
+      );
+
+      selectedProducts.forEach(
+        (product) =>
+          (product.innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`)
+      );
     }
   }
 
