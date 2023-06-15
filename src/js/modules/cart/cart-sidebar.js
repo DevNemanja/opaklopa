@@ -81,7 +81,9 @@ export default class CartSidebar extends Cart {
           .classList.toggle('cart-sidebar__form-toggle--open');
         break;
 
-      case target.classList.contains('cart-sidebar__close-button'):
+      case target.classList.contains('cart-sidebar__close-button') ||
+        target instanceof SVGElement ||
+        target.classList.contains('cart-sidebar__overlay'):
         this.el.classList.remove('cart-sidebar--open');
         break;
 

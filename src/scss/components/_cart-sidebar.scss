@@ -3,21 +3,45 @@
   top: 0;
   right: 0;
   bottom: 0;
-  min-width: 500px;
   min-height: 100vh;
-  overflow: auto;
-  background-color: #141414;
-  transform: translateX(100%);
   transition: 0.2s;
-  padding: 3rem;
+  transform: translateX(100%);
   z-index: 3;
 
   &--open {
     transform: translateX(0);
+
+    .cart-sidebar__overlay {
+      left: auto;
+      opacity: 1;
+    }
+  }
+
+  &__sidebar {
+    min-width: 500px;
+    background-color: #141414;
+    overflow: auto;
+    padding: 3rem;
+    height: 100%;
+  }
+
+  &__overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    width: 100vw;
+    height: 100%;
+    background-color: rgba(20, 20, 20, 0.5);
+    z-index: -1;
+    opacity: 0;
+    transition: 0.2s;
   }
 
   &__title {
     margin-bottom: 3rem;
+    margin-top: 1rem;
+    text-align: center;
   }
 
   &__form {
@@ -139,5 +163,11 @@
       background-color: #fff;
       color: inherit;
     }
+  }
+
+  &__close-button {
+    border: none;
+    background-color: transparent;
+    padding: 0;
   }
 }

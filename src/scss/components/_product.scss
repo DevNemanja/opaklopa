@@ -101,4 +101,9 @@
     padding: 0.2rem 1rem;
     max-width: fit-content;
   }
+
+  &--sidebar {
+    flex-direction: row-reverse;
+    text-align: right;
+  }
 }

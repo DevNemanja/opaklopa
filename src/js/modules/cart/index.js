@@ -133,12 +133,12 @@ export default class Cart {
     if (!cart) return;
 
     if (cart.length === 0) {
-      cartMarkup = 'Vasa korpa je prazna';
+      cartMarkup = '<p>Vasa korpa je prazna</p>';
     } else {
       cart.forEach((product) => {
         // Sidebar markup
         cartMarkup += `
-        <div class="product" data-product-id="${
+        <div class="product product--sidebar" data-product-id="${
           product.id
         }" data-product-name="${product.productName}" data-price="${
           product.price
