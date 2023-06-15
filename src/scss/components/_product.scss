@@ -75,4 +75,30 @@
     display: inline-block;
     text-align: center;
   }
+
+  &__variations {
+    margin-bottom: 1rem;
+  }
+
+  &__variation {
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  &__variation-input {
+    display: none;
+  }
+
+  &__variation-input:checked + &__variation-label {
+    background: #1077c0;
+    border-radius: 5px;
+  }
+
+  &__variation-label {
+    cursor: pointer;
+    line-height: 1.4;
+    display: block;
+    padding: 0.2rem 1rem;
+    max-width: fit-content;
+  }
 }

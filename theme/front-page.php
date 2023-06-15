@@ -2,16 +2,10 @@
 
 <main>
   <div class="left">
-<!-- <pre class="test">
-<?php // var_dump($woocommerce->cart->add_to_cart(178, 1)); ?>
-  <?php var_dump($woocommerce->cart->get_cart()); ?>
-  <button class="AJMO">Dodaj u korpu</button>
-  </pre> -->
-
   <?php 
-    // $product_category = 'pizza';
-    // $title = 'Pizza';
-    // require('template-parts/all-products-in-category.php'); 
+    $product_category = 'pizza';
+    $title = 'Pizza';
+    require('template-parts/all-products-in-category.php'); 
 
     // require('template-parts/free-delivery.php');
 
@@ -62,8 +56,11 @@
     $product_category = 'poslastice';
     $title = 'Poslastice';
     require('template-parts/all-products-in-category.php'); 
+    
+    $product_category = 'pica';
+    $title = 'Pića';
+    require('template-parts/all-products-in-category.php'); 
 
-  
   ?>
 
   </div>

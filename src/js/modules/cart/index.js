@@ -114,14 +114,17 @@ export default class Cart {
 
     if (!cart) return;
 
-    cart.forEach((product) => {
-      // Sidebar markup
-      cartMarkup += `
+    if (cart.length === 0) {
+      cartMarkup = 'Vasa korpa je prazna';
+    } else {
+      cart.forEach((product) => {
+        // Sidebar markup
+        cartMarkup += `
         <div class="product" data-product-id="${
           product.id
         }" data-product-name="${product.productName}" data-price="${
-        product.price
-      }" data-img-url="${product.imgUrl ? product.imgUrl : ''}">
+          product.price
+        }" data-img-url="${product.imgUrl ? product.imgUrl : ''}">
             <div class="product__info product__info--sidebar">
               <div class="product__name-wrapper product__name-wrapper--sidebar">
                 <div class="product__name">${product.productName}</div>
@@ -143,17 +146,18 @@ export default class Cart {
         </div>
       `;
 
-      // All products markup
-      document.querySelector(
-        `[data-id="${product.id}"] .product__cart-data`
-      ).innerHTML = `
+        // All products markup
+        document.querySelector(
+          `[data-id="${product.id}"] .product__cart-data`
+        ).innerHTML = `
                 <div class="product__cart">
                     <button class="remove-product button button--qty">-</button>
                     <span class="product__amount">${product.quantity}</span>
                     <button class="add-product button button--qty">+</button>
                 </div>
             `;
-    });
+      });
+    }
 
     document.querySelector('.cart-sidebar__list').innerHTML = cartMarkup;
   }
