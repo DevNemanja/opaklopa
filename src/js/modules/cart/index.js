@@ -6,7 +6,7 @@ export default class Cart {
   }
 
   getCart() {
-    const cart = JSON.parse(localStorage.getItem('opa-cart'));
+    const cart = JSON.parse(localStorage.getItem('opa-cart')) || [];
 
     if (cart.length > 0) {
       this.cartButton.classList.add('header__cart--has-items');
@@ -34,7 +34,7 @@ export default class Cart {
     return cart.filter((item) => {
       document.querySelector(
         `[data-id="${item.id}"] .product__cart-data`
-      ).innerHTML = `<button class="add-to-cart button">Add to cart</button>`;
+      ).innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`;
       if (item.id !== id) {
         return item;
       }

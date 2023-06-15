@@ -138,7 +138,7 @@
             </div>
             
             <div class="product__cart-data">
-              <button class="add-to-cart button">Add to cart</button>
+              <button class="add-to-cart button">Dodaj u korpu</button>
             </div>  
           </div>
           <div class="product__image-wrapper">

@@ -5,7 +5,7 @@
 <!-- <pre class="test">
 <?php // var_dump($woocommerce->cart->add_to_cart(178, 1)); ?>
   <?php var_dump($woocommerce->cart->get_cart()); ?>
-  <button class="AJMO">Add to cart</button>
+  <button class="AJMO">Dodaj u korpu</button>
   </pre> -->
 
   <?php 
