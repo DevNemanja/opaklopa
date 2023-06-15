@@ -50,6 +50,19 @@ export default class CartSidebar extends Cart {
     const product = e.target.closest('[data-product-id]');
 
     switch (true) {
+      case target.classList.contains('cart-sidebar__suggestion-img') ||
+        target.classList.contains('cart-sidebar__suggestion-desc') ||
+        target.classList.contains('cart-sidebar__suggestion-button'):
+        const suggestedProduct = e.target.closest('[data-suggestion-id]');
+
+        this.updateCart(
+          +suggestedProduct.dataset.suggestionId,
+          'increase',
+          suggestedProduct.dataset.suggestionName,
+          +suggestedProduct.dataset.price,
+          suggestedProduct.dataset.imgUrl
+        );
+        break;
       case target.classList.contains('cart-sidebar__submit-cart'):
         e.preventDefault();
         this.submitOrder();

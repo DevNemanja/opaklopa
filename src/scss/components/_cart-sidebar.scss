@@ -23,6 +23,8 @@
     overflow: auto;
     padding: 3rem;
     height: 100%;
+    display: flex;
+    flex-direction: column;
   }
 
   &__overlay {
@@ -105,15 +107,14 @@
     border-radius: 5px;
   }
 
-  &__suggestion-list {
-    display: flex;
-    margin-top: 3rem;
-    gap: 1rem;
+  &__suggestion {
+    margin-bottom: auto;
   }
+  $sugImgSize: 8rem;
 
   &__suggestion-img {
-    width: 6rem;
-    height: 6rem;
+    width: $size;
+    height: $size;
     object-fit: cover;
     border-radius: 50%;
   }
@@ -153,10 +154,11 @@
     &::after {
       content: '+';
       position: absolute;
-      top: 3rem;
-      width: 2rem;
-      height: 2rem;
-      line-height: 2rem;
+      top: $sugImgSize/2;
+      $size: 3rem;
+      width: $size;
+      height: $size;
+      line-height: $size;
       border-radius: 50%;
       left: 50%;
       transform: translateX(-50%);
@@ -167,7 +169,21 @@
 
   &__close-button {
     border: none;
+    margin-right: auto;
     background-color: transparent;
     padding: 0;
+  }
+
+  &__full-cart-suggestion {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  &__empty-cart-suggestion,
+  &__full-cart-suggestion {
+    &--hidden {
+      display: none;
+    }
   }
 }

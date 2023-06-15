@@ -110,48 +110,6 @@
     } 
 ?>
 
-<!-- <section class="products">
-  <div class="container">
-    <div class="title title--with-icon">
-      <h2 class="title__header"><?php echo $title ?></h2>
-        <?php echo $icon; ?>
-    </div>
-    <div class="products__wrapper">
-      <?php 
-        $products_IDs = new WP_Query( [
-          'post_type' => 'product',
-          'posts_per_page' => -1,
-          'product_cat' => $product_category
-        ]);
-        while ($products_IDs->have_posts() ) : $products_IDs->the_post();
-        global $product;
-      ?>
-
-      <div class="product" data-module="ADD_TO_CART" data-id="<?php echo get_the_ID(); ?>" data-name="<?php the_title(); ?>" data-price="<?php echo $product->get_price(); ?>" data-img-url="<?php echo get_the_post_thumbnail_url($post->ID) ?>">
-          <div class="product__info">
-            <div class="product__name-wrapper">
-              <div class="product__name"><?php the_title(); ?></div>
-              <div class="product__price"><?php echo $product->get_price_html(); ?>rsd</div>
-            </div>
-            <div class="product__ingredients">
-              <?php the_content(); ?>
-            </div>
-            
-            <div class="product__cart-data">
-              <button class="add-to-cart button">Dodaj u korpu</button>
-            </div>  
-          </div>
-          <div class="product__image-wrapper">
-            <?php if(get_the_post_thumbnail_url($post->ID)) :  ?>
-              <img src="<?php echo get_the_post_thumbnail_url($post->ID) ?>" alt="<?php the_title(); ?>"  title="<?php the_title(); ?>" class="product__image">
-            <?php endif; ?>
-          </div>
-      </div>
-      <?php endwhile; ?>
-    </div>
-  </div>
-</section> -->
-
 <section class="products">
   <div class="container">
     <div class="title title--with-icon">

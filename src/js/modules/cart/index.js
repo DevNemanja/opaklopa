@@ -3,6 +3,12 @@ import { CLIENT_KEY, CLIENT_SECRET } from '../../app';
 export default class Cart {
   constructor() {
     this.cartButton = document.querySelector('.header__cart');
+    this.emptyCartSuggestions = document.querySelector(
+      '.cart-sidebar__empty-cart-suggestion'
+    );
+    this.fullCartSuggestions = document.querySelector(
+      '.cart-sidebar__full-cart-suggestion'
+    );
   }
 
   getCart() {
@@ -134,7 +140,19 @@ export default class Cart {
 
     if (cart.length === 0) {
       cartMarkup = '<p>Vasa korpa je prazna</p>';
+      this.emptyCartSuggestions.classList.remove(
+        'cart-sidebar__empty-cart-suggestion--hidden'
+      );
+      this.fullCartSuggestions.classList.add(
+        'cart-sidebar__full-cart-suggestion--hidden'
+      );
     } else {
+      this.emptyCartSuggestions.classList.add(
+        'cart-sidebar__empty-cart-suggestion--hidden'
+      );
+      this.fullCartSuggestions.classList.remove(
+        'cart-sidebar__full-cart-suggestion--hidden'
+      );
       cart.forEach((product) => {
         // Sidebar markup
         cartMarkup += `
