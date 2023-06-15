@@ -110,7 +110,7 @@
     } 
 ?>
 
-<section class="products">
+<!-- <section class="products">
   <div class="container">
     <div class="title title--with-icon">
       <h2 class="title__header"><?php echo $title ?></h2>
@@ -144,10 +144,77 @@
           <div class="product__image-wrapper">
             <?php if(get_the_post_thumbnail_url($post->ID)) :  ?>
               <img src="<?php echo get_the_post_thumbnail_url($post->ID) ?>" alt="<?php the_title(); ?>"  title="<?php the_title(); ?>" class="product__image">
-            <?php else: ?>
-              <!-- <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/pizza.png" alt="" class="product__image"> -->
-            <?php endif; ?>          
+            <?php endif; ?>
           </div>
+      </div>
+      <?php endwhile; ?>
+    </div>
+  </div>
+</section> -->
+
+<section class="products">
+  <div class="container">
+    <div class="title title--with-icon">
+      <h2 class="title__header"><?php echo $title ?></h2>
+      <?php echo $icon; ?>
+    </div>
+    <div class="products__wrapper">
+      <?php 
+        $products_IDs = new WP_Query( [
+          'post_type' => 'product',
+          'posts_per_page' => -1,
+          'product_cat' => $product_category
+        ]);
+        while ($products_IDs->have_posts() ) : $products_IDs->the_post();
+        global $product;
+        
+        // Check if the product has variations
+        $has_variations = $product->is_type('variable');
+      ?>
+
+      <div class="product" data-module="ADD_TO_CART" data-id="<?php echo get_the_ID(); ?>" data-name="<?php the_title(); ?>" data-price="<?php echo $product->get_price(); ?>" data-img-url="<?php echo get_the_post_thumbnail_url($post->ID) ?>">
+        <div class="product__info">
+          <div class="product__name-wrapper">
+            <div class="product__name"><?php the_title(); ?></div>
+            <div class="product__price"><?php echo $product->get_price_html(); ?>rsd</div>
+          </div>
+          <div class="product__ingredients">
+            <?php the_content(); ?>
+          </div>
+          
+          <?php if ($has_variations) : ?>
+            <div class="product__variations">
+              <?php
+                $variations = $product->get_available_variations();
+                $first_variation = true; // Flag to track the first variation
+
+                foreach ($variations as $variation) {
+                  $variation_id = $variation['variation_id'];
+                  $variation_obj = wc_get_product($variation_id);
+              ?>
+                  <div class="product__variation">
+                    <input data-id="<?php echo $variation_id; ?>" type="radio" name="<?php the_title(); ?>" id="<?php echo $variation_obj->get_name(); ?>" <?php if ($first_variation) echo 'checked'; ?>>
+                    <label for="<?php echo $variation_obj->get_name(); ?>"><?php echo $variation_obj->get_name(); ?> <?php echo $variation_obj->get_price_html(); ?>rsd</label>
+                  </div>
+                  <br>
+                  <br>
+              <?php
+                  $first_variation = false; // Set the flag to false after the first variation
+                }
+              ?>
+            </div>
+          <?php endif; ?>
+
+          
+          <div class="product__cart-data">
+            <button class="add-to-cart button">Dodaj u korpu</button>
+          </div>  
+        </div>
+        <div class="product__image-wrapper">
+          <?php if(get_the_post_thumbnail_url($post->ID)) :  ?>
+            <img src="<?php echo get_the_post_thumbnail_url($post->ID) ?>" alt="<?php the_title(); ?>"  title="<?php the_title(); ?>" class="product__image">
+          <?php endif; ?>
+        </div>
       </div>
       <?php endwhile; ?>
     </div>
