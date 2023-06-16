@@ -1,0 +1,8 @@
+.admin-page {
+  background: #fff;
+
+  &::before,
+  &::after {
+    display: none;
+  }
+}
