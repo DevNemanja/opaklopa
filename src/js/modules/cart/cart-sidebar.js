@@ -45,6 +45,11 @@ export default class CartSidebar extends Cart {
     localStorage.setItem('opa-user-data', JSON.stringify(this.userData));
   }
 
+  closeSidebar() {
+    this.el.classList.remove('cart-sidebar--open');
+    document.body.classList.remove('noscroll');
+  }
+
   handleClick(e) {
     const target = e.target;
     const product = e.target.closest('[data-product-id]');
@@ -97,7 +102,7 @@ export default class CartSidebar extends Cart {
       case target.classList.contains('cart-sidebar__close-button') ||
         target instanceof SVGElement ||
         target.classList.contains('cart-sidebar__overlay'):
-        this.el.classList.remove('cart-sidebar--open');
+        this.closeSidebar();
         break;
 
       default:

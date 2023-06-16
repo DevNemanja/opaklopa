@@ -19,14 +19,18 @@ export default class Header {
     });
   }
 
+  openSidebar() {
+    document.querySelector('.cart-sidebar').classList.add('cart-sidebar--open');
+    document.body.classList.add('noscroll');
+  }
+
   handleClick(e) {
     const target = e.target;
-    const sidebar = document.querySelector('.cart-sidebar');
 
     switch (true) {
       case target.classList.contains('header__cart') ||
         target.classList.contains('header__cart-icon'):
-        sidebar.classList.add('cart-sidebar--open');
+        this.openSidebar();
         break;
 
       default:
