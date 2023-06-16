@@ -226,9 +226,11 @@ export default class Cart {
     document.querySelector('.cart-sidebar__list').innerHTML = cartMarkup;
   }
 
-  checkIfIdExists(array, id) {
-    for (let i = 0; i < array.length; i++) {
-      if (array[i].id === id) {
+  checkIfIdExistsInCart(id) {
+    const cart = this.getCart();
+
+    for (let i = 0; i < cart.length; i++) {
+      if (cart[i].id === id) {
         return true; // ID exists in the array
       }
     }
@@ -236,17 +238,13 @@ export default class Cart {
   }
 
   resetVariationMarkup(variationId, productName) {
-    const cart = this.getCart();
-
-    if (!this.checkIfIdExists(cart, variationId)) {
-      const selectedProducts = document.querySelectorAll(
-        `[data-name="${productName}"] .product__cart-data`
+    // Ako ovog proizvoda nema u cartu
+    if (!this.checkIfIdExistsInCart(variationId)) {
+      const selectedProduct = document.querySelector(
+        `.products [data-name="${productName}"] .product__cart-data`
       );
 
-      selectedProducts.forEach(
-        (product) =>
-          (product.innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`)
-      );
+      selectedProduct.innerHTML = `<button class="add-to-cart button">Dodaj u korpu</button>`;
     }
   }
 

@@ -142,7 +142,7 @@
       <div class="cart-sidebar__form-control">
         <textarea class="cart-sidebar__textarea writtable" placeholder="Poruka" id="poruka"></textarea>
       </div>
-      <button class="cart-sidebar__submit-cart button">Naruči</button>
+      <button class="cart-sidebar__submit-cart button">Potvrdi porudžbinu</button>
     </form>
   </div> 
 </div>
