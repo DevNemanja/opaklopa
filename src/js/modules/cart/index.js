@@ -3,12 +3,22 @@ import { CLIENT_KEY, CLIENT_SECRET } from '../../app';
 export default class Cart {
   constructor() {
     this.cartButton = document.querySelector('.header__cart');
+    this.orderForm = document.querySelector('.order-form');
     this.emptyCartSuggestions = document.querySelector(
       '.cart-sidebar__empty-cart-suggestion'
     );
     this.fullCartSuggestions = document.querySelector(
       '.cart-sidebar__full-cart-suggestion'
     );
+    this.loading = document.querySelector('.cart-sidebar__loading');
+  }
+
+  setLoading() {
+    this.loading.classList.add('cart-sidebar__loading--show');
+  }
+
+  removeLoading() {
+    this.loading.classList.remove('cart-sidebar__loading--show');
   }
 
   getCart() {
@@ -16,8 +26,10 @@ export default class Cart {
 
     if (cart.length > 0) {
       this.cartButton.classList.add('header__cart--has-items');
+      this.orderForm.classList.remove('order-form--hidden');
     } else {
       this.cartButton.classList.remove('header__cart--has-items');
+      this.orderForm.classList.add('order-form--hidden');
     }
 
     return cart;
@@ -273,14 +285,6 @@ export default class Cart {
     const phone = document.getElementById('telefon');
     const poruka = document.getElementById('poruka');
 
-    function clearForm() {
-      ime.value = '';
-      adresa.value = '';
-      mail.value = '';
-      phone.value = '';
-      poruka.value = '';
-    }
-
     const orderData = {
       payment_method: 'cod',
       payment_method_title: 'Cash on Delivery',
@@ -296,6 +300,8 @@ export default class Cart {
       customer_note: poruka.value,
     };
 
+    this.setLoading();
+
     fetch('https://opaklopa.local/wp-json/wc/v3/orders', {
       method: 'POST',
       headers: {
@@ -308,7 +314,7 @@ export default class Cart {
     })
       .then((response) => response.json())
       .then((data) => {
-        clearForm();
+        this.removeLoading();
         this.clearCart();
         console.log(data);
       });

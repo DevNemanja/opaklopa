@@ -34,6 +34,8 @@ export default class CartSidebar extends Cart {
 
     if (!userData) return;
 
+    console.log(userData);
+
     this.inputs.forEach((input) => {
       input.value = userData[input.id];
     });
@@ -68,7 +70,7 @@ export default class CartSidebar extends Cart {
           suggestedProduct.dataset.imgUrl
         );
         break;
-      case target.classList.contains('cart-sidebar__submit-cart'):
+      case target.classList.contains('order-form__submit-cart'):
         e.preventDefault();
         this.submitOrder();
         break;
@@ -89,14 +91,6 @@ export default class CartSidebar extends Cart {
           +product.dataset.price,
           product.dataset.imgUrl
         );
-        break;
-      case target.classList.contains('cart-sidebar__form-toggle'):
-        document
-          .querySelector('.cart-sidebar__form')
-          .classList.toggle('cart-sidebar__form--open');
-        document
-          .querySelector('.cart-sidebar__form-toggle')
-          .classList.toggle('cart-sidebar__form-toggle--open');
         break;
 
       case target.classList.contains('cart-sidebar__close-button') ||
