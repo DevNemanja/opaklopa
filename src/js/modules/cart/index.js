@@ -11,6 +11,9 @@ export default class Cart {
       '.cart-sidebar__full-cart-suggestion'
     );
     this.loading = document.querySelector('.cart-sidebar__loading');
+    this.cartTotalAmountPlaceholder = document.querySelector(
+      '.cart-sidebar__total-amount'
+    );
   }
 
   setLoading() {
@@ -157,12 +160,15 @@ export default class Cart {
 
     if (cart.length === 0) {
       cartMarkup =
-        '<p class="cart-sidebar__empty-message">Vasa korpa je prazna</p>';
+        '<p class="cart-sidebar__empty-message">Vaša korpa je prazna</p>';
       this.emptyCartSuggestions.classList.remove(
         'cart-sidebar__empty-cart-suggestion--hidden'
       );
       this.fullCartSuggestions.classList.add(
         'cart-sidebar__full-cart-suggestion--hidden'
+      );
+      this.cartTotalAmountPlaceholder.classList.add(
+        'cart-sidebar__total-amount--hidden'
       );
     } else {
       this.emptyCartSuggestions.classList.add(
@@ -171,6 +177,10 @@ export default class Cart {
       this.fullCartSuggestions.classList.remove(
         'cart-sidebar__full-cart-suggestion--hidden'
       );
+      this.cartTotalAmountPlaceholder.classList.remove(
+        'cart-sidebar__total-amount--hidden'
+      );
+
       cart.forEach((product) => {
         // Sidebar markup
         cartMarkup += `

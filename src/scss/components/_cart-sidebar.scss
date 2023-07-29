@@ -157,4 +157,13 @@
     text-align: center;
     margin: 7rem auto;
   }
+
+  &__total-amount {
+    text-align: right;
+    font-size: 2.2rem;
+
+    &--hidden {
+      display: none;
+    }
+  }
 }

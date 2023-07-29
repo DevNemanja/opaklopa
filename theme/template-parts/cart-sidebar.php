@@ -11,6 +11,7 @@
     <ul class="cart-sidebar__list">
       <!-- Populated via JS -->
     </ul>
+    <h3 class="cart-sidebar__total-amount">Total: <strong id="cart-total">1000</strong>rsd</h3>
     <div class="cart-sidebar__suggestion">
       <p class="cart-sidebar__suggestion-title">Sugestije:</p>
 
