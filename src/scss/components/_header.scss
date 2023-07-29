@@ -35,10 +35,14 @@
   }
 
   &__logo {
-    font-size: 5rem;
+    font-size: 3.5rem;
     margin-top: 2rem;
     color: $primary-color;
     font-weight: normal;
+
+    @include breakpoint(sm) {
+      font-size: 5rem;
+    }
   }
 
   &__menu {
@@ -54,6 +58,7 @@
     max-width: 4rem;
     margin-top: auto;
     position: relative;
+    margin-left: auto;
 
     &::before {
       transition: 0.2s;

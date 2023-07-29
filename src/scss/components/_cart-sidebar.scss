@@ -7,6 +7,7 @@
   transition: 0.2s;
   transform: translateX(100%);
   z-index: 3;
+  max-width: 100%;
 
   &--open {
     transform: translateX(0);
@@ -19,6 +20,7 @@
 
   &__sidebar {
     width: 500px;
+    max-width: 100%;
     background-color: #141414;
     overflow: auto;
     padding: 3rem;
@@ -71,12 +73,18 @@
   }
 
   $sugImgSize: 8rem;
+  $sugImgSizeMob: 5rem;
 
   &__suggestion-img {
-    width: $sugImgSize;
-    height: $sugImgSize;
+    width: $sugImgSizeMob;
+    height: $sugImgSizeMob;
     object-fit: cover;
     border-radius: 50%;
+
+    @include breakpoint(sm) {
+      width: $sugImgSize;
+      height: $sugImgSize;
+    }
   }
 
   &__suggestion-button {
@@ -87,24 +95,29 @@
     border-radius: 50%;
 
     &:hover {
-      .cart-sidebar {
-        &__suggestion-desc {
-          opacity: 1;
-          top: -1rem;
+      @include breakpoint(sm) {
+        .cart-sidebar {
+          &__suggestion-desc {
+            opacity: 1;
+            top: -1rem;
+          }
         }
       }
     }
   }
 
   &__suggestion-title {
-    font-size: 2rem;
+    font-size: 1.5rem;
     margin-bottom: 2rem;
+
+    @include breakpoint(sm) {
+      font-size: 2rem;
+    }
   }
 
   &__suggestion-desc {
     position: absolute;
     width: max-content;
-    background-color: white;
     color: #141414;
     padding: 0.2rem 0.4rem;
     left: 50%;
@@ -113,13 +126,20 @@
     transform: translate(-50%);
     z-index: 1;
     transition: 0.2s;
-    opacity: 0;
-    font-size: 1.4rem;
+    opacity: 1;
+    font-size: 0rem;
+
+    @include breakpoint(sm) {
+      font-size: 1.4rem;
+      opacity: 0;
+      background-color: white;
+    }
 
     &::after {
       content: '+';
       position: absolute;
       top: $sugImgSize/2;
+      font-size: 1.4rem;
       $size: 3rem;
       width: $size;
       height: $size;
@@ -153,14 +173,22 @@
   }
 
   &__empty-message {
-    font-size: 3rem;
+    font-size: 2rem;
     text-align: center;
     margin: 7rem auto;
+
+    @include breakpoint(sm) {
+      font-size: 3rem;
+    }
   }
 
   &__total-amount {
     text-align: right;
-    font-size: 2.2rem;
+    font-size: 1.6rem;
+
+    @include breakpoint(sm) {
+      font-size: 2.2rem;
+    }
 
     &--hidden {
       display: none;

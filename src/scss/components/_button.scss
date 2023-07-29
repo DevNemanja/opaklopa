@@ -1,10 +1,14 @@
 .button {
   border: none;
-  padding: 1rem 3rem;
+  padding: 0.7rem 2rem;
   border-radius: 5px;
   background-color: #eca917;
   color: white;
   transition: 0.2s;
+
+  @include breakpoint(sm) {
+    padding: 1rem 3rem;
+  }
 
   &:hover {
     background-color: darken(#eca917, 10%);
