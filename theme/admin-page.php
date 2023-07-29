@@ -22,14 +22,15 @@
     <section>
         <div class="container container--narrow pb-5">
             <div data-module="ORDERS">
-            <h1 class="mt-5 mb-3">Nove porudzbine</h1>
+            <h1 class="mt-5 mb-3">Nove porudžbine</h1>
             <div id="new-orders" class="row row-cols-3" ></div>
             <hr class="my-5">
+
             <div class="accordion" id="porudzbine">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                        Prihvacene porudzbine
+                        Prihvaćene porudžbine
                     </button>
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#porudzbine">
@@ -41,7 +42,7 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                        Zavrsene porudzbine
+                        Završene porudžbine
                     </button>
                     </h2>
                     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#porudzbine">
@@ -53,7 +54,7 @@
                 <div class="accordion-item">
                     <h2 class="accordion-header">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                        Odbijene porudzbine
+                        Odbijene porudžbine
                     </button>
                     </h2>
                     <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#porudzbine">
@@ -64,21 +65,17 @@
                 </div>
             </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <div class="fixed-bottom mb-0 alert alert-primary d-flex justify-content-center gap-2 d-none" id="loading-section">
+                <div class="spinner-grow text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                    </div>
+                    <div class="spinner-grow text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
 
             </div>
         </div>

@@ -5,6 +5,8 @@ export default class Orders {
     this.app = app;
     this.el = el;
 
+    this.loadingSection = document.getElementById('loading-section');
+
     this.handleClick = this.handleClick.bind(this);
 
     this.fetchOrders();
@@ -15,6 +17,8 @@ export default class Orders {
   fetchOrders() {
     const fetchData = () => {
       console.log('fetching data');
+      this.loadingSection.classList.remove('d-none');
+
       fetch('https://opaklopa.local/wp-json/wc/v3/orders', {
         method: 'GET',
         headers: {
@@ -27,6 +31,7 @@ export default class Orders {
         .then((response) => response.json())
         .then((data) => {
           this.updateMarkup(data);
+          this.loadingSection.classList.add('d-none');
           console.log(data);
         });
     };
@@ -78,7 +83,9 @@ export default class Orders {
                       order.total
                     }</strong>rsd</p>
                   </div>
-                  <button class="btn btn-primary mb-2">Potvrdi</button>
+                  <button class="btn btn-primary mb-2" data-order-number=${
+                    order.number
+                  } data-status="processing">Potvrdi</button>
 
                   <button class="btn btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#${
                     order.order_key
@@ -86,23 +93,10 @@ export default class Orders {
                     Odbij
                   </button>
                   <div class="collapse" id="${order.order_key}">
-                    <button class="mt-2 btn btn-danger btn-sm">Potvrdi</button>
+                    <button class="mt-2 btn btn-danger btn-sm" data-order-number=${
+                      order.number
+                    } data-status="cancelled">Potvrdi odbijanje porudžbine</button>
                   </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
               </div>
             </div>
           `;
@@ -135,7 +129,9 @@ export default class Orders {
                           .join('')}
                         </ol>
                       </div>
-                      <button class="btn btn-info">Zavrsi</button>
+                      <button class="btn btn-info" data-order-number=${
+                        order.number
+                      } data-status="completed">Završi</button>
                   </div>
                 </div>
               `;
@@ -162,7 +158,6 @@ export default class Orders {
                           </div>
                           <span class="badge bg-success rounded-pill">${item.quantity}</span>
                         </li>
-                    
                       `
                     )
                     .join('')}
@@ -216,7 +211,33 @@ export default class Orders {
     document.getElementById('rejected-orders').innerHTML = rejectedOrders;
   }
 
-  handleClick() {
+  updateOrder(orderId, status) {
+    this.loadingSection.classList.remove('d-none');
+
+    fetch(`https://opaklopa.local/wp-json/wc/v3/orders/${orderId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${Buffer.from(
+          `${CLIENT_KEY}:${CLIENT_SECRET}`
+        ).toString('base64')}`,
+      },
+      body: JSON.stringify({ status }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        this.fetchOrders();
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  handleClick(e) {
     console.log('ORDERS');
+    const { orderNumber, status } = e.target.dataset;
+
+    if (e.target.dataset.status) this.updateOrder(orderNumber, status);
   }
 }
