@@ -21,14 +21,10 @@
 <main>
     <section>
         <div class="container container--narrow pb-5">
-            <h1>Admin</h1>
             <div data-module="ORDERS">
-
-            <h2>Nove porudzbine</h2>
+            <h1 class="mt-5 mb-3">Nove porudzbine</h1>
             <div id="new-orders" class="row row-cols-3" ></div>
-            <hr>
-
-
+            <hr class="my-5">
             <div class="accordion" id="porudzbine">
                 <div class="accordion-item">
                     <h2 class="accordion-header">
@@ -56,11 +52,11 @@
                 </div>
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                         Odbijene porudzbine
                     </button>
                     </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#porudzbine">
+                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#porudzbine">
                         <div class="accordion-body">
                             <div id="rejected-orders" class="row row-cols-3" ></div>
                         </div>

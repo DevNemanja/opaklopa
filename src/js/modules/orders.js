@@ -47,7 +47,6 @@ export default class Orders {
     orders.forEach((order) => {
       switch (order.status) {
         case 'pending':
-          console.log(order);
           newOrders += `
             <div class="col-3 g-2">
               <div class="card d-flex flex-column">
