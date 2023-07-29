@@ -23,7 +23,7 @@
         <div class="container container--narrow pb-5">
             <div data-module="ORDERS">
             <h1 class="mt-5 mb-3">Nove porudžbine</h1>
-            <div id="new-orders" class="row row-cols-3" ></div>
+            <div id="new-orders" class="row" ></div>
             <hr class="my-5">
 
             <div class="accordion" id="porudzbine">
@@ -35,7 +35,7 @@
                     </h2>
                     <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#porudzbine">
                         <div class="accordion-body">
-                            <div id="accepted-orders" class="row row-cols-3" ></div>
+                            <div id="accepted-orders" class="row" ></div>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                     </h2>
                     <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#porudzbine">
                         <div class="accordion-body">
-                            <div id="completed-orders" class="row row-cols-3" ></div>
+                            <div id="completed-orders" class="row" ></div>
                         </div>
                     </div>
                 </div>
@@ -59,7 +59,7 @@
                     </h2>
                     <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#porudzbine">
                         <div class="accordion-body">
-                            <div id="rejected-orders" class="row row-cols-3" ></div>
+                            <div id="rejected-orders" class="row" ></div>
                         </div>
                     </div>
                 </div>

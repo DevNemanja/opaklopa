@@ -55,7 +55,7 @@ export default class Orders {
       switch (order.status) {
         case 'pending':
           newOrders += `
-            <div class="col-3 g-2">
+            <div class="col-12 col-md-4 col-lg-3 g-2">
               <div class="card d-flex flex-column">
                 <div class="p-3 fs-6 alert alert-primary mb-0">
                   <p class="mb-0">${order.billing.first_name}</p>
@@ -105,7 +105,7 @@ export default class Orders {
           break;
         case 'processing':
           acceptedOrders += `
-                <div class="col-3 g-2">
+                <div class="col-12 col-md-4 col-lg-3 g-2">
                   <div class="card d-flex flex-column">
                     <div class="p-3 fs-6 alert alert-info mb-0">
                       <p class="mb-0">${order.billing.first_name}</p>
@@ -140,7 +140,7 @@ export default class Orders {
           break;
         case 'completed':
           completedOrders += `
-          <div class="col-3 g-2">
+          <div class="col-12 col-md-4 col-lg-3 g-2">
             <div class="card d-flex flex-column">
               <div class="p-3 fs-6 alert alert-success mb-0">
                 <p class="mb-0">${order.billing.first_name}</p>
@@ -171,7 +171,7 @@ export default class Orders {
           break;
         case 'cancelled':
           rejectedOrders += `
-          <div class="col-3 g-2">
+          <div class="col-12 col-md-4 col-lg-3 g-2">
             <div class="card d-flex flex-column">
               <div class="p-3 fs-6 alert alert-danger mb-0">
                 <p class="mb-0">${order.billing.first_name}</p>
@@ -207,7 +207,10 @@ export default class Orders {
       }
     });
 
-    document.getElementById('new-orders').innerHTML = newOrders;
+    document.getElementById('new-orders').innerHTML =
+      newOrders === ''
+        ? '<div class="ml-5"><p class="alert alert-primary">Nema novih porudžbina</p></div>'
+        : newOrders;
     document.getElementById('accepted-orders').innerHTML = acceptedOrders;
     document.getElementById('completed-orders').innerHTML = completedOrders;
     document.getElementById('rejected-orders').innerHTML = rejectedOrders;

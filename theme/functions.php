@@ -43,10 +43,10 @@ add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' ); // remove Wo
 
 // Protect admin page
 function custom_password_protect() {
-  if (is_page('admin-page') || is_page('admin') && !is_user_logged_in()) {
+  if ((is_page('admin-page') || is_page('admin')) && !is_user_logged_in()) {
     auth_redirect();
   }
-  elseif (is_page('admin-page') || is_page('admin') && !current_user_can('administrator')) {
+  elseif ((is_page('admin-page') || is_page('admin')) && !current_user_can('administrator')) {
     wp_die('Access denied. You must be an administrator to view this page.');
   }
 }
