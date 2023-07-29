@@ -99,6 +99,10 @@ export default class CartSidebar extends Cart {
         this.closeSidebar();
         break;
 
+      case target.classList.contains('back-to-cart'):
+        this.removeErrorMessage();
+        break;
+
       default:
         break;
     }

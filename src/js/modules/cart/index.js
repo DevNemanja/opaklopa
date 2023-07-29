@@ -15,6 +15,16 @@ export default class Cart {
       '.cart-sidebar__total-amount'
     );
     this.cartTotalAmountDigit = document.getElementById('cart-total');
+    this.errorOverlay = document.querySelector('.cart-sidebar__error');
+    this.orderConfirmationModalPending = document.querySelector(
+      '.order-confirmation__message--pending'
+    );
+    this.orderConfirmationModalSuccess = document.querySelector(
+      '.order-confirmation__message--success'
+    );
+    this.orderConfirmationModalReject = document.querySelector(
+      '.order-confirmation__message--reject'
+    );
   }
 
   setLoading() {
@@ -301,6 +311,63 @@ export default class Cart {
     this.updateMarkup();
   }
 
+  setErrorMessage() {
+    console.log('Ima greske');
+    this.errorOverlay.classList.remove('cart-sidebar__error--hidden');
+  }
+
+  removeErrorMessage() {
+    this.errorOverlay.classList.add('cart-sidebar__error--hidden');
+  }
+
+  openConfirmationModal(orderId) {
+    this.orderConfirmationModalPending.classList.add(
+      'order-confirmation__message--show'
+    );
+
+    console.log('Number', orderId);
+
+    const interval = setInterval(() => {
+      console.log('getting more and more');
+      fetch(`${LOCATION_URL}/wp-json/wc/v3/orders/${orderId}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Basic ${Buffer.from(
+            `${CLIENT_KEY}:${CLIENT_SECRET}`
+          ).toString('base64')}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          if (data.status === 'processing') {
+            console.log('Handle success');
+            this.orderConfirmationModalPending.classList.remove(
+              'order-confirmation__message--show'
+            );
+            this.orderConfirmationModalSuccess.classList.add(
+              'order-confirmation__message--show'
+            );
+            clearInterval(interval);
+          }
+          if (data.status === 'cancelled') {
+            console.log('Handle reject');
+            this.orderConfirmationModalPending.classList.remove(
+              'order-confirmation__message--show'
+            );
+            this.orderConfirmationModalReject.classList.add(
+              'order-confirmation__message--show'
+            );
+            clearInterval(interval);
+          }
+        })
+        .catch((error) => {
+          console.error('Error:', error);
+        });
+    }, 10000);
+  }
+
   submitOrder() {
     const ime = document.getElementById('name');
     const adresa = document.getElementById('address');
@@ -335,11 +402,19 @@ export default class Cart {
       },
       body: JSON.stringify(orderData),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        return response.json();
+      })
       .then((data) => {
         this.removeLoading();
         this.clearCart();
+        this.openConfirmationModal(data.number);
         console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+        this.removeLoading();
+        this.setErrorMessage();
       });
   }
 }

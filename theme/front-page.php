@@ -53,7 +53,8 @@
   </div>
 
   <?php require('template-parts/cart-sidebar.php');  ?>
-
+  <?php require('template-parts/order-confirmation.php');  ?>
+  
 </main>
 
 <?php get_footer(); ?>

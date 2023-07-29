@@ -1,4 +1,9 @@
 <div class="cart-sidebar" data-module="CART_SIDEBAR">
+  <div class="cart-sidebar__error cart-sidebar__error--hidden">
+    <h2>Uuups..Došlo je do greške</h2>
+    <p>Vaša porudžbina nije poslata</p>
+    <button class="button back-to-cart">Vrati se u korpu</button>
+  </div>
   <div class="cart-sidebar__overlay"></div>
   <div class="cart-sidebar__sidebar">
     <button class="cart-sidebar__close-button">

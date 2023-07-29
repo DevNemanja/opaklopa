@@ -1,0 +1,21 @@
+.order-confirmation {
+  &__message {
+    position: fixed;
+    z-index: 101;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #141414;
+    color: white;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    &--show {
+      display: flex;
+    }
+  }
+}

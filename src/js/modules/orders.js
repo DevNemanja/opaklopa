@@ -11,8 +11,6 @@ export default class Orders {
 
     this.fetchOrders();
 
-    console.log(LOCATION_URL);
-
     el.addEventListener('click', this.handleClick);
   }
 
@@ -41,7 +39,7 @@ export default class Orders {
     // Run immediately
     fetchData();
 
-    // Schedule subsequent runs every 60 seconds
+    // Schedule subsequent runs every 10 seconds
     setInterval(fetchData, 10000);
   }
 
