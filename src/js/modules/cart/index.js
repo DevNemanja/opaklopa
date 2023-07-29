@@ -14,6 +14,7 @@ export default class Cart {
     this.cartTotalAmountPlaceholder = document.querySelector(
       '.cart-sidebar__total-amount'
     );
+    this.cartTotalAmountDigit = document.getElementById('cart-total');
   }
 
   setLoading() {
@@ -101,6 +102,17 @@ export default class Cart {
         return item;
       }
     })[0];
+  }
+
+  updateTotalAmount() {
+    const cart = this.getCart();
+
+    const totalPrice = cart.reduce(
+      (accumulator, item) => accumulator + item.price * item.quantity,
+      0
+    );
+
+    this.cartTotalAmountDigit.innerHTML = totalPrice;
   }
 
   updateCart(id, action, productName, price, imgUrl, hasVariations) {
@@ -245,6 +257,7 @@ export default class Cart {
       });
     }
 
+    this.updateTotalAmount();
     document.querySelector('.cart-sidebar__list').innerHTML = cartMarkup;
   }
 
