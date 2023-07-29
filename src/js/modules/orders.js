@@ -1,4 +1,5 @@
 import { CLIENT_KEY, CLIENT_SECRET } from '../app';
+import { LOCATION_URL } from '../utils';
 
 export default class Orders {
   constructor(app, el) {
@@ -11,6 +12,8 @@ export default class Orders {
 
     this.fetchOrders();
 
+    console.log(LOCATION_URL);
+
     el.addEventListener('click', this.handleClick);
   }
 
@@ -19,7 +22,7 @@ export default class Orders {
       console.log('fetching data');
       this.loadingSection.classList.remove('d-none');
 
-      fetch('https://opaklopa.local/wp-json/wc/v3/orders', {
+      fetch(LOCATION_URL + '/wp-json/wc/v3/orders', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +43,7 @@ export default class Orders {
     fetchData();
 
     // Schedule subsequent runs every 60 seconds
-    setInterval(fetchData, 60000);
+    setInterval(fetchData, 10000);
   }
 
   updateMarkup(orders) {
@@ -214,7 +217,7 @@ export default class Orders {
   updateOrder(orderId, status) {
     this.loadingSection.classList.remove('d-none');
 
-    fetch(`https://opaklopa.local/wp-json/wc/v3/orders/${orderId}`, {
+    fetch(`${LOCATION_URL}/wp-json/wc/v3/orders/${orderId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

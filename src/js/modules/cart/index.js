@@ -1,4 +1,5 @@
 import { CLIENT_KEY, CLIENT_SECRET } from '../../app';
+import { LOCATION_URL } from '../../utils';
 
 export default class Cart {
   constructor() {
@@ -302,7 +303,7 @@ export default class Cart {
 
     this.setLoading();
 
-    fetch('https://opaklopa.local/wp-json/wc/v3/orders', {
+    fetch(LOCATION_URL + '/wp-json/wc/v3/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
