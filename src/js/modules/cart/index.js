@@ -1,5 +1,4 @@
-import { CLIENT_KEY, CLIENT_SECRET } from '../../app';
-import { LOCATION_URL } from '../../utils';
+import { CLIENT_KEY, CLIENT_SECRET, LOCATION_URL } from '../../utils';
 
 export default class Cart {
   constructor() {
