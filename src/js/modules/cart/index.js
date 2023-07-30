@@ -325,10 +325,7 @@ export default class Cart {
       'order-confirmation__message--show'
     );
 
-    console.log('Number', orderId);
-
     const interval = setInterval(() => {
-      console.log('getting more and more');
       fetch(`${LOCATION_URL}/wp-json/wc/v3/orders/${orderId}`, {
         method: 'GET',
         headers: {
@@ -340,25 +337,34 @@ export default class Cart {
       })
         .then((response) => response.json())
         .then((data) => {
-          console.log(data);
           if (data.status === 'processing') {
-            console.log('Handle success');
             this.orderConfirmationModalPending.classList.remove(
               'order-confirmation__message--show'
             );
             this.orderConfirmationModalSuccess.classList.add(
               'order-confirmation__message--show'
             );
+
+            document
+              .querySelector('.cart-sidebar--open')
+              .classList.remove('cart-sidebar--open');
+            document.body.classList.remove('noscroll');
+
             clearInterval(interval);
           }
           if (data.status === 'cancelled') {
-            console.log('Handle reject');
             this.orderConfirmationModalPending.classList.remove(
               'order-confirmation__message--show'
             );
             this.orderConfirmationModalReject.classList.add(
               'order-confirmation__message--show'
             );
+
+            document
+              .querySelector('.cart-sidebar--open')
+              .classList.remove('cart-sidebar--open');
+            document.body.classList.remove('noscroll');
+
             clearInterval(interval);
           }
         })

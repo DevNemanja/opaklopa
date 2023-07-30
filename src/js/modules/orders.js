@@ -34,13 +34,18 @@ export default class Orders {
           this.loadingSection.classList.add('d-none');
           console.log(data);
         });
+
+      // Schedule subsequent runs every 10 seconds
+      this.fetchInterval = setInterval(fetchData, 10000);
     };
+
+    // Clear previous interval before starting a new one
+    if (this.fetchInterval) {
+      clearInterval(this.fetchInterval);
+    }
 
     // Run immediately
     fetchData();
-
-    // Schedule subsequent runs every 10 seconds
-    setInterval(fetchData, 10000);
   }
 
   updateMarkup(orders) {
