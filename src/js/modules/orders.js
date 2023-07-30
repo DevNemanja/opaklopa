@@ -36,13 +36,14 @@ export default class Orders {
         });
 
       // Schedule subsequent runs every 10 seconds
-      this.fetchInterval = setInterval(fetchData, 10000);
     };
 
     // Clear previous interval before starting a new one
     if (this.fetchInterval) {
       clearInterval(this.fetchInterval);
     }
+
+    this.fetchInterval = setInterval(fetchData, 10000);
 
     // Run immediately
     fetchData();
