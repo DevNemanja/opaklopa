@@ -59,6 +59,18 @@
   &__price {
     margin-top: auto;
     font-weight: 700;
+
+    del {
+      font-size: 14px;
+      font-weight: 300;
+      opacity: 0.7;
+    }
+
+    ins {
+      font-size: 16px;
+      text-decoration: none;
+      color: $primary-color;
+    }
   }
 
   &__image-wrapper {
@@ -91,6 +103,18 @@
   &__variation {
     margin-bottom: 1rem;
     display: block;
+
+    del {
+      font-size: 14px;
+      font-weight: 300;
+      opacity: 0.7;
+    }
+
+    ins {
+      font-size: 16px;
+      text-decoration: none;
+      color: $primary-color;
+    }
   }
 
   &__variation-input {
