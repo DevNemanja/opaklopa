@@ -9,6 +9,15 @@
     display: none;
   }
 
+  &__form-control {
+    display: flex;
+    gap: 0.5rem;
+
+    button {
+      flex-shrink: 0;
+    }
+  }
+
   &__input {
     padding: 0.7rem;
     width: 100%;
