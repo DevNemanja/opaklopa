@@ -59,3 +59,4 @@ add_action('template_redirect', 'custom_password_protect');
 
 // Kod za radno vreme
 require_once get_template_directory() . '/radno-vreme.php';
+require_once get_template_directory() . '/porudzbine.php';

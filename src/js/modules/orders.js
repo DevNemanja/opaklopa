@@ -19,13 +19,15 @@ export default class Orders {
       console.log('fetching data');
       this.loadingSection.classList.remove('d-none');
 
+      console.log(CLIENT_KEY);
+
       fetch(LOCATION_URL + '/wp-json/wc/v3/orders', {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Basic ${Buffer.from(
-            `${CLIENT_KEY}:${CLIENT_SECRET}`
-          ).toString('base64')}`,
+          Authorization: `Basic ${Buffer.from(`${CLIENT_KEY}:${CLIENT_SECRET}`).toString(
+            'base64'
+          )}`,
         },
       })
         .then((response) => response.json())
@@ -55,6 +57,7 @@ export default class Orders {
     let completedOrders = '';
     let rejectedOrders = '';
 
+    if (!orders) return;
     orders.forEach((order) => {
       switch (order.status) {
         case 'pending':
@@ -85,9 +88,7 @@ export default class Orders {
                       )
                       .join('')}
                     </ol>
-                    <p class="m-0 mt-2 text-end">Ukupno: <strong>${
-                      order.total
-                    }</strong>rsd</p>
+                    <p class="m-0 mt-2 text-end">Ukupno: <strong>${order.total}</strong>rsd</p>
                   </div>
                   <button class="btn btn-primary mb-2" data-order-number=${
                     order.number
@@ -227,9 +228,7 @@ export default class Orders {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Basic ${Buffer.from(
-          `${CLIENT_KEY}:${CLIENT_SECRET}`
-        ).toString('base64')}`,
+        Authorization: `Basic ${Buffer.from(`${CLIENT_KEY}:${CLIENT_SECRET}`).toString('base64')}`,
       },
       body: JSON.stringify({ status }),
     })

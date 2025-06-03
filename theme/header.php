@@ -34,8 +34,6 @@
 
 
   <?php if (!is_shop_open()): ?>
-    <button class="add-to-cart button">Dodaj u korpu</button>
-
     <style>
       .add-to-cart,
       .header__cart {
