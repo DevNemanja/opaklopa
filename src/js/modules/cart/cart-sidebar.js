@@ -90,7 +90,7 @@ export default class CartSidebar extends Cart {
       ".cart-sidebar__discount-amount"
     );
 
-    const couponCode = couponInput.value.trim();
+    const couponCode = couponInput.value.trim() || "";
     let validCoupon = null;
 
     statusDiv.textContent = "Loading";
