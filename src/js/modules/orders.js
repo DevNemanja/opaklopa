@@ -31,7 +31,6 @@ export default class Orders {
         .then((data) => {
           this.updateMarkup(data);
           this.loadingSection.classList.add("d-none");
-          console.log(data);
         });
 
       // Schedule subsequent runs every 10 seconds

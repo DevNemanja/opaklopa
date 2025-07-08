@@ -1,31 +1,32 @@
-@import 'vendor/reset';
-@import 'vendor/hamburger-menu';
-@import 'vendor/loading';
+@import "vendor/reset";
+@import "vendor/hamburger-menu";
+@import "vendor/loading";
 
-@import 'abstracts/variables';
-@import 'abstracts/mixins';
+@import "abstracts/variables";
+@import "abstracts/mixins";
 
-@import 'vendor-overrides/hamburger';
+@import "vendor-overrides/hamburger";
 
-@import 'base/animations';
-@import 'base/fonts';
-@import 'base/base';
-@import 'base/typography';
-@import 'base/utilities';
+@import "base/animations";
+@import "base/fonts";
+@import "base/base";
+@import "base/typography";
+@import "base/utilities";
 
-@import 'components/header';
-@import 'components/footer';
-@import 'components/products';
-@import 'components/product';
-@import 'components/free-delivery';
-@import 'components/title';
-@import 'components/contact';
-@import 'components/floating-call';
-@import 'components/mobile-menu';
-@import 'components/navigator';
-@import 'components/cart-sidebar';
-@import 'components/button';
-@import 'components/order-form';
-@import 'components/order-confirmation';
+@import "components/header";
+@import "components/footer";
+@import "components/products";
+@import "components/product";
+@import "components/free-delivery";
+@import "components/title";
+@import "components/contact";
+@import "components/floating-call";
+@import "components/mobile-menu";
+@import "components/navigator";
+@import "components/cart-sidebar";
+@import "components/button";
+@import "components/order-form";
+@import "components/order-confirmation";
+@import "components/last-order";
 
-@import 'pages/admin-page';
+@import "pages/admin-page";

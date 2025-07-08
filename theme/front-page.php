@@ -9,6 +9,9 @@
     }
     ?>
 
+  <div data-module="ORDER">
+    LAST ORDER: 
+  </div>
 
     <?php
 
@@ -60,6 +63,8 @@
     ?>
 
   </div>
+
+
 
   <?php require('template-parts/cart-sidebar.php');  ?>
   <?php require('template-parts/order-confirmation.php');  ?>

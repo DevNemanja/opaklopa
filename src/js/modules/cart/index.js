@@ -414,7 +414,7 @@ export default class Cart {
         this.removeLoading();
         this.clearCart();
         this.openConfirmationModal(data.number);
-        console.log(data);
+        localStorage.setItem("opa-order", JSON.stringify(data.id));
       })
       .catch((err) => {
         console.error(err);
