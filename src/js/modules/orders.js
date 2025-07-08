@@ -60,7 +60,14 @@ export default class Orders {
           newOrders += `
             <div class="col-12 col-md-4 col-lg-3 g-2">
               <div class="card d-flex flex-column">
-                <div class="p-3 fs-6 alert alert-primary mb-0">
+                <div class="p-3 fs-6 alert alert-primary mb-0 relative">
+                  ${
+                    order.coupon_lines.length > 0
+                      ? `<div class="position-absolute top-0 start-0 translate-middle-y badge rounded-pill bg-primary">
+                        ${order.coupon_lines[0].code}
+                      </div>`
+                      : ""
+                  }
                   <p class="mb-0">${order.billing.first_name}</p>
                   <p class="mb-0">${order.billing.email}</p>
                   <p class="mb-0">${order.billing.phone}</p>

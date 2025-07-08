@@ -25,6 +25,8 @@ export default class Cart {
     this.orderConfirmationModalReject = document.querySelector(
       ".order-confirmation__message--reject"
     );
+
+    this.coupon = document.querySelector("#coupon");
   }
 
   setLoading() {
@@ -393,6 +395,11 @@ export default class Cart {
       },
       line_items: this.prepareCartForOrder(),
       customer_note: poruka.value,
+      coupon_lines: [
+        {
+          code: this.coupon.value.trim() || "",
+        },
+      ],
     };
 
     this.setLoading();
