@@ -3,25 +3,42 @@ export const generateGuid = () => {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   };
 
-  return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
+  return (
+    S4() +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    "-" +
+    S4() +
+    S4() +
+    S4()
+  );
 };
 
 export const isMediumViewport = () => {
-  return window.matchMedia('screen and (min-width: 989px)').matches;
+  return window.matchMedia("screen and (min-width: 989px)").matches;
 };
 
 export const LOCATION_URL =
-  window.location.hostname === 'localhost' ? 'https://opaklopa.local' : window.location.origin;
+  window.location.hostname === "localhost"
+    ? "https://opaklopa.local"
+    : window.location.origin;
 
-// WINDOWS & Staging
-export const CLIENT_KEY =
-  window.location.hostname === 'localhost'
-    ? 'ck_68d74fd3eef100d46c01ebaadc1b80536b11f9ac'
-    : 'ck_68d74fd3eef100d46c01ebaadc1b80536b11f9ac';
-export const CLIENT_SECRET =
-  window.location.hostname === 'localhost'
-    ? 'cs_3ecd61fcbbbebff07b25a90ab95eeed3e13e60ea'
-    : 'cs_3ecd61fcbbbebff07b25a90ab95eeed3e13e60ea';
+export const CLIENT_KEY = "ck_cfe851f3c4f3142d065752d2d3b5240ac828790a";
+export const CLIENT_SECRET = "cs_4ff18d20cc3a93798108c1140d12b7cbf2b57c25";
+// // WINDOWS & Staging
+// export const CLIENT_KEY =
+//   window.location.hostname === "localhost"
+//     ? "ck_cfe851f3c4f3142d065752d2d3b5240ac828790a"
+//     : "ck_68d74fd3eef100d46c01ebaadc1b80536b11f9ac";
+// export const CLIENT_SECRET =
+//   window.location.hostname === "localhost"
+//     ? "cs_4ff18d20cc3a93798108c1140d12b7cbf2b57c25"
+//     : "cs_3ecd61fcbbbebff07b25a90ab95eeed3e13e60ea";
 
 // MAC & Staging
 // export const CLIENT_KEY =

@@ -60,3 +60,23 @@ add_action('template_redirect', 'custom_password_protect');
 // Kod za radno vreme
 require_once get_template_directory() . '/radno-vreme.php';
 require_once get_template_directory() . '/porudzbine.php';
+
+
+add_action( 'woocommerce_admin_order_data_after_order_details', 'add_eta_field_to_admin_order' );
+function add_eta_field_to_admin_order( $order ) {
+    $eta = get_post_meta( $order->get_id(), '_order_eta', true );
+    ?>
+    <div class="form-field form-field-wide">
+        <label for="order_eta"><?php _e( 'ETA (Estimated Time of Arrival)', 'your-textdomain' ); ?></label>
+        <input type="text" name="order_eta" id="order_eta" value="<?php echo esc_attr( $eta ); ?>" placeholder="YYYY-MM-DD HH:MM" />
+        <p class="description"><?php _e( 'Unesite procenjeno vreme dolaska za ovu porudžbinu.', 'your-textdomain' ); ?></p>
+    </div>
+    <?php
+}
+
+add_action( 'woocommerce_process_shop_order_meta', 'save_eta_field_from_admin_order' );
+function save_eta_field_from_admin_order( $order_id ) {
+    if ( isset( $_POST['order_eta'] ) ) {
+        update_post_meta( $order_id, '_order_eta', sanitize_text_field( $_POST['order_eta'] ) );
+    }
+}

@@ -1,39 +1,36 @@
-import { CLIENT_KEY, CLIENT_SECRET, LOCATION_URL } from '../utils';
+import { CLIENT_KEY, CLIENT_SECRET, LOCATION_URL } from "../utils";
 
 export default class Orders {
   constructor(app, el) {
     this.app = app;
     this.el = el;
 
-    this.loadingSection = document.getElementById('loading-section');
+    this.loadingSection = document.getElementById("loading-section");
 
     this.handleClick = this.handleClick.bind(this);
 
     this.fetchOrders();
 
-    el.addEventListener('click', this.handleClick);
+    el.addEventListener("click", this.handleClick);
   }
 
   fetchOrders() {
     const fetchData = () => {
-      console.log('fetching data');
-      this.loadingSection.classList.remove('d-none');
+      this.loadingSection.classList.remove("d-none");
 
-      console.log(CLIENT_KEY);
-
-      fetch(LOCATION_URL + '/wp-json/wc/v3/orders', {
-        method: 'GET',
+      fetch(LOCATION_URL + "/wp-json/wc/v3/orders", {
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Basic ${Buffer.from(`${CLIENT_KEY}:${CLIENT_SECRET}`).toString(
-            'base64'
-          )}`,
+          "Content-Type": "application/json",
+          Authorization: `Basic ${Buffer.from(
+            `${CLIENT_KEY}:${CLIENT_SECRET}`
+          ).toString("base64")}`,
         },
       })
         .then((response) => response.json())
         .then((data) => {
           this.updateMarkup(data);
-          this.loadingSection.classList.add('d-none');
+          this.loadingSection.classList.add("d-none");
           console.log(data);
         });
 
@@ -52,15 +49,15 @@ export default class Orders {
   }
 
   updateMarkup(orders) {
-    let newOrders = '';
-    let acceptedOrders = '';
-    let completedOrders = '';
-    let rejectedOrders = '';
+    let newOrders = "";
+    let acceptedOrders = "";
+    let completedOrders = "";
+    let rejectedOrders = "";
 
     if (!orders) return;
     orders.forEach((order) => {
       switch (order.status) {
-        case 'pending':
+        case "pending":
           newOrders += `
             <div class="col-12 col-md-4 col-lg-3 g-2">
               <div class="card d-flex flex-column">
@@ -69,7 +66,17 @@ export default class Orders {
                   <p class="mb-0">${order.billing.email}</p>
                   <p class="mb-0">${order.billing.phone}</p>
                   <p class="mb-0">${order.billing.address_1}</p>
+                  <div class="small text-muted">${new Date(
+                    order.date_created
+                  ).toLocaleString("sr-RS", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}</div>
                 </div>
+                
                 <div class="p-3 card-body flex-grow-1" >
                     <p>${order.customer_note}</p>
                     <ol class="list-group">${order.line_items
@@ -86,13 +93,24 @@ export default class Orders {
                       
                         `
                       )
-                      .join('')}
+                      .join("")}
                     </ol>
-                    <p class="m-0 mt-2 text-end">Ukupno: <strong>${order.total}</strong>rsd</p>
+                    <p class="m-0 mt-2 text-end">Ukupno: <strong>${
+                      order.total
+                    }</strong>rsd</p>
                   </div>
+                  <h3>Potvrdi</h3>
+                  <div>
                   <button class="btn btn-primary mb-2" data-order-number=${
                     order.number
-                  } data-status="processing">Potvrdi</button>
+                  } data-status="processing" data-eta="30">30min</button>
+                  <button class="btn btn-primary mb-2" data-order-number=${
+                    order.number
+                  } data-status="processing" data-eta="45">45min</button>
+                  <button class="btn btn-primary mb-2" data-order-number=${
+                    order.number
+                  } data-status="processing" data-eta="60">60min</button>
+                  </div>
 
                   <button class="btn btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#${
                     order.order_key
@@ -108,7 +126,7 @@ export default class Orders {
             </div>
           `;
           break;
-        case 'processing':
+        case "processing":
           acceptedOrders += `
                 <div class="col-12 col-md-4 col-lg-3 g-2">
                   <div class="card d-flex flex-column">
@@ -117,6 +135,20 @@ export default class Orders {
                       <p class="mb-0">${order.billing.email}</p>
                       <p class="mb-0">${order.billing.phone}</p>
                       <p class="mb-0">${order.billing.address_1}</p>
+                      <div class="small text-dark">
+                        ETA:
+                        ${
+                          order.meta_data.length > 0
+                            ? `<span class=" fw-bold">${new Date(
+                                order.meta_data[0].value
+                              ).toLocaleTimeString([], {
+                                hour: "2-digit",
+                                minute: "2-digit",
+                                hour12: false,
+                              })}</span>`
+                            : ""
+                        }
+                      </div>
                     </div>
                     <div class="p-3 card-body flex-grow-1" >
                         <ol class="list-group">${order.line_items
@@ -133,7 +165,7 @@ export default class Orders {
                           
                             `
                           )
-                          .join('')}
+                          .join("")}
                         </ol>
                       </div>
                       <button class="btn btn-info" data-order-number=${
@@ -143,7 +175,7 @@ export default class Orders {
                 </div>
               `;
           break;
-        case 'completed':
+        case "completed":
           completedOrders += `
           <div class="col-12 col-md-4 col-lg-3 g-2">
             <div class="card d-flex flex-column">
@@ -167,14 +199,14 @@ export default class Orders {
                         </li>
                       `
                     )
-                    .join('')}
+                    .join("")}
                   </ol>
                 </div>
             </div>
           </div>
         `;
           break;
-        case 'cancelled':
+        case "cancelled":
           rejectedOrders += `
           <div class="col-12 col-md-4 col-lg-3 g-2">
             <div class="card d-flex flex-column">
@@ -199,7 +231,7 @@ export default class Orders {
                     
                       `
                     )
-                    .join('')}
+                    .join("")}
                   </ol>
                 </div>
             </div>
@@ -212,25 +244,55 @@ export default class Orders {
       }
     });
 
-    document.getElementById('new-orders').innerHTML =
-      newOrders === ''
+    document.getElementById("new-orders").innerHTML =
+      newOrders === ""
         ? '<div class="ml-5"><p class="alert alert-primary">Nema novih porudžbina</p></div>'
         : newOrders;
-    document.getElementById('accepted-orders').innerHTML = acceptedOrders;
-    document.getElementById('completed-orders').innerHTML = completedOrders;
-    document.getElementById('rejected-orders').innerHTML = rejectedOrders;
+    document.getElementById("accepted-orders").innerHTML = acceptedOrders;
+    document.getElementById("completed-orders").innerHTML = completedOrders;
+    document.getElementById("rejected-orders").innerHTML = rejectedOrders;
   }
 
-  updateOrder(orderId, status) {
-    this.loadingSection.classList.remove('d-none');
+  updateOrder(orderId, status, etaMinutes) {
+    this.loadingSection.classList.remove("d-none");
+
+    // Izračunaj buduće vreme (ETA) u ISO formatu
+    let etaValue = null;
+
+    if (etaMinutes) {
+      const now = new Date();
+      now.setMinutes(now.getMinutes() + +etaMinutes); // Add etaMinutes to current time
+
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const day = String(now.getDate()).padStart(2, "0");
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
+
+      etaValue = `${year}-${month}-${day} ${hours}:${minutes}`;
+    }
+
+    // Pripremi meta_data za REST API
+    const bodyData = { status };
+
+    if (etaValue) {
+      bodyData.meta_data = [
+        {
+          key: "_order_eta",
+          value: etaValue,
+        },
+      ];
+    }
 
     fetch(`${LOCATION_URL}/wp-json/wc/v3/orders/${orderId}`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Basic ${Buffer.from(`${CLIENT_KEY}:${CLIENT_SECRET}`).toString('base64')}`,
+        "Content-Type": "application/json",
+        Authorization: `Basic ${Buffer.from(
+          `${CLIENT_KEY}:${CLIENT_SECRET}`
+        ).toString("base64")}`,
       },
-      body: JSON.stringify({ status }),
+      body: JSON.stringify(bodyData),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -238,14 +300,13 @@ export default class Orders {
         console.log(data);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
   }
 
   handleClick(e) {
-    console.log('ORDERS');
-    const { orderNumber, status } = e.target.dataset;
+    const { orderNumber, status, eta } = e.target.dataset;
 
-    if (e.target.dataset.status) this.updateOrder(orderNumber, status);
+    if (e.target.dataset.status) this.updateOrder(orderNumber, status, eta);
   }
 }

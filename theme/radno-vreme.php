@@ -127,6 +127,7 @@ function working_hours_page()
 function is_shop_open()
 {
     $options = get_option('working_hours_settings');
+
     if (!$options) {
         return false; // Nema podešavanja, radnja zatvorena
     }
