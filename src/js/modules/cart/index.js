@@ -27,6 +27,8 @@ export default class Cart {
     );
 
     this.coupon = document.querySelector("#coupon");
+
+    this.sidebarOpenedFirstTime = false;
   }
 
   setLoading() {
@@ -127,6 +129,11 @@ export default class Cart {
     this.cartTotalAmountDigit.innerHTML = totalPrice;
   }
 
+  openSidebar() {
+    document.querySelector(".cart-sidebar").classList.add("cart-sidebar--open");
+    document.body.classList.add("noscroll");
+  }
+
   updateCart(id, action, productName, price, imgUrl, hasVariations) {
     if (!action) return;
 
@@ -139,6 +146,14 @@ export default class Cart {
       cart = this.createCart(id, productName, price, hasVariations);
     } else {
       // Ako ima azuriraj Cart
+
+      if (cart.length === 0) {
+        if (!this.sidebarOpenedFirstTime) {
+          this.openSidebar();
+        }
+
+        this.sidebarOpenedFirstTime = true;
+      }
 
       // Proveri da li ovaj proizvod postoji u kartu
       let cartIndex = this.getProductIndex(id);
@@ -395,11 +410,6 @@ export default class Cart {
       },
       line_items: this.prepareCartForOrder(),
       customer_note: poruka.value,
-      coupon_lines: [
-        {
-          code: this.coupon.value.trim() || "",
-        },
-      ],
     };
 
     this.setLoading();
@@ -421,7 +431,14 @@ export default class Cart {
         this.removeLoading();
         this.clearCart();
         this.openConfirmationModal(data.number);
-        localStorage.setItem("opa-order", JSON.stringify(data.id));
+
+        const params = new URLSearchParams(window.location.search);
+        params.set("opa-order", data.id);
+        window.history.replaceState(
+          {},
+          "",
+          `${window.location.pathname}?${params}`
+        );
       })
       .catch((err) => {
         console.error(err);

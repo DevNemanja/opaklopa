@@ -12,6 +12,7 @@ export default class Order {
 
     if (this.orderId) {
       this.fetchOrder(this.orderId);
+      this.el.innerHTML = "ORDER ID: " + this.orderId;
     } else {
       this.el.innerHTML = "No orders yet.";
     }
@@ -66,17 +67,20 @@ export default class Order {
   }
 
   getOrderId() {
-    const orderId = localStorage.getItem("opa-order");
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get("opa-order");
 
-    if (orderId) {
-      return JSON.parse(orderId);
-    }
-
-    return null;
+    return orderId ? JSON.parse(orderId) : null;
   }
 
   saveOrderId(orderId) {
-    localStorage.setItem("opa-order", JSON.stringify(orderId));
+    const params = new URLSearchParams(window.location.search);
+    params.set("opa-order", orderId);
+    window.history.replaceState(
+      {},
+      "",
+      `${window.location.pathname}?${params}`
+    );
   }
 
   handleClick(e) {
