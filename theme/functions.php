@@ -80,3 +80,32 @@ function save_eta_field_from_admin_order( $order_id ) {
         update_post_meta( $order_id, '_order_eta', sanitize_text_field( $_POST['order_eta'] ) );
     }
 }
+
+add_action('woocommerce_new_order', 'posalji_email_korisniku_za_porudzbinu', 10, 1);
+
+function posalji_email_korisniku_za_porudzbinu($order_id) {
+    if (!$order_id) return;
+
+    $order = wc_get_order($order_id);
+    $to = $order->get_billing_email(); // Email korisnika
+
+    $subject = 'Hvala na porudžbini #' . $order->get_order_number();
+
+    $body = 'Zdravo ' . $order->get_billing_first_name() . ",\n\n";
+    $body .= "Hvala što ste naručili sa našeg sajta. Evo detalja vaše porudžbine:\n\n";
+
+    foreach ($order->get_items() as $item) {
+        $product_name = $item->get_name();
+        $quantity = $item->get_quantity();
+        $total = wc_price($item->get_total());
+        $body .= "- $product_name (x$quantity): $total\n";
+    }
+
+    $body .= "\nUkupno: " . $order->get_formatted_order_total();
+    $body .= "\n\nVaša porudžbina će uskoro biti obrađena.";
+    $body .= "\n\nMozete proveriti status porudzbine na www.opaklopa.rs?opa-order=" . $order_id;
+
+    $headers = array('Content-Type: text/plain; charset=UTF-8');
+
+    wp_mail($to, $subject, $body, $headers);
+}

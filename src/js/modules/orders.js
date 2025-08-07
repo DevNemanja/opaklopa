@@ -107,15 +107,21 @@ export default class Orders {
                   </div>
                   <h3>Potvrdi</h3>
                   <div>
-                  <button class="btn btn-primary mb-2" data-order-number=${
+                  <button class="btn btn-primary btn-sm mb-2" data-order-number=${
                     order.number
                   } data-status="processing" data-eta="30">30min</button>
-                  <button class="btn btn-primary mb-2" data-order-number=${
+                  <button class="btn btn-primary btn-sm mb-2" data-order-number=${
                     order.number
                   } data-status="processing" data-eta="45">45min</button>
-                  <button class="btn btn-primary mb-2" data-order-number=${
+                  <button class="btn btn-primary btn-sm mb-2" data-order-number=${
                     order.number
                   } data-status="processing" data-eta="60">60min</button>
+                  <button class="btn btn-primary btn-sm mb-2" data-order-number=${
+                    order.number
+                  } data-status="processing" data-eta="75">75min</button>
+                  <button class="btn btn-primary btn-sm mb-2" data-order-number=${
+                    order.number
+                  } data-status="processing" data-eta="90">90min</button>
                   </div>
 
                   <button class="btn btn-outline-danger" type="button" data-bs-toggle="collapse" data-bs-target="#${

@@ -17,7 +17,7 @@
       <!-- Populated via JS -->
     </ul>
     <h3 class="cart-sidebar__total-amount cart-sidebar__total-amount--discounted">Total: <strong id="cart-total">1000</strong>rsd</h3>
-    <h3 class="cart-sidebar__discount-amount cart-sidebar__discount-amount--hidden">Sa popuston: <strong id="cart-discount">1000</strong>rsd</h3>
+    <h3 class="cart-sidebar__discount-amount cart-sidebar__discount-amount--hidden">Sa popustom: <strong id="cart-discount">1000</strong>rsd</h3>
 
     <!-- 🧾 Kupon kod -->
     <div class="order-form__form-control">

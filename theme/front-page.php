@@ -9,9 +9,7 @@
     }
     ?>
 
-  <div data-module="ORDER">
-    LAST ORDER: 
-  </div>
+    <div data-module="ORDER"></div>
 
     <?php
 

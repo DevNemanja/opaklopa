@@ -396,6 +396,7 @@ export default class Cart {
     const mail = document.getElementById("mail");
     const phone = document.getElementById("telefon");
     const poruka = document.getElementById("poruka");
+    const kupon = document.getElementById("coupon").value.trim() || "";
 
     const orderData = {
       payment_method: "cod",
@@ -411,6 +412,14 @@ export default class Cart {
       line_items: this.prepareCartForOrder(),
       customer_note: poruka.value,
     };
+
+    if (kupon) {
+      orderData.coupon_lines = [
+        {
+          code: kupon,
+        },
+      ];
+    }
 
     this.setLoading();
 

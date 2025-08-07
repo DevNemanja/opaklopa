@@ -12,9 +12,6 @@ export default class Order {
 
     if (this.orderId) {
       this.fetchOrder(this.orderId);
-      this.el.innerHTML = "ORDER ID: " + this.orderId;
-    } else {
-      this.el.innerHTML = "No orders yet.";
     }
   }
 

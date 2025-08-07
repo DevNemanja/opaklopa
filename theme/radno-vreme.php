@@ -136,7 +136,7 @@ function is_shop_open()
         'monday' => 'ponedeljak',
         'tuesday' => 'utorak',
         'wednesday' => 'sreda',
-        'thursday' => 'četvrtak',
+        'thursday' => 'Četvrtak',
         'friday' => 'petak',
         'saturday' => 'subota',
         'sunday' => 'nedelja',
@@ -170,6 +170,9 @@ function is_shop_open()
     if ($current_time >= $open && $current_time <= $close) {
         return true; // Radnja je otvorena
     }
+
+    
+
 
     return false; // Radnja je zatvorena
 }
