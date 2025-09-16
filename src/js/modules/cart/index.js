@@ -1,53 +1,48 @@
-import { CLIENT_KEY, CLIENT_SECRET, LOCATION_URL } from "../../utils";
+import { CLIENT_KEY, CLIENT_SECRET, LOCATION_URL } from '../../utils';
 
 export default class Cart {
   constructor() {
-    this.cartButton = document.querySelector(".header__cart");
-    this.orderForm = document.querySelector(".order-form");
-    this.emptyCartSuggestions = document.querySelector(
-      ".cart-sidebar__empty-cart-suggestion"
-    );
-    this.fullCartSuggestions = document.querySelector(
-      ".cart-sidebar__full-cart-suggestion"
-    );
-    this.loading = document.querySelector(".cart-sidebar__loading");
-    this.cartTotalAmountPlaceholder = document.querySelector(
-      ".cart-sidebar__total-amount"
-    );
-    this.cartTotalAmountDigit = document.getElementById("cart-total");
-    this.errorOverlay = document.querySelector(".cart-sidebar__error");
+    this.cartButton = document.querySelector('.header__cart');
+    this.orderForm = document.querySelector('.order-form');
+    this.emptyCartSuggestions = document.querySelector('.cart-sidebar__empty-cart-suggestion');
+    this.fullCartSuggestions = document.querySelector('.cart-sidebar__full-cart-suggestion');
+    this.loading = document.querySelector('.cart-sidebar__loading');
+    this.cartTotalAmountPlaceholder = document.querySelector('.cart-sidebar__total-amount');
+    this.cartTotalAmountDigit = document.getElementById('cart-total');
+    this.errorOverlay = document.querySelector('.cart-sidebar__error');
+    this.orderConfirmationModal = document.querySelector('.order-confirmation__modal');
     this.orderConfirmationModalPending = document.querySelector(
-      ".order-confirmation__message--pending"
+      '.order-confirmation__message--pending'
     );
     this.orderConfirmationModalSuccess = document.querySelector(
-      ".order-confirmation__message--success"
+      '.order-confirmation__message--success'
     );
     this.orderConfirmationModalReject = document.querySelector(
-      ".order-confirmation__message--reject"
+      '.order-confirmation__message--reject'
     );
 
-    this.coupon = document.querySelector("#coupon");
+    this.coupon = document.querySelector('#coupon');
 
     this.sidebarOpenedFirstTime = false;
   }
 
   setLoading() {
-    this.loading.classList.add("cart-sidebar__loading--show");
+    this.loading.classList.add('cart-sidebar__loading--show');
   }
 
   removeLoading() {
-    this.loading.classList.remove("cart-sidebar__loading--show");
+    this.loading.classList.remove('cart-sidebar__loading--show');
   }
 
   getCart() {
-    const cart = JSON.parse(localStorage.getItem("opa-cart")) || [];
+    const cart = JSON.parse(localStorage.getItem('opa-cart')) || [];
 
     if (cart.length > 0) {
-      this.cartButton.classList.add("header__cart--has-items");
-      this.orderForm.classList.remove("order-form--hidden");
+      this.cartButton.classList.add('header__cart--has-items');
+      this.orderForm.classList.remove('order-form--hidden');
     } else {
-      this.cartButton.classList.remove("header__cart--has-items");
-      this.orderForm.classList.add("order-form--hidden");
+      this.cartButton.classList.remove('header__cart--has-items');
+      this.orderForm.classList.add('order-form--hidden');
     }
 
     return cart;
@@ -55,10 +50,8 @@ export default class Cart {
 
   createCart(id, productName, price, imgUrl, hasVariations) {
     localStorage.setItem(
-      "opa-cart",
-      JSON.stringify([
-        { id, quantity: 1, productName, price, imgUrl, hasVariations },
-      ])
+      'opa-cart',
+      JSON.stringify([{ id, quantity: 1, productName, price, imgUrl, hasVariations }])
     );
 
     return this.getCart();
@@ -130,8 +123,13 @@ export default class Cart {
   }
 
   openSidebar() {
-    document.querySelector(".cart-sidebar").classList.add("cart-sidebar--open");
-    document.body.classList.add("noscroll");
+    document.querySelector('.cart-sidebar').classList.add('cart-sidebar--open');
+    document.body.classList.add('noscroll');
+  }
+
+  closeSidebar() {
+    document.querySelector('.cart-sidebar').classList.remove('cart-sidebar--open');
+    document.body.classList.remove('noscroll');
   }
 
   updateCart(id, action, productName, price, imgUrl, hasVariations) {
@@ -161,10 +159,10 @@ export default class Cart {
       // Ako postoji promeni kolicinu
       if (cartIndex > -1) {
         switch (action) {
-          case "increase":
+          case 'increase':
             cart[cartIndex].quantity++;
             break;
-          case "decrease":
+          case 'decrease':
             if (cart[cartIndex].quantity === 1) {
               cart = this.removeItemFromCart(id);
             } else {
@@ -187,47 +185,32 @@ export default class Cart {
       }
     }
 
-    localStorage.setItem("opa-cart", JSON.stringify(cart));
+    localStorage.setItem('opa-cart', JSON.stringify(cart));
     this.updateMarkup();
   }
 
   updateMarkup() {
     const cart = this.getCart();
-    let cartMarkup = "";
+    let cartMarkup = '';
 
     if (!cart) return;
 
     if (cart.length === 0) {
-      cartMarkup =
-        '<p class="cart-sidebar__empty-message">Vaša korpa je prazna</p>';
-      this.emptyCartSuggestions.classList.remove(
-        "cart-sidebar__empty-cart-suggestion--hidden"
-      );
-      this.fullCartSuggestions.classList.add(
-        "cart-sidebar__full-cart-suggestion--hidden"
-      );
-      this.cartTotalAmountPlaceholder.classList.add(
-        "cart-sidebar__total-amount--hidden"
-      );
+      cartMarkup = '<p class="cart-sidebar__empty-message">Vaša korpa je prazna</p>';
+      this.emptyCartSuggestions.classList.remove('cart-sidebar__empty-cart-suggestion--hidden');
+      this.fullCartSuggestions.classList.add('cart-sidebar__full-cart-suggestion--hidden');
+      this.cartTotalAmountPlaceholder.classList.add('cart-sidebar__total-amount--hidden');
     } else {
-      this.emptyCartSuggestions.classList.add(
-        "cart-sidebar__empty-cart-suggestion--hidden"
-      );
-      this.fullCartSuggestions.classList.remove(
-        "cart-sidebar__full-cart-suggestion--hidden"
-      );
-      this.cartTotalAmountPlaceholder.classList.remove(
-        "cart-sidebar__total-amount--hidden"
-      );
+      this.emptyCartSuggestions.classList.add('cart-sidebar__empty-cart-suggestion--hidden');
+      this.fullCartSuggestions.classList.remove('cart-sidebar__full-cart-suggestion--hidden');
+      this.cartTotalAmountPlaceholder.classList.remove('cart-sidebar__total-amount--hidden');
 
       cart.forEach((product) => {
         // Sidebar markup
         cartMarkup += `
-        <div class="product product--sidebar" data-product-id="${
-          product.id
-        }" data-product-name="${product.productName}" data-price="${
-          product.price
-        }" data-img-url="${product.imgUrl ? product.imgUrl : ""}">
+        <div class="product product--sidebar" data-product-id="${product.id}" data-product-name="${
+          product.productName
+        }" data-price="${product.price}" data-img-url="${product.imgUrl ? product.imgUrl : ''}">
             <div class="product__info product__info--sidebar">
               <div class="product__name-wrapper product__name-wrapper--sidebar">
                 <div class="product__name">${product.productName}</div>
@@ -253,7 +236,7 @@ export default class Cart {
           // Proveri da li je ta varijacija cekirana
           if (document.querySelector(`[data-id="${product.id}"]`).checked) {
             // Ako jeste odradi update markupa, ako nije iskuliraj
-            let markup = "";
+            let markup = '';
             if (product.quantity > 0) {
               markup = `
               <div class="product__cart">
@@ -285,7 +268,7 @@ export default class Cart {
     }
 
     this.updateTotalAmount();
-    document.querySelector(".cart-sidebar__list").innerHTML = cartMarkup;
+    document.querySelector('.cart-sidebar__list').innerHTML = cartMarkup;
   }
 
   checkIfIdExistsInCart(id) {
@@ -324,87 +307,88 @@ export default class Cart {
 
     cart.map((item) => this.removeItemFromCart(item.id));
 
-    localStorage.setItem("opa-cart", JSON.stringify([]));
+    localStorage.setItem('opa-cart', JSON.stringify([]));
     this.updateMarkup();
   }
 
   setErrorMessage() {
-    this.errorOverlay.classList.remove("cart-sidebar__error--hidden");
+    this.errorOverlay.classList.remove('cart-sidebar__error--hidden');
   }
 
   removeErrorMessage() {
-    this.errorOverlay.classList.add("cart-sidebar__error--hidden");
+    this.errorOverlay.classList.add('cart-sidebar__error--hidden');
   }
 
   openConfirmationModal(orderId) {
-    this.orderConfirmationModalPending.classList.add(
-      "order-confirmation__message--show"
-    );
+    this.orderConfirmationModal.classList.add('order-confirmation__modal--show');
+    this.orderConfirmationModalPending.classList.add('order-confirmation__message--show');
 
     const interval = setInterval(() => {
       fetch(`${LOCATION_URL}/wp-json/wc/v3/orders/${orderId}`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Basic ${Buffer.from(
-            `${CLIENT_KEY}:${CLIENT_SECRET}`
-          ).toString("base64")}`,
+          'Content-Type': 'application/json',
+          Authorization: `Basic ${Buffer.from(`${CLIENT_KEY}:${CLIENT_SECRET}`).toString(
+            'base64'
+          )}`,
         },
       })
         .then((response) => response.json())
         .then((data) => {
-          if (data.status === "processing") {
-            this.orderConfirmationModalPending.classList.remove(
-              "order-confirmation__message--show"
-            );
-            this.orderConfirmationModalSuccess.classList.add(
-              "order-confirmation__message--show"
-            );
+          this.orderConfirmationModal.classList.add('order-confirmation__modal--show');
 
-            document
-              .querySelector(".cart-sidebar--open")
-              .classList.remove("cart-sidebar--open");
-            document.body.classList.remove("noscroll");
+          if (data.status === 'processing') {
+            this.orderConfirmationModalPending.classList.remove(
+              'order-confirmation__message--show'
+            );
+            this.orderConfirmationModalSuccess.classList.add('order-confirmation__message--show');
+
+            document.getElementById('eta').innerText = new Date(
+              data.meta_data[0].value
+            ).toLocaleTimeString([], {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: false,
+            });
+
+            document.querySelector('.cart-sidebar').classList.remove('cart-sidebar--open');
+            document.body.classList.remove('noscroll');
 
             clearInterval(interval);
           }
-          if (data.status === "cancelled") {
+          if (data.status === 'cancelled') {
             this.orderConfirmationModalPending.classList.remove(
-              "order-confirmation__message--show"
+              'order-confirmation__message--show'
             );
-            this.orderConfirmationModalReject.classList.add(
-              "order-confirmation__message--show"
-            );
+            this.orderConfirmationModalReject.classList.add('order-confirmation__message--show');
 
-            document
-              .querySelector(".cart-sidebar--open")
-              .classList.remove("cart-sidebar--open");
-            document.body.classList.remove("noscroll");
+            document.querySelector('.cart-sidebar').classList.remove('cart-sidebar--open');
+            document.body.classList.remove('noscroll');
 
             clearInterval(interval);
           }
         })
         .catch((error) => {
-          console.error("Error:", error);
+          console.error('Error:', error);
         });
     }, 10000);
   }
 
   submitOrder() {
-    const ime = document.getElementById("name");
-    const adresa = document.getElementById("address");
-    const mail = document.getElementById("mail");
-    const phone = document.getElementById("telefon");
-    const poruka = document.getElementById("poruka");
-    const kupon = document.getElementById("coupon").value.trim() || "";
+    const ime = document.getElementById('name');
+    const adresa = document.getElementById('address');
+    const mail = document.getElementById('mail');
+    const phone = document.getElementById('telefon');
+    const poruka = document.getElementById('poruka');
+    const kupon = document.getElementById('coupon').value.trim() || '';
 
     const orderData = {
-      payment_method: "cod",
-      payment_method_title: "Cash on Delivery",
+      payment_method: 'cod',
+      payment_method_title: 'Cash on Delivery',
       set_paid: false,
       billing: {
         first_name: ime.value,
-        last_name: "",
+        last_name: '',
         address_1: adresa.value,
         email: mail.value,
         phone: phone.value,
@@ -423,13 +407,11 @@ export default class Cart {
 
     this.setLoading();
 
-    fetch(LOCATION_URL + "/wp-json/wc/v3/orders", {
-      method: "POST",
+    fetch(LOCATION_URL + '/wp-json/wc/v3/orders', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${Buffer.from(
-          `${CLIENT_KEY}:${CLIENT_SECRET}`
-        ).toString("base64")}`,
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${Buffer.from(`${CLIENT_KEY}:${CLIENT_SECRET}`).toString('base64')}`,
       },
       body: JSON.stringify(orderData),
     })
@@ -439,15 +421,13 @@ export default class Cart {
       .then((data) => {
         this.removeLoading();
         this.clearCart();
+        this.closeSidebar();
+
         this.openConfirmationModal(data.number);
 
         const params = new URLSearchParams(window.location.search);
-        params.set("opa-order", data.id);
-        window.history.replaceState(
-          {},
-          "",
-          `${window.location.pathname}?${params}`
-        );
+        params.set('opa-order', data.id);
+        window.history.replaceState({}, '', `${window.location.pathname}?${params}`);
       })
       .catch((err) => {
         console.error(err);

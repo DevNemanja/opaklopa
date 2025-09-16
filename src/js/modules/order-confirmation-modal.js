@@ -11,8 +11,8 @@ export default class OrderConfirmationModal {
   handleClick(e) {
     if (e.target.classList.contains('close-modal')) {
       document
-        .querySelector('.order-confirmation__message--show')
-        .classList.remove('order-confirmation__message--show');
+        .querySelector('.order-confirmation__modal--show')
+        .classList.remove('order-confirmation__modal--show');
     }
   }
 }

@@ -3,33 +3,18 @@ export const generateGuid = () => {
     return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
   };
 
-  return (
-    S4() +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    "-" +
-    S4() +
-    S4() +
-    S4()
-  );
+  return S4() + S4() + '-' + S4() + '-' + S4() + '-' + S4() + '-' + S4() + S4() + S4();
 };
 
 export const isMediumViewport = () => {
-  return window.matchMedia("screen and (min-width: 989px)").matches;
+  return window.matchMedia('screen and (min-width: 989px)').matches;
 };
 
 export const LOCATION_URL =
-  window.location.hostname === "localhost"
-    ? "https://opaklopa.local"
-    : window.location.origin;
+  window.location.hostname === 'localhost' ? 'https://opaklopa.local' : window.location.origin;
 
-export const CLIENT_KEY = "ck_cfe851f3c4f3142d065752d2d3b5240ac828790a";
-export const CLIENT_SECRET = "cs_4ff18d20cc3a93798108c1140d12b7cbf2b57c25";
+export const CLIENT_KEY = 'ck_db382c610c8fd14d0be33235e24061e6c01bfc22';
+export const CLIENT_SECRET = 'cs_96557214ecb99ab0b90b057f8728db302d04fbb7';
 // // WINDOWS & Staging
 // export const CLIENT_KEY =
 //   window.location.hostname === "localhost"
