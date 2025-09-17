@@ -18,57 +18,75 @@ export default class Order {
   renderLastOrder(order) {
     // Napravi dugme
     this.el.innerHTML = `
-    <button id="show-last-order" class="btn btn-primary mb-3">LAST ORDER</button>
-    <div id="last-order-details" class="hidden"></div>
+    <button id="show-last-order">LAST ORDER</button>
+    <div id="last-order-details" class="hidden last-order"></div>
   `;
 
     const button = this.el.querySelector('#show-last-order');
     const detailsContainer = this.el.querySelector('#last-order-details');
 
-    // Napravi HTML za poručene proizvode
+    // HTML za poručene proizvode sa BEM klasama
     const itemsHtml =
       order.line_items && order.line_items.length > 0
-        ? `<ul class="mb-2">
+        ? `
+        <ul class="last-order__products-list">
           ${order.line_items
-            .map(
-              (item) => `
-              <div>
-                <li>
-                  ${item.image.src ? `<img src="${item.image.src}" alt="${item.name}" />` : ''}
-                  <strong>${item.name}</strong> — Qty: ${item.quantity} — Price: ${item.price}
+            .map((item) => {
+              const imageSrc = item.image && item.image.src ? item.image.src : '';
+              return `
+                <li class="last-order__product">
+                  ${
+                    imageSrc
+                      ? `<img class="last-order__product-image" src="${imageSrc}" alt="${item.name}">`
+                      : ''
+                  }
+                  <div class="last-order__product-details">
+                    <strong class="last-order__product-name">${item.name}</strong> <span> x${
+                item.quantity
+              } </span>
+                  </div>
                 </li>
-              </div>
-          `
-            )
+              `;
+            })
             .join('')}
         </ul>`
-        : '<p>No products found.</p>';
+        : '<p class="last-order__no-products">No products found.</p>';
 
-    // Napravi HTML za ostale informacije
+    // HTML za ostale informacije sa BEM klasama
     detailsContainer.innerHTML = `
-      <div class="last-order">
-        <p class="mb-0"><strong>Name:</strong> ${order.billing.first_name}</p>
-        <p class="mb-0"><strong>Email:</strong> ${order.billing.email}</p>
-        <p class="mb-0"><strong>Phone:</strong> ${order.billing.phone}</p>
-        <p class="mb-0"><strong>Address:</strong> ${order.billing.address_1}</p>
-        <div class="small text-dark mb-2">
-          ETA: ${
+    <div class="last-order__modal">
+      <div class="last-order__info">
+        <div class="last-order__customer-info">
+          <p class="last-order__field">Ime: <strong>${order.billing.first_name}</strong></p>
+          <p class="last-order__field">Email: <strong>${order.billing.email}</strong></p>
+          <p class="last-order__field">Telefon: <strong>${order.billing.phone}</strong></p>
+          <p class="last-order__field">Adresa: <strong>${order.billing.address_1}</strong></p>
+        </div>
+        <div class="last-order__eta">
+          Očekivano vreme dostave: ${
             order.meta_data.length > 0
-              ? `<span class="fw-bold">${new Date(order.meta_data[0].value).toLocaleTimeString([], {
+              ? `<span class="last-order__eta-value">${new Date(
+                  order.meta_data[0].value
+                ).toLocaleTimeString([], {
                   hour: '2-digit',
                   minute: '2-digit',
                   hour12: false,
                 })}</span>`
-              : `<span class="fw-bold">N/A</span>`
+              : `<span class="last-order__eta-value">N/A</span>`
           }
         </div>
-        <h5>Ordered Products:</h5>
+      </div>
+
+      <div class="last-order__products">
+        <h5 class="last-order__products-title">Vaša porużbina:</h5>
         ${itemsHtml}
       </div>
-    `;
+    </div>
+  `;
 
     button.addEventListener('click', () => {
       detailsContainer.classList.toggle('hidden');
+      document.body.classList.toggle('noscroll');
     });
   }
 
