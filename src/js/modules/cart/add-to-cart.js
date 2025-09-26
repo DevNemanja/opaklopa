@@ -9,7 +9,7 @@ export default class AddToCart extends Cart {
     this.name = this.el.dataset.name;
     this.price = +this.el.dataset.price;
     this.imgUrl = this.el.dataset.imgUrl;
-    this.hasVariations = false;
+    this.hasVariations = this.el.dataset.hasVariations;
 
     this.handleClick = this.handleClick.bind(this);
 
@@ -21,15 +21,21 @@ export default class AddToCart extends Cart {
       if (this.el.querySelector('input:checked')) {
         this.id = +this.el.querySelector('input:checked').dataset.id;
         this.price = +this.el.querySelector('input:checked').dataset.price;
-        this.hasVariations = true;
       }
     }
 
+    const sidesEls = this.el.querySelectorAll('input:checked');
+    console.log('123', sidesEls[0]);
+    const sides = Array.from(sidesEls).map((el) => ({
+      id: el.value,
+      name: el.name,
+      price: el.dataset.price,
+    }));
+
     if (e.target.classList.contains('button')) {
-      if (this.el.querySelector('input:checked')) {
+      if (this.el.querySelector('input:checked') && this.hasVariations) {
         this.id = +this.el.querySelector('input:checked').dataset.id;
         this.price = +this.el.querySelector('input:checked').dataset.price;
-        this.hasVariations = true;
       }
 
       this.updateCart(
@@ -43,7 +49,8 @@ export default class AddToCart extends Cart {
         this.name,
         this.price,
         this.imgUrl,
-        this.hasVariations
+        this.hasVariations,
+        sides
       );
     }
 

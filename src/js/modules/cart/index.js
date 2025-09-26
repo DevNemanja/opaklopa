@@ -132,10 +132,12 @@ export default class Cart {
     document.body.classList.remove('noscroll');
   }
 
-  updateCart(id, action, productName, price, imgUrl, hasVariations) {
+  updateCart(id, action, productName, price, imgUrl, hasVariations, sides) {
     if (!action) return;
 
     let cart = this.getCart();
+
+    console.log('id', id, price);
 
     // Ako nema nista u localStorage-u
     if (!cart) {
@@ -181,12 +183,15 @@ export default class Cart {
           price,
           imgUrl,
           hasVariations,
+          sides,
         });
       }
     }
 
     localStorage.setItem('opa-cart', JSON.stringify(cart));
-    this.updateMarkup();
+    // this.updateMarkup();
+
+    console.log('cart', cart, sides);
   }
 
   updateMarkup() {
