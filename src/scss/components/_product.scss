@@ -30,6 +30,7 @@
 
   &__name-wrapper {
     display: flex;
+    justify-content: flex-end;
     gap: 1rem;
 
     &--sidebar {
@@ -47,6 +48,12 @@
     @include breakpoint(sm) {
       font-size: 1.6rem;
     }
+  }
+
+  &__sides {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    opacity: 0.8;
   }
 
   &__price {

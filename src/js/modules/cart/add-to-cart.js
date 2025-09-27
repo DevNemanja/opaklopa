@@ -25,7 +25,6 @@ export default class AddToCart extends Cart {
     }
 
     const sidesEls = this.el.querySelectorAll('input:checked');
-    console.log('123', sidesEls[0]);
     const sides = Array.from(sidesEls).map((el) => ({
       id: el.value,
       name: el.name,

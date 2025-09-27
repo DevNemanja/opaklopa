@@ -132,12 +132,28 @@ export default class Cart {
     document.body.classList.remove('noscroll');
   }
 
+  removeItemFromCartUsingIndex(index) {
+    let cart = this.getCart(); // Učitaj cart iz localStorage-a
+
+    if (!cart || cart.length === 0) return; // Ako nema ništa, ništa ne radimo
+
+    // Proveri da li je index validan
+    if (index < 0 || index >= cart.length) return;
+
+    // Ukloni stavku sa datog indeksa
+    cart.splice(index, 1);
+
+    // Sačuvaj izmenjeni cart u localStorage
+    localStorage.setItem('opa-cart', JSON.stringify(cart));
+
+    // Ažuriraj markup da se reflektuje promena
+    this.updateMarkup();
+  }
+
   updateCart(id, action, productName, price, imgUrl, hasVariations, sides) {
     if (!action) return;
 
     let cart = this.getCart();
-
-    console.log('id', id, price);
 
     // Ako nema nista u localStorage-u
     if (!cart) {
@@ -146,7 +162,6 @@ export default class Cart {
       cart = this.createCart(id, productName, price, hasVariations);
     } else {
       // Ako ima azuriraj Cart
-
       if (cart.length === 0) {
         if (!this.sidebarOpenedFirstTime) {
           this.openSidebar();
@@ -158,8 +173,8 @@ export default class Cart {
       // Proveri da li ovaj proizvod postoji u kartu
       let cartIndex = this.getProductIndex(id);
 
-      // Ako postoji promeni kolicinu
-      if (cartIndex > -1) {
+      // Ako postoji i ako nema priloge promeni kolicinu
+      if (cartIndex > -1 && !sides) {
         switch (action) {
           case 'increase':
             cart[cartIndex].quantity++;
@@ -189,9 +204,7 @@ export default class Cart {
     }
 
     localStorage.setItem('opa-cart', JSON.stringify(cart));
-    // this.updateMarkup();
-
-    console.log('cart', cart, sides);
+    this.updateMarkup();
   }
 
   updateMarkup() {
@@ -210,7 +223,7 @@ export default class Cart {
       this.fullCartSuggestions.classList.remove('cart-sidebar__full-cart-suggestion--hidden');
       this.cartTotalAmountPlaceholder.classList.remove('cart-sidebar__total-amount--hidden');
 
-      cart.forEach((product) => {
+      cart.forEach((product, i) => {
         // Sidebar markup
         cartMarkup += `
         <div class="product product--sidebar" data-product-id="${product.id}" data-product-name="${
@@ -221,10 +234,19 @@ export default class Cart {
                 <div class="product__name">${product.productName}</div>
                 <div class="product__price">${product.price}rsd</div>
               </div>
+              <div class="product__sides">${product.sides.map(
+                (side) => side.name + (side.price ? `(${side.price}rsd)` : '')
+              )}</div>
               <div class="product__cart">
+              ${
+                product.sides
+                  ? `<button class="remove-product-with-sides button button--qty" data-i=${i}>Izbaci iz korpe</button>`
+                  : `
                   <button class="remove-product button button--qty">-</button>
                   <span class="product__amount">${product.quantity}</span>
                   <button class="add-product button button--qty">+</button>
+              `
+              }
               </div>
             </div>
             ${
