@@ -30,10 +30,10 @@
 
   &__name-wrapper {
     display: flex;
-    justify-content: flex-end;
     gap: 1rem;
 
     &--sidebar {
+      justify-content: flex-end;
       margin-bottom: 0.5rem;
     }
   }
@@ -139,5 +139,53 @@
   &--sidebar {
     flex-direction: row-reverse;
     text-align: right;
+  }
+
+  &__item-added,
+  &__item-removed {
+    position: relative;
+  }
+
+  &__item-added::after {
+    content: '+1';
+    position: absolute;
+    font-size: 2rem;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #4caf50; // zelena za dodavanje
+    font-weight: bold;
+    opacity: 0;
+    animation: fadeUp 1s forwards;
+    pointer-events: none;
+  }
+
+  &__item-removed::after {
+    content: '-1';
+    position: absolute;
+    font-size: 2rem;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #f44336; // crvena za uklanjanje
+    font-weight: bold;
+    opacity: 0;
+    animation: fadeUp 1s forwards;
+    pointer-events: none;
+  }
+
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(0);
+    }
+    30% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-10px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-30px);
+    }
   }
 }

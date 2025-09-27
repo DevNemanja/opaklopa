@@ -14,7 +14,7 @@
     <?php
     // Define all categories to render
     $categories = [
-      // 'pizza'              => 'Pizza',
+      'pizza'              => 'Pizza',
       // 'novo-u-ponudi',
       // 'sendvici',
       // 'obroci-na-meru',

@@ -24,11 +24,20 @@ export default class AddToCart extends Cart {
   }
 
   animateAddToCart() {
-    const button = this.el.querySelector('button');
+    const product = this.el.querySelector('.product__cart-data');
 
-    button.classList.add('button__item-added');
+    product.classList.add('product__item-added');
     setTimeout(() => {
-      button.classList.remove('button__item-added');
+      product.classList.remove('product__item-added');
+    }, 1000);
+  }
+
+  animateRemoveFromCart() {
+    const product = this.el.querySelector('.product__cart-data');
+
+    product.classList.add('product__item-removed');
+    setTimeout(() => {
+      product.classList.remove('product__item-removed');
     }, 1000);
   }
 
@@ -40,12 +49,15 @@ export default class AddToCart extends Cart {
       }
     }
 
-    const sidesEls = this.el.querySelectorAll('input:checked');
-    const sides = Array.from(sidesEls).map((el) => ({
-      id: el.value,
-      name: el.name,
-      price: el.dataset.price,
-    }));
+    const sidesEls = this.el.querySelectorAll('.sides:checked');
+    const sides =
+      sidesEls.length === 0
+        ? null
+        : Array.from(sidesEls).map((el) => ({
+            id: el.value,
+            name: el.name,
+            price: el.dataset.price,
+          }));
 
     if (e.target.classList.contains('button')) {
       if (this.el.querySelector('input:checked') && this.hasVariations) {
@@ -53,17 +65,25 @@ export default class AddToCart extends Cart {
         this.price = +this.el.querySelector('input:checked').dataset.price;
       }
 
-      this.animateAddToCart();
       this.uncheckAllSides();
+
+      const isIncrease =
+        e.target.className === 'add-to-cart button' ||
+        e.target.className === 'add-product button button--qty';
+
+      const isDecrease = e.target.className === 'remove-product button button--qty';
+
+      const action = isIncrease ? 'increase' : isDecrease ? 'decrease' : null;
+
+      if (isIncrease) {
+        this.animateAddToCart();
+      } else {
+        this.animateRemoveFromCart();
+      }
 
       this.updateCart(
         this.id,
-        e.target.className === 'remove-product button button--qty'
-          ? 'decrease'
-          : e.target.className === 'add-to-cart button' ||
-            e.target.className === 'add-product button button--qty'
-          ? 'increase'
-          : null,
+        action,
         this.name,
         this.price,
         this.imgUrl,

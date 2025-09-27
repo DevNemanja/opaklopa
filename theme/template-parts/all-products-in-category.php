@@ -128,13 +128,15 @@ $title = $category->name; // Use the category name as the title
                 $prod_id = $prod->get_id();
                 $prod_name = esc_html($prod->get_name());
             ?>
-                <label style="display:block; margin-bottom:5px; cursor:pointer;">
-                  <input type="checkbox" name="<?= $prod_name; ?>" value="<?= $prod_id; ?>" data-price="<?php echo $price; ?>">
-                  <?= $prod_name; ?> (ID: <?= $prod_id; ?>)
-                  <?php if ($price > 0) : ?>
-                    <span><?= wc_price($price); ?></span>
-                  <?php endif; ?>
-                </label>
+                <div class="product__variation">
+                  <input class="sides product__variation-input" id="sides-<?= $prod_id; ?>" type="checkbox" name="<?= $prod_name; ?>" value="<?= $prod_id; ?>" data-price="<?php echo $price; ?>">
+                  <label class="product__variation-label" for="sides-<?= $prod_id; ?>">
+                    <?= $prod_name; ?>
+                    <?php if ($price > 0) : ?>
+                      <span><?= wc_price($price); ?></span>
+                    <?php endif; ?>
+                  </label>
+                </div>
             <?php endforeach;
             }
             ?>
