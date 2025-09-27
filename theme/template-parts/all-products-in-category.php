@@ -152,7 +152,9 @@ $title = $category->name; // Use the category name as the title
             ?>
 
             <?php if (!empty($cross_sell_ids)): ?>
-              <button class="product__show-sides button">Izaberi priloge</button>
+              <div>
+                <button class="product__show-sides button">Izaberi priloge</button>
+              </div>
             <?php else: ?>
               <div class="product__cart-data">
                 <button class="add-to-cart button">Dodaj u korpu</button>

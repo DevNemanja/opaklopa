@@ -4,8 +4,11 @@
   padding-bottom: 2rem;
   border-bottom: 1px solid #fafafa;
   margin-bottom: 2rem;
+  flex-direction: column-reverse;
+  gap: 1.6rem;
 
   @include breakpoint(md) {
+    flex-direction: row;
     flex: 0 0 calc(50% - 0.5rem);
   }
 
@@ -76,16 +79,17 @@
 
   &__image-wrapper {
     flex-shrink: 0;
-    margin-left: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: center;
   }
 
   &__image {
-    max-width: 8.3rem;
-    max-height: 8.3rem;
-    object-fit: contain;
+    @include breakpoint(md) {
+      max-width: 8.3rem;
+      max-height: 8.3rem;
+      object-fit: contain;
+    }
   }
 
   &__cart {
