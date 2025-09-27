@@ -9,7 +9,7 @@ export default class AddToCart extends Cart {
     this.name = this.el.dataset.name;
     this.price = +this.el.dataset.price;
     this.imgUrl = this.el.dataset.imgUrl;
-    this.hasVariations = this.el.dataset.hasVariations;
+    this.hasVariations = Boolean(this.el.dataset.hasVariations);
 
     this.handleClick = this.handleClick.bind(this);
 
@@ -66,6 +66,8 @@ export default class AddToCart extends Cart {
       if (this.el.querySelector('input:checked')) {
         this.id = +this.el.querySelector('input:checked').dataset.id;
         this.price = +this.el.querySelector('input:checked').dataset.price;
+
+        this.hasVariations = true;
       }
     }
 

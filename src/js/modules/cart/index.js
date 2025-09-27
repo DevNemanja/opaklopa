@@ -173,8 +173,6 @@ export default class Cart {
       // Proveri da li ovaj proizvod postoji u kartu
       let cartIndex = this.getProductIndex(id);
 
-      console.log('cartIndex', cartIndex, id);
-
       // Ako postoji i ako nema priloge promeni kolicinu
       if (cartIndex > -1 && !sides) {
         switch (action) {
