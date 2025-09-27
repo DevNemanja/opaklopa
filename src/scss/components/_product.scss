@@ -17,6 +17,7 @@
     font-size: 1.6rem;
     display: flex;
     flex-direction: column;
+    position: relative;
   }
 
   &__name {
@@ -134,6 +135,11 @@
     display: block;
     padding: 0.2rem 1rem;
     max-width: fit-content;
+
+    &:hover {
+      background: #222;
+      border-radius: 5px;
+    }
   }
 
   &--sidebar {
@@ -187,5 +193,44 @@
       opacity: 0;
       transform: translateX(-50%) translateY(-30px);
     }
+  }
+
+  /* Wrapper treba da bude relativan da bi children mogli apsolutno da se pozicioniraju */
+  .product__sides-wrapper {
+    position: absolute; /* neće pomerati druge elemente */
+    top: 0; /* odmah ispod proizvoda ili dugmeta */
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    padding: 1.6rem;
+    pointer-events: none; /* ne dozvoljava interakciju dok je sakriveno */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateY(-10px); /* blagi "slide up" efekat */
+    z-index: 20; /* da se prikazuje iznad ostalih elemenata */
+    background: radial-gradient(50% 50% at 50% 50%, #1b1b1b 0, #141414 100%);
+  }
+
+  .product__overlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 10;
+
+    &--show {
+      display: block;
+    }
+  }
+
+  /* Kada je vidljivo */
+  .product__sides-wrapper--visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
   }
 }

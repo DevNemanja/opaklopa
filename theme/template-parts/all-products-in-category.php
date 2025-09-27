@@ -13,6 +13,7 @@ $title = $category->name; // Use the category name as the title
 ?>
 
 <section class="products">
+
   <div class="container">
     <div class="title title--with-icon">
       <h2 class="title__header"><?php echo $title ?></h2>
@@ -38,7 +39,7 @@ $title = $category->name; // Use the category name as the title
           data-price="<?php echo $product->get_price(); ?>"
           data-img-url="<?php echo get_the_post_thumbnail_url($post->ID) ?>"
           <?php if ($has_variations) echo 'data-has-variations'; ?>>
-
+          <div class="product__overlay"></div>
           <div class="product__info">
             <div class="product__name-wrapper">
               <div class="product__name">
@@ -122,6 +123,8 @@ $title = $category->name; // Use the category name as the title
               // Spoji tako da free budu prvi
               $all_products_sorted = array_merge($free_products, $paid_products);
 
+              echo '<div class="product__sides-wrapper">';
+
               // Prikaz proizvoda sa checkbox-om
               foreach ($all_products_sorted as $prod) :
                 $price = $prod->get_price();
@@ -129,21 +132,34 @@ $title = $category->name; // Use the category name as the title
                 $prod_name = esc_html($prod->get_name());
             ?>
                 <div class="product__variation">
-                  <input class="sides product__variation-input" id="sides-<?= $prod_id; ?>" type="checkbox" name="<?= $prod_name; ?>" value="<?= $prod_id; ?>" data-price="<?php echo $price; ?>">
-                  <label class="product__variation-label" for="sides-<?= $prod_id; ?>">
+                  <input class="sides product__variation-input" id="sides-<?= $prod_id . '-' . $product->get_id(); ?>" type="checkbox" name="<?= $prod_name; ?>" value="<?= $prod_id; ?>" data-price="<?php echo $price; ?>">
+                  <label class="product__variation-label" for="sides-<?= $prod_id . '-' . $product->get_id(); ?>">
                     <?= $prod_name; ?>
                     <?php if ($price > 0) : ?>
                       <span><?= wc_price($price); ?></span>
                     <?php endif; ?>
                   </label>
                 </div>
-            <?php endforeach;
+              <?php endforeach; ?>
+
+              <div class="product__cart-data">
+                <button class="add-to-cart button">Dodaj u korpu</button>
+              </div>
+            <?php
+
+              echo '</div>';
             }
             ?>
 
-            <div class="product__cart-data">
-              <button class="add-to-cart button">Dodaj u korpu</button>
-            </div>
+            <?php if (!empty($cross_sell_ids)): ?>
+              <button class="product__show-sides button">Izaberi priloge</button>
+            <?php else: ?>
+              <div class="product__cart-data">
+                <button class="add-to-cart button">Dodaj u korpu</button>
+              </div>
+            <?php endif; ?>
+
+
           </div>
 
           <div class="product__image-wrapper">

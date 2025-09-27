@@ -269,7 +269,10 @@ export default class Cart {
         // Ako ima varijacije
         if (product.hasVariations) {
           // Proveri da li je ta varijacija cekirana
-          if (document.querySelector(`[data-id="${product.id}"]`).checked) {
+          if (
+            document.querySelector(`[data-id="${product.id}"]`) &&
+            document.querySelector(`[data-id="${product.id}"]`).checked
+          ) {
             // Ako jeste odradi update markupa, ako nije iskuliraj
             let markup = '';
             if (product.quantity > 0) {
@@ -283,11 +286,15 @@ export default class Cart {
             } else {
               markup = `<button class="add-to-cart button">Dodaj u korpu</button>`;
             }
+
             document.querySelector(
               `[data-name="${product.productName}"] .product__cart-data`
             ).innerHTML = markup;
           }
-        } else if (!product.sides) {
+        } else if (
+          !product.sides &&
+          document.querySelector(`[data-name="${product.productName}"] .product__cart-data`)
+        ) {
           // Svakako uradi proveru markapa ako nije varijacija u pitanju
           document.querySelector(
             `[data-name="${product.productName}"] .product__cart-data`

@@ -41,12 +41,40 @@ export default class AddToCart extends Cart {
     }, 1000);
   }
 
+  openSidesModal() {
+    const wrapper = this.el.querySelector('.product__sides-wrapper');
+    const overlay = this.el.querySelector('.product__overlay');
+    const button = this.el.querySelector('.product__show-sides');
+
+    button && button.classList.add('hidden');
+    overlay.classList.add('product__overlay--show');
+    wrapper && wrapper.classList.add('product__sides-wrapper--visible');
+  }
+
+  closeSidesModal() {
+    const wrapper = this.el.querySelector('.product__sides-wrapper');
+    const overlay = this.el.querySelector('.product__overlay');
+    const button = this.el.querySelector('.product__show-sides');
+
+    button && button.classList.remove('hidden');
+    overlay.classList.remove('product__overlay--show');
+    wrapper && wrapper.classList.remove('product__sides-wrapper--visible');
+  }
+
   handleClick(e) {
     if (e.target.classList.contains('product__variation-input')) {
       if (this.el.querySelector('input:checked')) {
         this.id = +this.el.querySelector('input:checked').dataset.id;
         this.price = +this.el.querySelector('input:checked').dataset.price;
       }
+    }
+
+    if (e.target.classList.contains('product__show-sides')) {
+      this.openSidesModal();
+    }
+
+    if (e.target.classList.contains('product__overlay')) {
+      this.closeSidesModal();
     }
 
     const sidesEls = this.el.querySelectorAll('.sides:checked');
@@ -77,7 +105,8 @@ export default class AddToCart extends Cart {
 
       if (isIncrease) {
         this.animateAddToCart();
-      } else {
+        this.closeSidesModal();
+      } else if (isDecrease) {
         this.animateRemoveFromCart();
       }
 

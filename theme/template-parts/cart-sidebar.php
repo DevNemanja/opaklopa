@@ -20,11 +20,11 @@
     <h3 class="cart-sidebar__discount-amount cart-sidebar__discount-amount--hidden">Sa popustom: <strong id="cart-discount">1000</strong>rsd</h3>
 
     <!-- 🧾 Kupon kod -->
-    <div class="order-form__form-control">
+    <!-- <div class="order-form__form-control">
       <input class="order-form__input writtable" placeholder="Unesite kupon kod" id="coupon" type="text">
       <button type="button" id="check-coupon" class="button">Proveri kupon</button>
     </div>
-    <div id="coupon-status" class="coupon-status"></div>
+    <div id="coupon-status" class="coupon-status"></div> -->
     <div class="cart-sidebar__suggestion">
       <p class="cart-sidebar__suggestion-title">Sugestije:</p>
 
