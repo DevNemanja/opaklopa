@@ -27,17 +27,19 @@
           <?php require('template-parts/mobile-menu.php'); ?>
         </div>
       </div>
-      <?php require('template-parts/navigator.php'); ?>
     </div>
   </header>
 
+  <div class="layout-wrapper">
+    <?php require('template-parts/navigator.php'); ?>
 
 
-  <?php if (!is_shop_open()): ?>
-    <style>
-      /* .add-to-cart,
+
+    <?php if (!is_shop_open()): ?>
+      <style>
+        /* .add-to-cart,
       .header__cart {
         display: none;
       } */
-    </style>
-  <?php endif; ?>
+      </style>
+    <?php endif; ?>

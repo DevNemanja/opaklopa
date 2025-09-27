@@ -17,6 +17,11 @@
     z-index: 2;
     transition: background-color 0.2s;
 
+    @include breakpoint(lg) {
+      background-color: #0d0d0d;
+      min-height: 12rem;
+    }
+
     &--scrolled {
       background-color: #0d0d0d;
       padding-bottom: 2rem;

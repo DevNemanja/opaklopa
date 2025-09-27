@@ -1,4 +1,4 @@
-
+</div>
 <footer class="footer">
     <div class="container">
         <div class="footer__container">
@@ -40,9 +40,10 @@
         </ul>
     </div>
 </footer>
-    <a class="floating-call" href="tel:066/513-85-76">
-        <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/call.svg" alt="">
-    </a>
+<a class="floating-call" href="tel:066/513-85-76">
+    <img src="<?php echo get_stylesheet_directory_uri(); ?>/assets/images/call.svg" alt="">
+</a>
 <?php wp_footer(); ?>
 </body>
+
 </html>

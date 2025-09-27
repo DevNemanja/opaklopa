@@ -1,18 +1,26 @@
 .navigator {
+  color: #fff;
+
+  @include breakpoint(lg) {
+    position: sticky;
+    z-index: 10;
+    top: 0;
+    height: 100vh;
+    width: max-content;
+    min-width: 20rem;
+  }
+
   &--hidden {
     display: none;
   }
 
   &__list {
-    margin-top: 2rem;
     padding: 0.2rem 2rem;
     gap: 1rem;
     overflow-x: scroll;
     overflow-y: hidden;
     display: flex;
-    visibility: hidden;
     scroll-behavior: smooth;
-    opacity: 0;
     transition: opacity 0.2s;
     /* Hide scrollbar for IE, Edge and Firefox */
     -ms-overflow-style: none; /* IE and Edge */
@@ -26,14 +34,36 @@
       padding: 0.5rem 4rem;
     }
 
-    @include breakpoint(md) {
-      padding: 0.5rem 8rem;
+    @include breakpoint(lg) {
+      flex-direction: column;
+      width: max-content;
+      gap: 1.2rem;
+      position: fixed;
+      left: 0;
+      z-index: 10;
+      height: 100vh;
+      padding: 2rem;
+      background-color: #0d0d0d;
+      min-width: 20rem;
     }
 
-    &--open {
-      visibility: visible;
-      opacity: 1;
-    }
+    // &--open {
+    //   padding: 2rem 0;
+    //   position: sticky;
+    //   top: 0;
+    //   left: 0;
+    //   bottom: 0;
+
+    //   visibility: visible;
+    //   opacity: 1;
+    //   background-color: #0d0d0d;
+    //   z-index: 10;
+
+    //   @include breakpoint(lg) {
+    //     height: 100%;
+    //     padding: 2rem;
+    //   }
+    // }
   }
 
   &__list-item {
