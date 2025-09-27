@@ -279,7 +279,7 @@ export default class Cart {
               `[data-name="${product.productName}"] .product__cart-data`
             ).innerHTML = markup;
           }
-        } else {
+        } else if (!product.sides) {
           // Svakako uradi proveru markapa ako nije varijacija u pitanju
           document.querySelector(
             `[data-name="${product.productName}"] .product__cart-data`

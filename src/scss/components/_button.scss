@@ -17,4 +17,37 @@
   &--qty {
     padding: 0.5rem 1rem;
   }
+
+  &__item-added {
+    position: relative;
+  }
+
+  &__item-added::after {
+    content: '+1';
+    position: absolute;
+    font-size: 2rem;
+    top: 0; /* gde će se pojaviti iznad dugmeta */
+    left: 50%;
+    transform: translateX(-50%);
+    color: white; /* zelena boja */
+    font-weight: bold;
+    opacity: 0;
+    animation: fadeUp 1s forwards;
+    pointer-events: none; /* da ne blokira klikove */
+  }
+
+  @keyframes fadeUp {
+    0% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(0);
+    }
+    30% {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-10px);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(-50%) translateY(-30px);
+    }
+  }
 }

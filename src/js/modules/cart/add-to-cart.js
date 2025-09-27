@@ -16,6 +16,22 @@ export default class AddToCart extends Cart {
     el.addEventListener('click', this.handleClick);
   }
 
+  uncheckAllSides() {
+    const inputs = this.el.querySelectorAll('input[type="checkbox"]');
+    inputs.forEach((input) => {
+      input.checked = false;
+    });
+  }
+
+  animateAddToCart() {
+    const button = this.el.querySelector('button');
+
+    button.classList.add('button__item-added');
+    setTimeout(() => {
+      button.classList.remove('button__item-added');
+    }, 1000);
+  }
+
   handleClick(e) {
     if (e.target.classList.contains('product__variation-input')) {
       if (this.el.querySelector('input:checked')) {
@@ -36,6 +52,9 @@ export default class AddToCart extends Cart {
         this.id = +this.el.querySelector('input:checked').dataset.id;
         this.price = +this.el.querySelector('input:checked').dataset.price;
       }
+
+      this.animateAddToCart();
+      this.uncheckAllSides();
 
       this.updateCart(
         this.id,
