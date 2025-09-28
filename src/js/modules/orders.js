@@ -79,8 +79,6 @@ export default class Orders {
         //
       }
 
-      console.log('customerNote', customerNote);
-
       switch (order.status) {
         case 'pending':
           newOrders += `

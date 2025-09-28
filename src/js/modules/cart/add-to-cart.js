@@ -62,15 +62,12 @@ export default class AddToCart extends Cart {
   }
 
   handleClick(e) {
-    console.log('e.target.dataset.variation', e.target.dataset.variation);
-
     if (e.target.classList.contains('product__variation-input') && e.target.dataset.variation) {
       if (this.el.querySelector('input:checked')) {
         this.id = +this.el.querySelector('input:checked').dataset.id;
         this.price = +this.el.querySelector('input:checked').dataset.price;
 
         this.hasVariations = true;
-        console.log('123');
       }
     }
 

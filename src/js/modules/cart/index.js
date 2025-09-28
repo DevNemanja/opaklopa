@@ -156,9 +156,6 @@ export default class Cart {
   updateCart(id, action, productName, price, imgUrl, hasVariations, sides) {
     if (!action) return;
 
-    console.log('id', id);
-    console.log(this.getCart());
-
     let cart = this.getCart();
 
     // Ako nema nista u localStorage-u
@@ -213,9 +210,32 @@ export default class Cart {
     this.updateMarkup();
   }
 
+  getPaidSidesMarkup(sides) {
+    // 1. filtriraj samo one koji imaju cenu
+    const paidSides = sides.filter((side) => side.price && Number(side.price) > 0);
+
+    // 2. grupiši po imenu
+    const grouped = {};
+    for (const side of paidSides) {
+      if (!grouped[side.name]) {
+        grouped[side.name] = { count: 0, price: Number(side.price) };
+      }
+      grouped[side.name].count++;
+    }
+
+    // 3. napravi markup
+    return Object.entries(grouped)
+      .map(([name, { count, price }]) => {
+        const total = count * price;
+        return `<li>${count}x ${name} (${total} RSD)</li>`;
+      })
+      .join('\n');
+  }
+
   updateMarkup() {
     const cart = this.getCart();
     let cartMarkup = '';
+    let sides = [];
 
     if (!cart) return;
 
@@ -230,6 +250,10 @@ export default class Cart {
       this.cartTotalAmountPlaceholder.classList.remove('cart-sidebar__total-amount--hidden');
 
       cart.forEach((product, i) => {
+        if (product.sides) {
+          sides = [...sides, ...product.sides];
+        }
+
         // Sidebar markup
         cartMarkup += `
         <div class="product product--sidebar" data-product-id="${product.id}" data-product-name="${
@@ -314,7 +338,9 @@ export default class Cart {
     }
 
     this.updateTotalAmount();
+
     document.querySelector('.cart-sidebar__list').innerHTML = cartMarkup;
+    document.querySelector('.cart-sidebar__sides').innerHTML = this.getPaidSidesMarkup(sides);
   }
 
   checkIfIdExistsInCart(id) {
@@ -341,11 +367,37 @@ export default class Cart {
 
   prepareCartForOrder() {
     const cart = this.getCart();
+    const orderItems = [];
+    const sidesMap = {}; // za grupisanje priloga
 
-    return cart.map((item) => ({
-      product_id: item.id,
-      quantity: item.quantity,
-    }));
+    cart.forEach((item) => {
+      // dodaj glavni proizvod
+      if (item.id) {
+        orderItems.push({
+          product_id: item.id,
+          quantity: item.quantity,
+        });
+      }
+
+      // dodaj ili grupiši plaćene priloge
+      (item.sides || [])
+        .filter((side) => side.price && Number(side.price) > 0)
+        .forEach((side) => {
+          if (!sidesMap[side.id]) {
+            sidesMap[side.id] = {
+              product_id: side.id,
+              quantity: 0,
+              price: Number(side.price),
+            };
+          }
+          sidesMap[side.id].quantity += item.quantity;
+        });
+    });
+
+    // dodaj grupisane priloge u orderItems
+    Object.values(sidesMap).forEach((sideItem) => orderItems.push(sideItem));
+
+    return orderItems;
   }
 
   clearCart() {
