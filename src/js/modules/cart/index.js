@@ -64,7 +64,10 @@ export default class Cart {
 
     return cart.filter((item) => {
       if (item.hasVariations) {
-        if (document.querySelector(`[data-id="${item.id}"]`).checked) {
+        if (
+          document.querySelector(`[data-id="${item.id}"]`) &&
+          document.querySelector(`[data-id="${item.id}"]`).checked
+        ) {
           const products = document.querySelectorAll(
             `[data-name="${item.productName}"] .product__cart-data`
           );
@@ -152,6 +155,9 @@ export default class Cart {
 
   updateCart(id, action, productName, price, imgUrl, hasVariations, sides) {
     if (!action) return;
+
+    console.log('id', id);
+    console.log(this.getCart());
 
     let cart = this.getCart();
 
@@ -414,13 +420,31 @@ export default class Cart {
     }, 10000);
   }
 
+  getSidesFromCart() {
+    const cart = this.getCart();
+
+    return cart
+      .filter((item) => item.sides && item.sides.length > 0) // samo sa prilozima
+      .map((item, index) => {
+        const sidesList = item.sides.map((side) => side.name).join(', ');
+        return `${index + 1}. ${item.productName}: ${sidesList}`;
+      })
+      .join('\n');
+  }
+
   submitOrder() {
     const ime = document.getElementById('name');
     const adresa = document.getElementById('address');
     const mail = document.getElementById('mail');
     const phone = document.getElementById('telefon');
     const poruka = document.getElementById('poruka');
-    const kupon = document.getElementById('coupon').value.trim() || '';
+    // const kupon = document.getElementById('coupon').value.trim() || '';
+
+    const porukaSaPrilozima = `${poruka.value}
+      -----------------------
+      Prilozi:
+      ${this.getSidesFromCart()}
+    `;
 
     const orderData = {
       payment_method: 'cod',
@@ -434,16 +458,16 @@ export default class Cart {
         phone: phone.value,
       },
       line_items: this.prepareCartForOrder(),
-      customer_note: poruka.value,
+      customer_note: porukaSaPrilozima,
     };
 
-    if (kupon) {
-      orderData.coupon_lines = [
-        {
-          code: kupon,
-        },
-      ];
-    }
+    // if (kupon) {
+    //   orderData.coupon_lines = [
+    //     {
+    //       code: kupon,
+    //     },
+    //   ];
+    // }
 
     this.setLoading();
 

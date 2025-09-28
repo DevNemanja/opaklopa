@@ -69,6 +69,7 @@ $title = $category->name; // Use the category name as the title
                     <input class="product__variation-input"
                       data-price="<?php echo $variation_obj->get_price(); ?>"
                       data-id="<?php echo $variation_id; ?>"
+                      data-variation="<?php echo $variation_id; ?>"
                       type="radio"
                       name="<?php the_title(); ?>"
                       id="<?php echo $variation_obj->get_name(); ?>"

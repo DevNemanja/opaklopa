@@ -116,7 +116,7 @@ export default class Order {
     const params = new URLSearchParams(window.location.search);
     const orderId = params.get('opa-order');
 
-    return orderId ? JSON.parse(orderId) : null;
+    return orderId && orderId !== 'undefined' ? JSON.parse(orderId) : null;
   }
 
   saveOrderId(orderId) {

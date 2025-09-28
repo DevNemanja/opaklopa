@@ -13,8 +13,8 @@ export const isMediumViewport = () => {
 export const LOCATION_URL =
   window.location.hostname === 'localhost' ? 'https://opaklopa.local' : window.location.origin;
 
-export const CLIENT_KEY = 'ck_db382c610c8fd14d0be33235e24061e6c01bfc22';
-export const CLIENT_SECRET = 'cs_96557214ecb99ab0b90b057f8728db302d04fbb7';
+export const CLIENT_KEY = 'ck_b5ce331ad8086c636824ea4df29041c022f11e6d';
+export const CLIENT_SECRET = 'cs_10fe17734ccba8999013d43506414e2eeb52fc30';
 // // WINDOWS & Staging
 // export const CLIENT_KEY =
 //   window.location.hostname === "localhost"

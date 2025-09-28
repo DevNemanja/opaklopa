@@ -4,7 +4,7 @@
   @include breakpoint(lg) {
     position: sticky;
     z-index: 10;
-    top: 0;
+    // top: 0;
     height: 100vh;
     width: max-content;
     min-width: 20rem;

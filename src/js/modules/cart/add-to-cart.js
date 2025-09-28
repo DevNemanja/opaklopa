@@ -62,17 +62,21 @@ export default class AddToCart extends Cart {
   }
 
   handleClick(e) {
-    if (e.target.classList.contains('product__variation-input')) {
+    console.log('e.target.dataset.variation', e.target.dataset.variation);
+
+    if (e.target.classList.contains('product__variation-input') && e.target.dataset.variation) {
       if (this.el.querySelector('input:checked')) {
         this.id = +this.el.querySelector('input:checked').dataset.id;
         this.price = +this.el.querySelector('input:checked').dataset.price;
 
         this.hasVariations = true;
+        console.log('123');
       }
     }
 
     if (e.target.classList.contains('product__show-sides')) {
       this.openSidesModal();
+      this.id = +this.el.dataset.id;
     }
 
     if (e.target.classList.contains('product__overlay')) {
