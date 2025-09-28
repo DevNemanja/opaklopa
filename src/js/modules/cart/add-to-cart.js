@@ -23,24 +23,6 @@ export default class AddToCart extends Cart {
     });
   }
 
-  animateAddToCart() {
-    const product = this.el.querySelector('.product__cart-data');
-
-    product.classList.add('product__item-added');
-    setTimeout(() => {
-      product.classList.remove('product__item-added');
-    }, 1000);
-  }
-
-  animateRemoveFromCart() {
-    const product = this.el.querySelector('.product__cart-data');
-
-    product.classList.add('product__item-removed');
-    setTimeout(() => {
-      product.classList.remove('product__item-removed');
-    }, 1000);
-  }
-
   openSidesModal() {
     const wrapper = this.el.querySelector('.product__sides-wrapper');
     const overlay = this.el.querySelector('.product__overlay');

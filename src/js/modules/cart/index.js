@@ -26,6 +26,24 @@ export default class Cart {
     this.sidebarOpenedFirstTime = false;
   }
 
+  animateAddToCart() {
+    const product = this.el.querySelector('.product__cart-data');
+
+    product.classList.add('product__item-added');
+    setTimeout(() => {
+      product.classList.remove('product__item-added');
+    }, 1000);
+  }
+
+  animateRemoveFromCart() {
+    const product = this.el.querySelector('.product__cart-data');
+
+    product.classList.add('product__item-removed');
+    setTimeout(() => {
+      product.classList.remove('product__item-removed');
+    }, 1000);
+  }
+
   setLoading() {
     this.loading.classList.add('cart-sidebar__loading--show');
   }
@@ -114,13 +132,35 @@ export default class Cart {
     })[0];
   }
 
+  // updateTotalAmount() {
+  //   const cart = this.getCart();
+
+  //   const totalPrice = cart.reduce(
+  //     (accumulator, item) => accumulator + item.price * item.quantity,
+  //     0
+  //   );
+
+  //   this.cartTotalAmountDigit.innerHTML = totalPrice;
+  // }
+
   updateTotalAmount() {
     const cart = this.getCart();
 
-    const totalPrice = cart.reduce(
-      (accumulator, item) => accumulator + item.price * item.quantity,
-      0
-    );
+    const totalPrice = cart.reduce((accumulator, item) => {
+      // cena glavnog proizvoda
+      let itemTotal = item.price * item.quantity;
+
+      // dodaj cenu plaćenih priloga
+      if (item.sides && item.sides.length > 0) {
+        const sidesTotal = item.sides
+          .filter((side) => side.price && Number(side.price) > 0)
+          .reduce((sum, side) => sum + Number(side.price) * item.quantity, 0);
+
+        itemTotal += sidesTotal;
+      }
+
+      return accumulator + itemTotal;
+    }, 0);
 
     this.cartTotalAmountDigit.innerHTML = totalPrice;
   }
@@ -177,7 +217,7 @@ export default class Cart {
       let cartIndex = this.getProductIndex(id);
 
       // Ako postoji i ako nema priloge promeni kolicinu
-      if (cartIndex > -1 && !sides) {
+      if (cartIndex > -1 && sides === undefined) {
         switch (action) {
           case 'increase':
             cart[cartIndex].quantity++;
@@ -265,7 +305,7 @@ export default class Cart {
                 <div class="product__price">${product.price}rsd</div>
               </div>
               ${
-                product.sides
+                product.sides && product.sides !== undefined
                   ? `
                 <div class="product__sides">${product.sides.map(
                   (side) => side.name + (side.price ? `(${side.price}rsd)` : '')
@@ -275,7 +315,7 @@ export default class Cart {
               }
               <div class="product__cart">
               ${
-                product.sides
+                product.sides || product.sides === null
                   ? `<button class="remove-product-with-sides button button--qty" data-i=${i}>Izbaci iz korpe</button>`
                   : `
                   <button class="remove-product button button--qty">-</button>
@@ -320,9 +360,10 @@ export default class Cart {
             ).innerHTML = markup;
           }
         } else if (
-          !product.sides &&
+          product.sides === undefined &&
           document.querySelector(`[data-name="${product.productName}"] .product__cart-data`)
         ) {
+          this.animateAddToCart();
           // Svakako uradi proveru markapa ako nije varijacija u pitanju
           document.querySelector(
             `[data-name="${product.productName}"] .product__cart-data`
