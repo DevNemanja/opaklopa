@@ -424,12 +424,17 @@ export default class Cart {
     const cart = this.getCart();
 
     return cart
-      .filter((item) => item.sides && item.sides.length > 0) // samo sa prilozima
-      .map((item, index) => {
-        const sidesList = item.sides.map((side) => side.name).join(', ');
-        return `${index + 1}. ${item.productName}: ${sidesList}`;
-      })
-      .join('\n');
+      .filter((item) => item.sides && item.sides.length > 0) // samo oni sa prilozima
+      .map((item) => {
+        return {
+          productName: item.productName,
+          sides: item.sides.map((side) => ({
+            id: side.id,
+            name: side.name,
+            price: side.price || 0,
+          })),
+        };
+      });
   }
 
   submitOrder() {
@@ -440,11 +445,10 @@ export default class Cart {
     const poruka = document.getElementById('poruka');
     // const kupon = document.getElementById('coupon').value.trim() || '';
 
-    const porukaSaPrilozima = `${poruka.value}
-      -----------------------
-      Prilozi:
-      ${this.getSidesFromCart()}
-    `;
+    const porukaSaPrilozima = {
+      poruka: poruka.value,
+      prilozi: this.getSidesFromCart(),
+    };
 
     const orderData = {
       payment_method: 'cod',
@@ -458,7 +462,7 @@ export default class Cart {
         phone: phone.value,
       },
       line_items: this.prepareCartForOrder(),
-      customer_note: porukaSaPrilozima,
+      customer_note: JSON.stringify(porukaSaPrilozima),
     };
 
     // if (kupon) {

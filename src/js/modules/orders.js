@@ -1,36 +1,36 @@
-import { CLIENT_KEY, CLIENT_SECRET, LOCATION_URL } from "../utils";
+import { CLIENT_KEY, CLIENT_SECRET, LOCATION_URL } from '../utils';
 
 export default class Orders {
   constructor(app, el) {
     this.app = app;
     this.el = el;
 
-    this.loadingSection = document.getElementById("loading-section");
+    this.loadingSection = document.getElementById('loading-section');
 
     this.handleClick = this.handleClick.bind(this);
 
     this.fetchOrders();
 
-    el.addEventListener("click", this.handleClick);
+    el.addEventListener('click', this.handleClick);
   }
 
   fetchOrders() {
     const fetchData = () => {
-      this.loadingSection.classList.remove("d-none");
+      this.loadingSection.classList.remove('d-none');
 
-      fetch(LOCATION_URL + "/wp-json/wc/v3/orders", {
-        method: "GET",
+      fetch(LOCATION_URL + '/wp-json/wc/v3/orders', {
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
-          Authorization: `Basic ${Buffer.from(
-            `${CLIENT_KEY}:${CLIENT_SECRET}`
-          ).toString("base64")}`,
+          'Content-Type': 'application/json',
+          Authorization: `Basic ${Buffer.from(`${CLIENT_KEY}:${CLIENT_SECRET}`).toString(
+            'base64'
+          )}`,
         },
       })
         .then((response) => response.json())
         .then((data) => {
           this.updateMarkup(data);
-          this.loadingSection.classList.add("d-none");
+          this.loadingSection.classList.add('d-none');
         });
 
       // Schedule subsequent runs every 10 seconds
@@ -47,16 +47,42 @@ export default class Orders {
     fetchData();
   }
 
+  getSidesMarkup(sidesData) {
+    if (!sidesData || sidesData.length === 0) {
+      return ''; // ništa ne prikazuj ako nema priloga
+    }
+
+    // Kreiranje liste
+    let html = '<ul class="sides-list">';
+    sidesData.forEach((item, index) => {
+      const sidesList = item.sides.map((side) => side.name).join(', ');
+      html += `<li><strong>${index + 1}. ${item.productName}</strong>: ${sidesList}</li>`;
+    });
+    html += '</ul>';
+
+    return html;
+  }
+
   updateMarkup(orders) {
-    let newOrders = "";
-    let acceptedOrders = "";
-    let completedOrders = "";
-    let rejectedOrders = "";
+    let newOrders = '';
+    let acceptedOrders = '';
+    let completedOrders = '';
+    let rejectedOrders = '';
+
+    let customerNote;
 
     if (!orders) return;
     orders.forEach((order) => {
+      try {
+        customerNote = JSON.parse(order.customer_note);
+      } catch (error) {
+        //
+      }
+
+      console.log('customerNote', customerNote);
+
       switch (order.status) {
-        case "pending":
+        case 'pending':
           newOrders += `
             <div class="col-12 col-md-4 col-lg-3 g-2">
               <div class="card d-flex flex-column">
@@ -66,25 +92,33 @@ export default class Orders {
                       ? `<div class="position-absolute top-0 start-0 translate-middle-y badge rounded-pill bg-primary">
                         ${order.coupon_lines[0].code}
                       </div>`
-                      : ""
+                      : ''
                   }
                   <p class="mb-0">${order.billing.first_name}</p>
                   <p class="mb-0">${order.billing.email}</p>
                   <p class="mb-0">${order.billing.phone}</p>
                   <p class="mb-0">${order.billing.address_1}</p>
-                  <div class="small text-muted">${new Date(
-                    order.date_created
-                  ).toLocaleString("sr-RS", {
-                    day: "2-digit",
-                    month: "2-digit",
-                    year: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit",
-                  })}</div>
+                  <div class="small text-muted">${new Date(order.date_created).toLocaleString(
+                    'sr-RS',
+                    {
+                      day: '2-digit',
+                      month: '2-digit',
+                      year: 'numeric',
+                      hour: '2-digit',
+                      minute: '2-digit',
+                    }
+                  )}</div>
                 </div>
                 
                 <div class="p-3 card-body flex-grow-1" >
-                    <p>${order.customer_note}</p>
+                    <p>${customerNote.poruka}</p>
+                    <div>
+                      ${
+                        customerNote &&
+                        customerNote.prilozi &&
+                        this.getSidesMarkup(customerNote.prilozi)
+                      }
+                    </div>
                     <ol class="list-group">${order.line_items
                       .map(
                         (item) =>
@@ -99,11 +133,9 @@ export default class Orders {
                       
                         `
                       )
-                      .join("")}
+                      .join('')}
                     </ol>
-                    <p class="m-0 mt-2 text-end">Ukupno: <strong>${
-                      order.total
-                    }</strong>rsd</p>
+                    <p class="m-0 mt-2 text-end">Ukupno: <strong>${order.total}</strong>rsd</p>
                   </div>
                   <h3>Potvrdi</h3>
                   <div>
@@ -138,7 +170,7 @@ export default class Orders {
             </div>
           `;
           break;
-        case "processing":
+        case 'processing':
           acceptedOrders += `
                 <div class="col-12 col-md-4 col-lg-3 g-2">
                   <div class="card d-flex flex-column">
@@ -154,11 +186,11 @@ export default class Orders {
                             ? `<span class=" fw-bold">${new Date(
                                 order.meta_data[0].value
                               ).toLocaleTimeString([], {
-                                hour: "2-digit",
-                                minute: "2-digit",
+                                hour: '2-digit',
+                                minute: '2-digit',
                                 hour12: false,
                               })}</span>`
-                            : ""
+                            : ''
                         }
                       </div>
                     </div>
@@ -177,7 +209,7 @@ export default class Orders {
                           
                             `
                           )
-                          .join("")}
+                          .join('')}
                         </ol>
                       </div>
                       <button class="btn btn-info" data-order-number=${
@@ -187,7 +219,7 @@ export default class Orders {
                 </div>
               `;
           break;
-        case "completed":
+        case 'completed':
           completedOrders += `
           <div class="col-12 col-md-4 col-lg-3 g-2">
             <div class="card d-flex flex-column">
@@ -211,14 +243,14 @@ export default class Orders {
                         </li>
                       `
                     )
-                    .join("")}
+                    .join('')}
                   </ol>
                 </div>
             </div>
           </div>
         `;
           break;
-        case "cancelled":
+        case 'cancelled':
           rejectedOrders += `
           <div class="col-12 col-md-4 col-lg-3 g-2">
             <div class="card d-flex flex-column">
@@ -243,7 +275,7 @@ export default class Orders {
                     
                       `
                     )
-                    .join("")}
+                    .join('')}
                   </ol>
                 </div>
             </div>
@@ -256,17 +288,17 @@ export default class Orders {
       }
     });
 
-    document.getElementById("new-orders").innerHTML =
-      newOrders === ""
+    document.getElementById('new-orders').innerHTML =
+      newOrders === ''
         ? '<div class="ml-5"><p class="alert alert-primary">Nema novih porudžbina</p></div>'
         : newOrders;
-    document.getElementById("accepted-orders").innerHTML = acceptedOrders;
-    document.getElementById("completed-orders").innerHTML = completedOrders;
-    document.getElementById("rejected-orders").innerHTML = rejectedOrders;
+    document.getElementById('accepted-orders').innerHTML = acceptedOrders;
+    document.getElementById('completed-orders').innerHTML = completedOrders;
+    document.getElementById('rejected-orders').innerHTML = rejectedOrders;
   }
 
   updateOrder(orderId, status, etaMinutes) {
-    this.loadingSection.classList.remove("d-none");
+    this.loadingSection.classList.remove('d-none');
 
     // Izračunaj buduće vreme (ETA) u ISO formatu
     let etaValue = null;
@@ -276,10 +308,10 @@ export default class Orders {
       now.setMinutes(now.getMinutes() + +etaMinutes); // Add etaMinutes to current time
 
       const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, "0");
-      const day = String(now.getDate()).padStart(2, "0");
-      const hours = String(now.getHours()).padStart(2, "0");
-      const minutes = String(now.getMinutes()).padStart(2, "0");
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
 
       etaValue = `${year}-${month}-${day} ${hours}:${minutes}`;
     }
@@ -290,19 +322,17 @@ export default class Orders {
     if (etaValue) {
       bodyData.meta_data = [
         {
-          key: "_order_eta",
+          key: '_order_eta',
           value: etaValue,
         },
       ];
     }
 
     fetch(`${LOCATION_URL}/wp-json/wc/v3/orders/${orderId}`, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        Authorization: `Basic ${Buffer.from(
-          `${CLIENT_KEY}:${CLIENT_SECRET}`
-        ).toString("base64")}`,
+        'Content-Type': 'application/json',
+        Authorization: `Basic ${Buffer.from(`${CLIENT_KEY}:${CLIENT_SECRET}`).toString('base64')}`,
       },
       body: JSON.stringify(bodyData),
     })
@@ -312,7 +342,7 @@ export default class Orders {
         console.log(data);
       })
       .catch((error) => {
-        console.error("Error:", error);
+        console.error('Error:', error);
       });
   }
 
