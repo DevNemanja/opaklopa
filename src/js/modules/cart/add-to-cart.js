@@ -31,6 +31,7 @@ export default class AddToCart extends Cart {
     button && button.classList.add('hidden');
     overlay.classList.add('product__overlay--show');
     wrapper && wrapper.classList.add('product__sides-wrapper--visible');
+    document.body.classList.add('noscroll');
   }
 
   closeSidesModal() {
@@ -41,6 +42,7 @@ export default class AddToCart extends Cart {
     button && button.classList.remove('hidden');
     overlay.classList.remove('product__overlay--show');
     wrapper && wrapper.classList.remove('product__sides-wrapper--visible');
+    document.body.classList.remove('noscroll');
   }
 
   handleClick(e) {

@@ -201,18 +201,36 @@
 
   /* Wrapper treba da bude relativan da bi children mogli apsolutno da se pozicioniraju */
   .product__sides-wrapper {
-    position: absolute; /* neće pomerati druge elemente */
-    top: 0; /* odmah ispod proizvoda ili dugmeta */
+    position: fixed;
     left: 0;
+    bottom: 0;
+    max-height: 70vh;
+    overflow: scroll;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
     width: 100%;
     opacity: 0;
     visibility: hidden;
     padding: 1.6rem;
     pointer-events: none; /* ne dozvoljava interakciju dok je sakriveno */
     transition: opacity 0.3s ease, transform 0.3s ease;
-    transform: translateY(-10px); /* blagi "slide up" efekat */
+    transform: translateY(10px); /* blagi "slide up" efekat */
     z-index: 20; /* da se prikazuje iznad ostalih elemenata */
     background: radial-gradient(50% 50% at 50% 50%, #1b1b1b 0, #141414 100%);
+
+    .button {
+      width: 100%;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    @include breakpoint(md) {
+      position: absolute; /* neće pomerati druge elemente */
+      top: 0; /* odmah ispod proizvoda ili dugmeta */
+      left: 0;
+      transform: translateY(-10px); /* blagi "slide up" efekat */
+      border-radius: 16px;
+    }
   }
 
   .product__overlay {
