@@ -41,7 +41,7 @@ export default class Navigator {
       const activeTitle = product.querySelector('.title__header').textContent;
 
       // Ako se kategorije slazu - skroluj do te sekcije
-      if (target === activeTitle) {
+      if (target.toLowerCase() === activeTitle.toLowerCase()) {
         var headerOffset = 100;
         var elementPosition = product.getBoundingClientRect().top;
         var offsetPosition = elementPosition + window.pageYOffset - headerOffset;
@@ -56,7 +56,7 @@ export default class Navigator {
 
   setActive(product) {
     this.navItems.forEach((item) => {
-      if (item.textContent === product) {
+      if (item.textContent.toLowerCase() === product.toLowerCase()) {
         document
           .querySelector('.navigator__list-item--active')
           .classList.remove('navigator__list-item--active');

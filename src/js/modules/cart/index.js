@@ -185,8 +185,6 @@ export default class Cart {
   }
 
   updateCart(id, action, productName, price, imgUrl, hasVariations, sides) {
-    console.log('ovde sam sides:', sides);
-
     if (!action) return;
 
     let cart = this.getCart();
@@ -208,12 +206,8 @@ export default class Cart {
       // Proveri da li ovaj proizvod postoji u kartu
       let cartIndex = this.getProductIndex(id);
 
-      console.log('cartIndex', cartIndex);
-
       // Ako postoji i ako nema priloge promeni kolicinu
       if (cartIndex > -1 && sides === null) {
-        console.log('inside');
-
         switch (action) {
           case 'increase':
             cart[cartIndex].quantity++;
@@ -272,8 +266,6 @@ export default class Cart {
     const cart = this.getCart();
     let cartMarkup = '';
     let sides = [];
-
-    console.log('cart', cart);
 
     if (!cart) return;
 
