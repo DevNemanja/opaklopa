@@ -358,7 +358,7 @@ export default class Cart {
             ).innerHTML = markup;
           }
         } else if (
-          product.sides === undefined &&
+          product.sides === null &&
           document.querySelector(`[data-name="${product.productName}"] .product__cart-data`)
         ) {
           this.animateAddToCart();
