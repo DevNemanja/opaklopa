@@ -14,15 +14,11 @@ export default class Navigator {
     });
 
     window.addEventListener('scroll', () => {
-      // if (window.scrollY >= 50) {
-      //   document
-      //     .querySelector('.navigator__list')
-      //     .classList.add('navigator__list--open');
-      // } else {
-      //   document
-      //     .querySelector('.navigator__list')
-      //     .classList.remove('navigator__list--open');
-      // }
+      if (window.scrollY >= 50) {
+        document.querySelector('.navigator__list').classList.add('navigator__list--open');
+      } else {
+        document.querySelector('.navigator__list').classList.remove('navigator__list--open');
+      }
 
       this.products.forEach((product) => {
         if (

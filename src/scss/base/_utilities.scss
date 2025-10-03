@@ -11,6 +11,22 @@
     padding: 0 $container-padding;
   }
 
+  &--wide {
+    max-width: 100%;
+
+    @include breakpoint(sm) {
+      padding: 0 $container-padding/2;
+    }
+
+    @include breakpoint(md) {
+      padding: 0 $container-padding;
+    }
+
+    @include breakpoint(lg) {
+      padding: 0 2rem;
+    }
+  }
+
   &--narrow {
     max-width: 80rem;
   }

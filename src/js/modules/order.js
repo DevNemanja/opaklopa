@@ -102,8 +102,8 @@ export default class Order {
         return response.json();
       })
       .then((data) => {
-        console.log('Order data:', data);
-        this.renderLastOrder(data);
+        console.log('Last order data:', data);
+        // this.renderLastOrder(data);
       })
       .catch((err) => {
         console.error(err);

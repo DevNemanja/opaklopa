@@ -1,17 +1,28 @@
 .navigator {
   color: #fff;
+  // position: fixed;
+  // top: 88px;
+  // left: 0;
+  // width: 100%;
+  // z-index: 2;
+  padding-top: 1.5rem;
 
-  @include breakpoint(lg) {
-    position: sticky;
-    z-index: 10;
-    // top: 0;
-    height: 100vh;
-    width: max-content;
-    min-width: 20rem;
-  }
+  // @include breakpoint(lg) {
+  //   position: sticky;
+  //   z-index: 1;
+  //   top: 0;
+  //   height: 100vh;
+  //   width: max-content;
+  //   min-width: 20rem;
+  // }
 
   &--hidden {
     display: none;
+  }
+
+  &--scrolled {
+    transition: background-color 0.2s;
+    background-color: #0d0d0d;
   }
 
   &__list {
@@ -34,18 +45,18 @@
       padding: 0.5rem 4rem;
     }
 
-    @include breakpoint(lg) {
-      flex-direction: column;
-      width: max-content;
-      gap: 1.2rem;
-      position: fixed;
-      left: 0;
-      z-index: 10;
-      height: 100vh;
-      padding: 2rem;
-      background-color: #0d0d0d;
-      min-width: 20rem;
-    }
+    // @include breakpoint(lg) {
+    //   flex-direction: column;
+    //   width: max-content;
+    //   gap: 1.2rem;
+    //   position: fixed;
+    //   left: 0;
+    //   z-index: 10;
+    //   height: 100vh;
+    //   padding: 2rem;
+    //   background-color: #0d0d0d;
+    //   min-width: 20rem;
+    // }
 
     // &--open {
     //   padding: 2rem 0;

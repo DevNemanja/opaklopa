@@ -4,9 +4,9 @@
   <div class="left">
     <?php
 
-    if (!is_shop_open()) {
-      echo '<div style="background: #ffdddd; padding: 10px; text-align: center; font-weight: bold; color: #d00;">Radnja je trenutno zatvorena. Molimo Vas da dođete kasnije.</div>';
-    }
+    // if (!is_shop_open()) {
+    //   echo '<div style="background: #ffdddd; padding: 10px; text-align: center; font-weight: bold; color: #d00;">Radnja je trenutno zatvorena. Molimo Vas da dođete kasnije.</div>';
+    // }
     ?>
 
     <div data-module="ORDER"></div>
@@ -14,24 +14,24 @@
     <?php
     // Define all categories to render
     $categories = [
+      'novo-u-ponudi',
       'pizza'              => 'Pizza',
-      // 'novo-u-ponudi',
-      // 'sendvici',
-      // 'obroci-na-meru',
-      // 'opa-klopa-obroci',
-      // 'prilozi',
-      // 'burgeri',
+      'sendvici',
+      'obroci-na-meru',
+      'opa-klopa-obroci',
+      'burgeri',
       'rostilj',
-      // 'klasik',
-      // 'slane-palacinke',
-      // 'palacinke',
-      // 'smoothie',
-      // 'salate',
-      // 'tortilje',
-      // 'hrono-obroci',
-      // 'komplet-lepinje',
-      // 'poslastice',
-      // 'pica',
+      'klasik',
+      'slane-palacinke',
+      'palacinke',
+      'smoothie',
+      'salate',
+      'tortilje',
+      'hrono-obroci',
+      'komplet-lepinje',
+      'poslastice',
+      'prilozi',
+      'pica',
     ];
 
     foreach ($categories as $slug => $title) {
