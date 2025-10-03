@@ -152,7 +152,9 @@ export default class CartSidebar extends Cart {
           'increase',
           suggestedProduct.dataset.suggestionName,
           +suggestedProduct.dataset.price,
-          suggestedProduct.dataset.imgUrl
+          suggestedProduct.dataset.imgUrl,
+          null,
+          null
         );
         break;
       case target.classList.contains('order-form__submit-cart'):
@@ -169,7 +171,9 @@ export default class CartSidebar extends Cart {
           'decrease',
           product.dataset.productName,
           +product.dataset.price,
-          product.dataset.imgUrl
+          product.dataset.imgUrl,
+          null,
+          null
         );
         break;
       case target.classList.contains('remove-product-with-sides'):
@@ -181,7 +185,9 @@ export default class CartSidebar extends Cart {
           'increase',
           product.dataset.productName,
           +product.dataset.price,
-          product.dataset.imgUrl
+          product.dataset.imgUrl,
+          null,
+          null
         );
         break;
 

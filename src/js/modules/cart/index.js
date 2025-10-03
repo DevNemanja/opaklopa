@@ -29,10 +29,12 @@ export default class Cart {
   animateAddToCart() {
     const product = this.el.querySelector('.product__cart-data');
 
-    product.classList.add('product__item-added');
-    setTimeout(() => {
-      product.classList.remove('product__item-added');
-    }, 1000);
+    if (product) {
+      product.classList.add('product__item-added');
+      setTimeout(() => {
+        product.classList.remove('product__item-added');
+      }, 1000);
+    }
   }
 
   animateRemoveFromCart() {
@@ -132,17 +134,6 @@ export default class Cart {
     })[0];
   }
 
-  // updateTotalAmount() {
-  //   const cart = this.getCart();
-
-  //   const totalPrice = cart.reduce(
-  //     (accumulator, item) => accumulator + item.price * item.quantity,
-  //     0
-  //   );
-
-  //   this.cartTotalAmountDigit.innerHTML = totalPrice;
-  // }
-
   updateTotalAmount() {
     const cart = this.getCart();
 
@@ -194,6 +185,8 @@ export default class Cart {
   }
 
   updateCart(id, action, productName, price, imgUrl, hasVariations, sides) {
+    console.log('ovde sam sides:', sides);
+
     if (!action) return;
 
     let cart = this.getCart();
@@ -201,7 +194,6 @@ export default class Cart {
     // Ako nema nista u localStorage-u
     if (!cart) {
       // Kreiraj cart sa osnovnim podacima
-
       cart = this.createCart(id, productName, price, hasVariations);
     } else {
       // Ako ima azuriraj Cart
@@ -216,8 +208,12 @@ export default class Cart {
       // Proveri da li ovaj proizvod postoji u kartu
       let cartIndex = this.getProductIndex(id);
 
+      console.log('cartIndex', cartIndex);
+
       // Ako postoji i ako nema priloge promeni kolicinu
-      if (cartIndex > -1 && sides === undefined) {
+      if (cartIndex > -1 && sides === null) {
+        console.log('inside');
+
         switch (action) {
           case 'increase':
             cart[cartIndex].quantity++;
@@ -277,6 +273,8 @@ export default class Cart {
     let cartMarkup = '';
     let sides = [];
 
+    console.log('cart', cart);
+
     if (!cart) return;
 
     if (cart.length === 0) {
@@ -315,7 +313,7 @@ export default class Cart {
               }
               <div class="product__cart">
               ${
-                product.sides || product.sides === null
+                product.sides || product.sides !== null
                   ? `<button class="remove-product-with-sides button button--qty" data-i=${i}>Izbaci iz korpe</button>`
                   : `
                   <button class="remove-product button button--qty">-</button>

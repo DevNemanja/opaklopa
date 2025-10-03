@@ -72,6 +72,9 @@ export default class AddToCart extends Cart {
             price: el.dataset.price,
           }));
 
+    console.log('sidesEls', sidesEls);
+    console.log('sides', sides);
+
     if (e.target.classList.contains('button')) {
       if (this.el.querySelector('input:checked') && this.hasVariations) {
         this.id = +this.el.querySelector('input:checked').dataset.id;
@@ -95,7 +98,7 @@ export default class AddToCart extends Cart {
         this.animateRemoveFromCart();
       }
 
-      console.log(this.id, action, this.name, this.price, this.imgUrl, this.hasVariations, sides);
+      console.log(this.id, action, this.name, this.hasVariations, sides);
 
       this.updateCart(
         this.id,
