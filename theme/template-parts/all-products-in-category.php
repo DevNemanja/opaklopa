@@ -38,7 +38,7 @@ $title = $category->name; // Use the category name as the title
           data-name="<?php the_title(); ?>"
           data-price="<?php echo $product->get_price(); ?>"
           data-img-url="<?php echo get_the_post_thumbnail_url($post->ID) ?>"
-          <?php if ($has_variations) echo 'data-has-variations'; ?>>
+          <?php if ($has_variations) echo 'data-has-variations="true"'; ?>>
           <div class="product__overlay"></div>
           <div class="product__info">
             <div class="product__name-wrapper">

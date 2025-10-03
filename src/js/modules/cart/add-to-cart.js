@@ -50,8 +50,6 @@ export default class AddToCart extends Cart {
       if (this.el.querySelector('input:checked')) {
         this.id = +this.el.querySelector('input:checked').dataset.id;
         this.price = +this.el.querySelector('input:checked').dataset.price;
-
-        this.hasVariations = true;
       }
     }
 
@@ -96,6 +94,8 @@ export default class AddToCart extends Cart {
       } else if (isDecrease) {
         this.animateRemoveFromCart();
       }
+
+      console.log(this.id, action, this.name, this.price, this.imgUrl, this.hasVariations, sides);
 
       this.updateCart(
         this.id,
