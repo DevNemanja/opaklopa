@@ -3,10 +3,7 @@
 <main>
   <div class="left">
     <?php
-
-    if (!is_shop_open()) {
-      echo '<div style="background: #ffdddd; padding: 10px; text-align: center; font-weight: bold; margin-top: 50px; color: #d00;">Radnja je trenutno zatvorena. Molimo Vas da dođete kasnije.</div>';
-    }
+    get_template_part('template-parts/shop-closed-modal');
     ?>
 
     <div data-module="ORDER"></div>

@@ -1,0 +1,126 @@
+// Variables
+$color-bg: #0d0d0d;
+$color-primary: #eca917;
+$color-text: #ffffff;
+$color-muted: rgba(255, 255, 255, 0.75);
+
+$radius: 14px;
+
+// Block: shop-closed-modal
+.shop-closed-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 16px;
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  &__content {
+    position: relative;
+    background: $color-bg;
+    color: $color-text;
+    max-width: 480px;
+    width: 100%;
+    border-radius: $radius;
+    padding: 32px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    text-align: center;
+    z-index: 1;
+  }
+
+  &__heading {
+    font-family: 'Lobster', cursive;
+    font-size: 36px;
+    color: $color-primary;
+    margin-bottom: 8px;
+  }
+
+  &__subheading {
+    color: $color-muted;
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  &__message {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 12px 16px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 15px;
+    margin-bottom: 20px;
+
+    &-icon {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 6px;
+
+      svg {
+        width: 18px;
+        height: 18px;
+        stroke: $color-primary;
+        fill: none;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    }
+  }
+
+  &__hours {
+    font-size: 14px;
+    color: $color-muted;
+    margin-bottom: 20px;
+
+    strong {
+      color: $color-text;
+    }
+  }
+
+  &__cta {
+    display: inline-block;
+    background: transparent;
+    border: 1px solid rgba($color-primary, 0.3);
+    color: $color-primary;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.15s ease;
+
+    &:hover {
+      background: rgba($color-primary, 0.08);
+      transform: translateY(-2px);
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    color: $color-muted;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $color-primary;
+    }
+  }
+}
