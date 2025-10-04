@@ -541,7 +541,7 @@ export default class Cart {
         first_name: ime.value,
         last_name: '',
         address_1: adresa.value,
-        email: mail.value,
+        email: mail.value.trim(),
         phone: phone.value,
       },
       line_items: this.prepareCartForOrder(),
