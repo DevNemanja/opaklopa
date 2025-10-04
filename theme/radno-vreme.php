@@ -128,6 +128,8 @@ function is_shop_open()
 {
     $options = get_option('working_hours_settings');
 
+
+
     if (!$options) {
         return false; // Nema podešavanja, radnja zatvorena
     }
@@ -146,9 +148,9 @@ function is_shop_open()
     $today = $day_map[$current_day] ?? '';
     $current_time = current_time('H:i'); // vreme u WP timezone
 
-    // 1️⃣ Proveri da li je danas uopšte omogućen rad (enabled)
-    if (!isset($options[$today]['enabled']) || !$options[$today]['enabled']) {
-        return false; // Danas ne radimo
+    if (!isset($options[$today]['enabled'])) {
+        // Ako nije cekiran danasnji dan, radnja je zatvorena.
+        return false;
     }
 
     // 2️⃣ Proveri da li je za danas definisano radno vreme
@@ -166,13 +168,13 @@ function is_shop_open()
         return true;
     }
 
-    // 5️⃣ Uporedi vreme
-    if ($current_time >= $open && $current_time <= $close) {
-        return true; // Radnja je otvorena
+    $current = strtotime($current_time);
+    $open = strtotime($open);
+    $close = strtotime($close);
+
+    if ($current >= $open && $current <= $close) {
+        return true;
     }
-
-    
-
 
     return false; // Radnja je zatvorena
 }
