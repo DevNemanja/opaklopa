@@ -4,9 +4,9 @@
   <div class="left">
     <?php
 
-    // if (!is_shop_open()) {
-    //   echo '<div style="background: #ffdddd; padding: 10px; text-align: center; font-weight: bold; color: #d00;">Radnja je trenutno zatvorena. Molimo Vas da dođete kasnije.</div>';
-    // }
+    if (!is_shop_open()) {
+      echo '<div style="background: #ffdddd; padding: 10px; text-align: center; font-weight: bold; margin-top: 50px; color: #d00;">Radnja je trenutno zatvorena. Molimo Vas da dođete kasnije.</div>';
+    }
     ?>
 
     <div data-module="ORDER"></div>

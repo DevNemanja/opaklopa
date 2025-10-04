@@ -13,8 +13,15 @@ export const isMediumViewport = () => {
 export const LOCATION_URL =
   window.location.hostname === 'localhost' ? 'https://opaklopa.local' : window.location.origin;
 
-export const CLIENT_KEY = 'ck_b5ce331ad8086c636824ea4df29041c022f11e6d';
-export const CLIENT_SECRET = 'cs_10fe17734ccba8999013d43506414e2eeb52fc30';
+const STAGING_KEY = 'ck_f539f0e4c70110776f2fa0253646f3254e33a7e4';
+const STAGING_SECRET = 'cs_0065c67bbf1631f557928b61db397b7a3936aaaa';
+
+const STARI_MAC_KEY = 'ck_b5ce331ad8086c636824ea4df29041c022f11e6d';
+const STARI_MAC_SECRET = 'cs_10fe17734ccba8999013d43506414e2eeb52fc30';
+
+export const CLIENT_KEY = STARI_MAC_KEY;
+export const CLIENT_SECRET = STARI_MAC_SECRET;
+
 // // WINDOWS & Staging
 // export const CLIENT_KEY =
 //   window.location.hostname === "localhost"

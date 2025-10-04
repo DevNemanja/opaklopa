@@ -34,9 +34,9 @@
   <div class="layout-wrapper">
     <?php if (!is_shop_open()): ?>
       <style>
-        /* .add-to-cart,
-      .header__cart {
-        display: none;
-      } */
+        .add-to-cart,
+        .header__cart {
+          display: none;
+        }
       </style>
     <?php endif; ?>
