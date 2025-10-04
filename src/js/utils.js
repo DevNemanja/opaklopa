@@ -19,8 +19,8 @@ const STAGING_SECRET = 'cs_0065c67bbf1631f557928b61db397b7a3936aaaa';
 const STARI_MAC_KEY = 'ck_b5ce331ad8086c636824ea4df29041c022f11e6d';
 const STARI_MAC_SECRET = 'cs_10fe17734ccba8999013d43506414e2eeb52fc30';
 
-export const CLIENT_KEY = STARI_MAC_KEY;
-export const CLIENT_SECRET = STARI_MAC_SECRET;
+export const CLIENT_KEY = STAGING_KEY;
+export const CLIENT_SECRET = STAGING_SECRET;
 
 // // WINDOWS & Staging
 // export const CLIENT_KEY =
