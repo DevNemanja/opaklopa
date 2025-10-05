@@ -144,7 +144,7 @@ function is_shop_open()
         'sunday' => 'nedelja',
     ];
 
-    $current_day = strtolower(date_i18n('l')); // uzima WP timezone i lokalizaciju
+    $current_day = strtolower(date('l', $current_timestamp));
     $today = $day_map[$current_day] ?? '';
     $current_time = current_time('H:i'); // vreme u WP timezone
 
